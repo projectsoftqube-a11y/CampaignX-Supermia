@@ -54,12 +54,19 @@ export function SocialProof() {
                 {[...platforms, ...platforms].map((platform, index) => (
                   <li
                     key={`${platform.id}-${index}`}
-                    className="group flex shrink-0 items-center gap-2.5 rounded-pill border border-line bg-surface/85 py-2 pr-4 pl-2 transition-[border-color,box-shadow] duration-300 ease-[var(--ease-out-soft)] hover:border-line-strong hover:shadow-raise"
+                    /* No hover state: the pills are moving targets inside a
+                       decorative rail, so a hover style only ever flickers
+                       as they pass under the cursor. */
+                    /* Marks only on phones: a named pill is wide enough
+                       that barely two fit across a 320px screen, which
+                       reads as a short list rather than as a run of
+                       destinations. The name returns from sm up. */
+                    className="flex shrink-0 items-center gap-2.5 rounded-pill border border-line bg-surface/85 p-2 sm:py-2 sm:pr-4 sm:pl-2"
                   >
                     <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white shadow-soft">
                       <BrandGlyph name={platform.id} className="size-[17px]" />
                     </span>
-                    <span className="text-[0.875rem] font-medium whitespace-nowrap">
+                    <span className="hidden text-[0.875rem] font-medium whitespace-nowrap sm:inline">
                       {platform.name}
                     </span>
                   </li>

@@ -7,6 +7,7 @@ import type {
   HowStep,
   Platform,
 } from "@/types/content";
+import { galleryImages } from "@/config/gallery";
 import { siteConfig } from "@/config/site";
 
 /* ---------------------------------------------------------------- hero -- */
@@ -245,34 +246,103 @@ export const howItWorks = {
 
 /* ------------------------------------------------ gallery showcase -- */
 
+/* ---------------------------------------------------------------- demo -- */
+
+export const demo = {
+  eyebrow: "Watch it work",
+  heading: "Rather just be shown?",
+  headingHighlight: "be shown?",
+  supporting:
+    "One short video, no signup. The rest of this page explains it in detail. This is the quick version if you would rather see it than read it.",
+
+  /** Real title and channel, from the video itself. */
+  videoTitle: "This AI Tool Creates and Schedules Your Social Media Campaign",
+  channel: "MIA My Intelligent Assistant",
+  watchLabel: "Watch on YouTube",
+  soundNote: "Sound on",
+
+  /**
+   * YouTube video id, not a full embed URL — the component builds the URL so
+   * the privacy-preserving host and player flags are set in one place.
+   */
+  videoId: "3FYQj_urQiw",
+  /** Used for the play button's accessible name and the iframe title. */
+  title: "CampaignX product demo",
+  /** Roughly how long, so nobody has to guess before pressing play. */
+  duration: "Under 2 minutes",
+
+  /** Three things to watch for, beside the player. */
+  points: [
+    {
+      kind: "brief",
+      label: "One sentence in",
+      detail: "A plain-English brief, typed the way you would say it",
+    },
+    {
+      kind: "channels",
+      label: "Every channel out",
+      detail: "Built per channel, not one asset resized",
+    },
+    {
+      kind: "results",
+      label: "Edit and ship",
+      detail: "Change an asset, regenerate a channel, approve and send",
+    },
+  ] as const,
+} as const;
+
+/* ------------------------------------------------------------- brochure -- */
+
+export const brochure = {
+  eyebrow: "Take it with you",
+  heading: "The whole picture, on one page",
+  headingHighlight: "on one page",
+  supporting:
+    "Everything on this page, as a document you can keep. Useful when the person who decides is not the person reading. Send it on, or take it into a meeting, without asking anyone to scroll a website first.",
+
+  /**
+   * The real file, in `public/brochure`. `size` and `pages` are read from
+   * it rather than guessed, and shown beside the button so nobody is
+   * surprised by a 5MB download on mobile data. Update both if the file
+   * is replaced.
+   */
+  file: "/brochure/campaignx-brochure.pdf",
+  fileName: "CampaignX-Brochure.pdf",
+  size: "PDF · 4.9 MB",
+  pages: "8 pages",
+
+  cta: "Download the brochure",
+  secondaryCta: "View in browser",
+
+  /** The three facts under the buttons. `kind` picks the icon. */
+  facts: [
+    { kind: "pages", label: "8 pages" },
+    { kind: "file", label: "PDF · 4.9 MB" },
+    { kind: "open", label: "No signup to read it" },
+  ] as const,
+
+  /** The designed cover card, standing in for a page render. */
+  cover: {
+    title: "CampaignX",
+    subtitle: "brochure",
+    footnote: "8 PAGES",
+  },
+} as const;
+
 export const galleryShowcase = {
   eyebrow: "AI-Generated Creative",
   heading: "Every campaign ships with visuals that match your brand.",
   headingHighlight: "visuals",
   supporting:
-    "CampaignX doesn't just write copy — it generates the creative assets each channel needs, styled to your brand guidelines, ready to publish.",
+    "CampaignX doesn't just write copy. It generates the creative assets each channel needs, styled to your brand guidelines, ready to publish.",
   points: [
     "On-brand imagery from your colour palette and type system",
-    "Per-channel sizing — stories, posts, banners, emails",
+    "Per-channel sizing for stories, posts, banners and emails",
     "Regenerate any asset without starting the whole campaign over",
     "No stock-photo searches, no Figma round-trips",
   ],
-  images: [
-    "https://miachatbot.s3.us-east-1.amazonaws.com/campaginx/media_gallery/246/67a4c320-c893-4a7a-a203-1845231a8c53_708082b61a47477bb996b792adde9c07.png",
-    "https://miachatbot.s3.amazonaws.com/campaign_images/0602682b05a9468d9a226905badcba7a.png",
-    "https://miachatbot.s3.us-east-1.amazonaws.com/campaginx/media_gallery/246/0de39b3b-ede7-4970-9088-e62be0e65833_976c871ea23d47379874747e38f8b188.png",
-    "https://miachatbot.s3.amazonaws.com/campaign_images/648c964ce8464373a06bd172bc71f2b1.png",
-    "https://miachatbot.s3.amazonaws.com/campaign_images/47491756f3e04fc49edf2ee36ae0c334.png",
-    "https://miachatbot.s3.us-east-1.amazonaws.com/campaginx/media_gallery/246/83f720b6-a60e-4a55-9575-eae4966d49cb_a0382bd47c534581919e2bf301e24860.png",
-    "https://miachatbot.s3.amazonaws.com/campaign_images/9e7e5b8fc9c14a899f0ecc04c142038a.png",
-    "https://miachatbot.s3.amazonaws.com/campaign_images/ec5beb15c799452b814637bdec834839.png",
-    "https://miachatbot.s3.amazonaws.com/campaign_images/d0ca9a90351d4ee4be536e6dd7b2f659.png",
-    "https://miachatbot.s3.amazonaws.com/campaign_images/d7c5bf62e5ea4c129afddb4e0dc20b4c.png",
-    "https://miachatbot.s3.amazonaws.com/campaign_images/8355d483c1fc4362baf0bf8375eccbef.png",
-    "https://miachatbot.s3.amazonaws.com/campaign_images/a0952d8dece740c6844c654ecd7ca2e0.png",
-    "https://miachatbot.s3.amazonaws.com/campaign_images/0d0e4d1e71384862975c733c24c2623b.png",
-    "https://miachatbot.s3.amazonaws.com/campaign_images/178fce803b464215af9aa8886b4f10c0.png",
-  ],
+  /* Local, optimised copies — see config/gallery.ts. */
+  images: galleryImages,
 } as const;
 
 /* ----------------------------------------------------------- final cta -- */
@@ -281,7 +351,7 @@ export const finalCta = {
   heading: "Write the sentence. We ship the campaign.",
   headingHighlight: "sentence",
   supporting:
-    "Strategy, creative and every channel — from one line of plain English.",
+    "Strategy, creative and every channel, from one line of plain English.",
   primaryCta: { label: "Start a Campaign", href: siteConfig.signupUrl },
   secondaryCta: { label: "See how it works", href: "#how" },
   /** The working prompt bar in the closing panel. */
@@ -290,8 +360,6 @@ export const finalCta = {
     hint: "Free to start · no credit card required",
   },
 } as const;
-
-export const footerBlurb = "The AI campaign agent for teams who care about craft.";
 
 /* -------------------------------------------------------------- pricing -- */
 
@@ -360,7 +428,7 @@ export const faq = {
     {
       question: "Will it sound like us, or like AI?",
       answer:
-        "It learns your voice from your own material — your site, your guidelines, your past campaigns — and writes from that model rather than a generic one. You approve everything before it ships, and edits feed back into the model.",
+        "It learns your voice from your own material (your site, your guidelines, your past campaigns) and writes from that model rather than a generic one. You approve everything before it ships, and edits feed back into the model.",
     },
     {
       question: "Do you train on our data?",
@@ -370,7 +438,7 @@ export const faq = {
     {
       question: "What if the output is wrong?",
       answer:
-        "Nothing sends without a named approver signing off. You can edit any asset directly, regenerate a single channel, or rewrite the brief and start again — the other channels stay as they are.",
+        "Nothing sends without a named approver signing off. You can edit any asset directly, regenerate a single channel, or rewrite the brief and start again. The other channels stay as they are.",
     },
     {
       question: "Which channels does it actually publish to?",
@@ -416,7 +484,7 @@ export const testimonials = {
     },
     {
       quote:
-        "I was ready to hate the copy. It sounds like us — because it learned from us, not from the internet.",
+        "I was ready to hate the copy. It sounds like us, because it learned from us, not from the internet.",
       name: "Daniel Okoye",
       role: "Brand Lead",
       company: "Rally Goods",
@@ -444,7 +512,7 @@ export const testimonials = {
     },
     {
       quote:
-        "It caught that our tone shifts between B2B and consumer. I did not tell it that — it worked it out from our old campaigns.",
+        "It caught that our tone shifts between B2B and consumer. I did not tell it that. It worked it out from our old campaigns.",
       name: "Lucas Ferreira",
       role: "Content Strategist",
       company: "Halden & Co",

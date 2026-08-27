@@ -18,6 +18,8 @@ export function HeroPrompt() {
     <div data-hero-prompt className="w-full">
       <Link
         href={hero.primaryCta.href}
+        target="_blank"
+        rel="noopener noreferrer"
         aria-label={`${hero.prompt.action} a campaign`}
         className="group glass-strong glass-sheen block rounded-[1.75rem] p-1.5 shadow-float transition-shadow duration-500 ease-[var(--ease-out-soft)] hover:shadow-cinema focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
       >

@@ -9,9 +9,8 @@ import { faq } from "@/config/content";
 /**
  * FAQ.
  *
- * The page's last section before the closing ask, which is where the
- * remaining objections live — the ones price and security raise but do not
- * fully answer.
+ * The page's last section, and where the remaining objections live — the
+ * ones price and security raise but do not fully answer.
  *
  * Built on native <details>/<summary> rather than a JS accordion: it opens
  * without hydration, is keyboard-operable and screen-reader-correct for
@@ -50,8 +49,24 @@ export function FAQ() {
             <ul className="flex flex-col">
               {faq.items.map((item) => (
                 <li key={item.question} data-animate="reveal">
-                  <details className="cx-disclosure group border-b border-line">
-                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6 text-left [&::-webkit-details-marker]:hidden">
+                  {/* A shared `name` makes the group exclusive: opening one
+                      closes the rest, the same way radio buttons work. This
+                      is native behaviour, so it costs no JavaScript and
+                      keeps the no-hydration benefits described above.
+
+                      Browsers without support simply ignore the attribute
+                      and every panel stays independently openable — the
+                      old behaviour, not a broken one. */}
+                  <details
+                    name="faq"
+                    className="cx-disclosure group border-b border-line"
+                  >
+                    {/* `py-6` gave the row even padding, which reads right
+                        while closed but pushes the answer 24px clear of its
+                        own question once open. The bottom half is dropped
+                        when open so the pair reads as one block; the closed
+                        rows keep their original rhythm. */}
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 pt-6 pb-6 text-left group-open:pb-2 [&::-webkit-details-marker]:hidden">
                       <h3 className="text-[1.0625rem] font-medium transition-colors duration-300 group-hover:text-accent">
                         {item.question}
                       </h3>

@@ -50,6 +50,12 @@ export function HowItWorks() {
 
       if (prefersReducedMotion()) return;
 
+      /* The pinned stage is hidden below lg, and pinning a display:none
+         element makes ScrollTrigger reserve scroll distance for something
+         nobody can see — the page gains four viewports of dead scroll on a
+         phone. Matched to the `lg:` breakpoint the markup switches on. */
+      if (!window.matchMedia("(min-width: 1024px)").matches) return;
+
       const stage = root.querySelector<HTMLElement>("[data-how-stage]");
       if (!stage) return;
 
@@ -106,10 +112,15 @@ export function HowItWorks() {
               pass, and it would also mean the server HTML never contains the
               real content. The stacked list is the source of truth for
               reduced-motion users and for anything reading the markup. */}
-          <div className="motion-reduce:hidden">
+          {/* Below lg the pinned stage has nowhere to go: the rail, copy
+              and artwork sit side by side, and a phone cannot show them
+              together at a readable size. Mobile gets the stacked list —
+              the same content, one step after another, no pin and no
+              cross-fade. */}
+          <div className="hidden lg:block motion-reduce:hidden">
             <PinnedSequence active={active} />
           </div>
-          <div className="hidden motion-reduce:block">
+          <div className="block lg:hidden motion-reduce:block">
             <StackedSteps />
           </div>
         </div>

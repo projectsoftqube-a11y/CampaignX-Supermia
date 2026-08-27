@@ -8,6 +8,7 @@
 
 import { useEffect, useMemo, useRef, useCallback } from "react";
 import { useGesture } from "@use-gesture/react";
+import { galleryImageSrcs } from "@/config/gallery";
 import "./DomeGallery.css";
 
 /* ---------------------------------------------------------------- types -- */
@@ -38,22 +39,10 @@ interface DomeGalleryProps {
 
 /* ------------------------------------------------------------- defaults -- */
 
-const DEFAULT_IMAGES: ImageInput[] = [
-  "https://miachatbot.s3.us-east-1.amazonaws.com/campaginx/media_gallery/246/67a4c320-c893-4a7a-a203-1845231a8c53_708082b61a47477bb996b792adde9c07.png",
-  "https://miachatbot.s3.amazonaws.com/campaign_images/0602682b05a9468d9a226905badcba7a.png",
-  "https://miachatbot.s3.us-east-1.amazonaws.com/campaginx/media_gallery/246/0de39b3b-ede7-4970-9088-e62be0e65833_976c871ea23d47379874747e38f8b188.png",
-  "https://miachatbot.s3.amazonaws.com/campaign_images/648c964ce8464373a06bd172bc71f2b1.png",
-  "https://miachatbot.s3.amazonaws.com/campaign_images/47491756f3e04fc49edf2ee36ae0c334.png",
-  "https://miachatbot.s3.us-east-1.amazonaws.com/campaginx/media_gallery/246/83f720b6-a60e-4a55-9575-eae4966d49cb_a0382bd47c534581919e2bf301e24860.png",
-  "https://miachatbot.s3.amazonaws.com/campaign_images/9e7e5b8fc9c14a899f0ecc04c142038a.png",
-  "https://miachatbot.s3.amazonaws.com/campaign_images/ec5beb15c799452b814637bdec834839.png",
-  "https://miachatbot.s3.amazonaws.com/campaign_images/d0ca9a90351d4ee4be536e6dd7b2f659.png",
-  "https://miachatbot.s3.amazonaws.com/campaign_images/d7c5bf62e5ea4c129afddb4e0dc20b4c.png",
-  "https://miachatbot.s3.amazonaws.com/campaign_images/8355d483c1fc4362baf0bf8375eccbef.png",
-  "https://miachatbot.s3.amazonaws.com/campaign_images/a0952d8dece740c6844c654ecd7ca2e0.png",
-  "https://miachatbot.s3.amazonaws.com/campaign_images/0d0e4d1e71384862975c733c24c2623b.png",
-  "https://miachatbot.s3.amazonaws.com/campaign_images/178fce803b464215af9aa8886b4f10c0.png",
-];
+/* The project's own campaign creative, from config/gallery.ts. The
+   component previously inlined 14 S3 URLs as its fallback, which meant a
+   second, drifting copy of the same list. */
+const DEFAULT_IMAGES: ImageInput[] = galleryImageSrcs.map((src) => src);
 
 const DEFAULTS = {
   maxVerticalRotationDeg: 5,
@@ -435,7 +424,7 @@ export default function DomeGallery({
         }
         if (last) {
           draggingRef.current = false;
-          let [vMagX, vMagY] = velocity;
+          const [vMagX, vMagY] = velocity;
           const [dirX, dirY] = direction;
           let vx2 = vMagX * dirX;
           let vy2 = vMagY * dirY;

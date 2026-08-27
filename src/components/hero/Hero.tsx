@@ -167,7 +167,11 @@ export function Hero() {
       id={SECTION_IDS.hero}
       data-hero-state={state}
       data-hero-ambient={ambient}
-      className="relative flex min-h-[100svh] flex-col justify-center overflow-x-clip pt-28 pb-20 sm:pt-32 lg:pt-36"
+      /* Full viewport only from sm up. On phones the content is a headline,
+         a prompt bar and one row of marks — much shorter than the screen —
+         so forcing 100svh and centring it left a large empty band under the
+         marquee. Below sm the section simply sizes to what is in it. */
+      className="relative flex flex-col justify-center overflow-x-clip pt-28 pb-12 sm:min-h-[100svh] sm:pt-32 sm:pb-20 lg:pt-36"
     >
       <HeroGlow />
 
@@ -186,9 +190,23 @@ export function Hero() {
         {/* Connectors -> devices. One unit, so the scroll parallax lifts the
             whole assembly together. */}
         <div className="mx-auto w-full max-w-[1020px]">
-          <HeroRouting />
+          {/* The connectors fan out to three columns, so they only make
+              sense while the devices are in three columns. Below sm the
+              row stacks and the wires are hidden rather than left pointing
+              at nothing. */}
+          <div className="hidden sm:block">
+            <HeroRouting />
+          </div>
 
-          <ul className="grid w-full grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
+          {/* Devices from sm up only.
+
+              Three 9:16 mockups stacked on a phone is a phone screen drawn
+              inside a phone screen, and it pushed everything below the hero
+              a long way down. Nothing replaces them here: the SocialProof
+              section immediately below already makes the "every channel"
+              point with its own rail of platform marks, and repeating it in
+              the hero said the same thing twice in one screen. */}
+          <ul className="hidden w-full sm:grid sm:grid-cols-3 sm:gap-6 lg:gap-8">
             {hero.channels.map((channel) => (
               <li key={channel.name} className="flex">
                 <PhoneMock channel={channel} className="w-full" />

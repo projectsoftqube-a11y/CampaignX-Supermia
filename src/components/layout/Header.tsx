@@ -50,8 +50,14 @@ export function Header() {
               : "border border-transparent bg-transparent shadow-none",
           )}
         >
+          {/* The site root, not `#hero`.
+
+              An anchor left `#hero` sitting in the address bar on the
+              homepage, and resolved to `/privacy#hero` on the legal pages —
+              a section that does not exist there, so the logo did nothing.
+              `/` is what a logo is expected to do from anywhere. */}
           <Link
-            href="#hero"
+            href="/"
             className="rounded-pill py-1 transition-opacity duration-300 hover:opacity-70"
             aria-label="CampaignX home"
           >
@@ -63,6 +69,8 @@ export function Header() {
           <div className="flex items-center gap-1 sm:gap-2">
             <Link
               href={secondaryCta.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden h-9 items-center rounded-pill px-3.5 text-[0.9375rem] text-muted-strong transition-colors hover:text-foreground sm:inline-flex"
             >
               {secondaryCta.label}
@@ -70,6 +78,8 @@ export function Header() {
 
             <Link
               href={primaryCta.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-brand shadow-brand group hidden h-11 items-center gap-2 rounded-pill pl-5 pr-4 text-[0.9375rem] font-medium text-white transition-[box-shadow,transform,filter] duration-200 ease-[var(--ease-out-soft)] hover:-translate-y-px hover:brightness-[1.07] hover:shadow-brand-hover sm:inline-flex"
             >
               {primaryCta.label}

@@ -1,62 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import {
-  useEffect,
-  useRef,
-  useState,
-  type FormEvent,
-  type KeyboardEvent,
-} from "react";
-import { ArrowRight, Paperclip, Sparkles } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { ArrowUpRight, Globe, Mail, MapPin } from "lucide-react";
 import { Container } from "@/components/layout/Container";
-import { BrandGlyph } from "@/components/ui/BrandGlyph";
-import { withHighlight } from "@/components/ui/Highlight";
-import { finalCta, footerBlurb } from "@/config/content";
+import { Logo } from "@/components/ui/Logo";
 import { footerNavigation } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { gsap, registerGsap } from "@/lib/animations/gsap";
 import { revealOnScroll } from "@/lib/animations/reveal";
 
-/** Where the prompt bar sends people: straight into the app. */
-const START_HREF = siteConfig.signupUrl;
 
 /**
- * The closing CTA and footer.
+ * The site footer.
  *
- * They are one component because they are one moment: the CTA is the page's
- * last argument and the footer is what holds it up. Splitting them would
- * put a seam between the ask and the ground it sits on.
- *
- * Every "Start a Campaign" control now leaves for the app itself, so this
- * section is the page's closing argument rather than their scroll target.
- * It keeps `id="start"` so the anchor stays a valid deep link.
+ * Purely a directory now — the closing CTA panel that used to sit above it
+ * was removed, along with its working prompt bar. The page's ask is made in
+ * the hero and by the header's "Start a Campaign", both of which leave for
+ * the app directly, so there is nothing left here to scroll to.
  */
 export function Footer() {
   const rootRef = useRef<HTMLElement>(null);
-  const [brief, setBrief] = useState("");
-
-  /* The brief is carried into the app as a query param, so whatever was
-     typed survives sign-up instead of being retyped afterwards.
-
-     `window.location` rather than `router.push`: the app is a different
-     origin, and the Next router only handles routes within this app. */
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const trimmed = brief.trim();
-    window.location.href = trimmed
-      ? `${START_HREF}?brief=${encodeURIComponent(trimmed)}`
-      : START_HREF;
-  };
-
-  /* Enter submits; Shift+Enter keeps its usual newline, since this is a
-     textarea and a brief may well run to two lines. */
-  const onKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault();
-      event.currentTarget.form?.requestSubmit();
-    }
-  };
 
   useEffect(() => {
     registerGsap();
@@ -77,119 +41,6 @@ export function Footer() {
 
   return (
     <footer ref={rootRef} className="relative">
-      {/* ---------------------------------------------------------------
-          Closing CTA
-
-          A bounded dark panel rather than centred text on a wash. The page
-          is off-white the whole way down, so ending on an inverted card
-          gives the final ask somewhere to land instead of dissolving into
-          the same background as everything above it.
-          --------------------------------------------------------------- */}
-      <section id="start" aria-labelledby="cta-heading" className="pb-20">
-        <Container>
-          <div
-            data-animate="reveal"
-            className="relative isolate overflow-hidden rounded-frame bg-foreground px-6 py-16 sm:px-14 sm:py-20"
-          >
-            {/* Brand light, from the lower right. */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -right-1/4 -bottom-1/2 -z-10 size-[80%] rounded-full bg-[radial-gradient(closest-side,rgba(var(--brand-blue-rgb),0.45),transparent)] blur-[60px]"
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -top-1/3 -left-[10%] -z-10 size-[60%] rounded-full bg-[radial-gradient(closest-side,rgba(208,0,255,0.30),transparent)] blur-[70px]"
-            />
-
-            <div className="mx-auto flex max-w-[46rem] flex-col items-center gap-6 text-center">
-              {/* The ask */}
-              <div className="flex flex-col items-center gap-5">
-                <h2
-                  id="cta-heading"
-                  className="text-display max-w-[18ch] text-[clamp(2rem,4.2vw,3.5rem)] leading-[1.08] text-white"
-                >
-                  {withHighlight(finalCta.heading, finalCta.headingHighlight)}
-                </h2>
-
-                <p className="max-w-[52ch] text-[1.0625rem] leading-relaxed text-white/55">
-                  {finalCta.supporting}
-                </p>
-
-                <div className="mt-2 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
-                  <Link
-                    href={finalCta.primaryCta.href}
-                    className="bg-brand shadow-brand group inline-flex h-14 items-center justify-center gap-2 rounded-pill px-8 text-base font-medium text-white transition-[box-shadow,transform,filter] duration-200 ease-[var(--ease-out-soft)] hover:-translate-y-px hover:brightness-[1.07] hover:shadow-brand-hover"
-                  >
-                    {finalCta.primaryCta.label}
-                    <ArrowRight
-                      className="size-4 transition-transform duration-300 group-hover:translate-x-0.5"
-                      aria-hidden="true"
-                    />
-                  </Link>
-
-                  <Link
-                    href={finalCta.secondaryCta.href}
-                    className="inline-flex h-14 items-center justify-center rounded-pill border border-white/20 px-8 text-base font-medium text-white transition-colors duration-300 hover:border-white/40 hover:bg-white/5"
-                  >
-                    {finalCta.secondaryCta.label}
-                  </Link>
-                </div>
-              </div>
-
-              {/* A working prompt bar, echoing the hero's. Unlike the hero's
-                  — which is a link, because it sits above the fold before
-                  anyone has read anything — this one accepts real input:
-                  by this point the visitor has read the page and typing is
-                  the action they are ready to take. Submitting carries the
-                  brief to the login screen so it is not lost on sign-up. */}
-              <form
-                onSubmit={onSubmit}
-                className="mt-4 w-full text-left"
-              >
-                <div className="rounded-frame border border-white/10 bg-white/[0.04] p-2.5 backdrop-blur-sm transition-colors duration-300 focus-within:border-white/25">
-                  <div className="rounded-[1.4rem] bg-white/[0.04] px-5 pt-5 pb-3.5">
-                    <label htmlFor="cta-brief" className="sr-only">
-                      Describe your campaign
-                    </label>
-
-                    <textarea
-                      id="cta-brief"
-                      name="brief"
-                      value={brief}
-                      onChange={(event) => setBrief(event.target.value)}
-                      onKeyDown={onKeyDown}
-                      rows={2}
-                      placeholder="Launch our spring collection to everyone who bought last season."
-                      className="w-full resize-none bg-transparent text-[0.9375rem] leading-[1.6] text-white placeholder:text-white/35 focus:outline-none"
-                    />
-
-                    <div className="mt-2 flex items-center justify-between gap-3">
-                      <span
-                        aria-hidden="true"
-                        className="flex size-8 items-center justify-center rounded-full border border-white/15"
-                      >
-                        <Paperclip className="size-3.5 text-white/40" />
-                      </span>
-
-                      <button
-                        type="submit"
-                        className="bg-brand shadow-brand inline-flex h-10 cursor-pointer items-center gap-2 rounded-pill pr-3.5 pl-4 text-[0.9375rem] font-medium text-white transition-[filter,box-shadow] duration-200 hover:brightness-[1.07] hover:shadow-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                      >
-                        <Sparkles className="size-3.5" aria-hidden="true" />
-                        {finalCta.prompt.action}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <p className="mt-3 text-center text-[0.8125rem] text-white/40">
-                  {finalCta.prompt.hint}
-                </p>
-              </form>
-            </div>
-          </div>
-        </Container>
-      </section>
 
 
 
@@ -197,66 +48,81 @@ export function Footer() {
       {/* ---------------------------------------------------------------
           Footer.
 
-          The structural idea: the wordmark is the floor. It runs the full
-          bleed at the very bottom, clipped by the page edge, and everything
-          else sits on top of it — so the footer reads as one composition
-          rather than a column layout with a logo dropped in the corner.
+          A conventional column layout, deliberately: the footer is where
+          people go to check the product is real and find a way to contact
+          someone. That is a job for a legible directory, not a composition
+          — so the logo and what-we-are sentence sit on the left, the links
+          in two short columns beside them, and the ways to reach us on the
+          right, each with its own icon.
 
-          The navigation is a single ruled row rather than three stacked
-          columns. With nine links a column grid leaves most of its area
-          empty, which is what made the previous version feel like padding.
+          Light, like the rest of the page. The closing CTA above is the
+          one inverted panel; repeating that here would give the page two
+          dark blocks stacked with only a gutter between them.
+
+          Every link resolves to a real destination. Columns that would
+          only be padding are not here.
           --------------------------------------------------------------- */}
-      <div className="relative overflow-hidden bg-foreground pt-20">
-        {/* Aurora, low and wide. */}
+      <div className="relative isolate overflow-hidden border-t border-line bg-surface-soft/60">
+        {/* Backdrop.
+
+            The footer was a flat panel with content floating on it. This
+            is the hero's own dot field, faded out toward the baseline, so
+            the top and bottom of the page are made of the same material —
+            plus a low brand glow so the page ends on colour rather than on
+            grey. Decorative throughout. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-[70%]"
+          className="pointer-events-none absolute inset-0 -z-10"
         >
-          <div className="absolute -bottom-1/3 left-[10%] size-[55%] rounded-full bg-[radial-gradient(closest-side,rgba(var(--brand-blue-rgb),0.35),transparent)] blur-[90px]" />
-          <div className="absolute right-[8%] -bottom-1/4 size-[45%] rounded-full bg-[radial-gradient(closest-side,rgba(208,0,255,0.22),transparent)] blur-[90px]" />
+          {/* Dots, strongest at the top edge where the footer meets the
+              page and gone by the legal line. */}
+          <div className="cx-dots absolute inset-0 opacity-70 [mask-image:linear-gradient(to_bottom,#000,transparent_78%)]" />
+
+          {/* One wide, low brand volume. Sized in vw so it stays a wash at
+              any width rather than becoming a visible disc. */}
+          <div className="absolute -bottom-[38vh] left-1/2 h-[60vh] w-[120vw] max-w-[1800px] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(closest-side,rgba(var(--brand-blue-rgb),0.10),rgba(138,43,226,0.05)_58%,transparent)]" />
+
+          {/* A hairline of brand along the top border, so the seam between
+              the page and the footer is not a plain grey rule. */}
+          <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(to_right,transparent,rgba(var(--brand-blue-rgb),0.35),rgba(208,0,255,0.25),transparent)]" />
         </div>
 
         <Container className="relative">
-          {/* Top row: the promise, and the way in. */}
-          <div
-            data-animate="reveal"
-            className="flex flex-col gap-8 border-b border-white/10 pb-12 lg:flex-row lg:items-end lg:justify-between lg:gap-16"
-          >
-            <p className="text-display max-w-[18ch] text-[clamp(1.75rem,3.2vw,2.75rem)] leading-[1.1] text-white">
-              {footerBlurb}
-            </p>
+          {/* The directory. */}
+          <div className="grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.2fr)_repeat(2,minmax(0,0.65fr))_minmax(0,1.3fr)] lg:gap-8 lg:py-20">
+            {/* Who we are. */}
+            <div data-animate="reveal" className="flex flex-col gap-5">
+              {/* Linked, like the header's: a logo that does nothing when
+                  clicked reads as broken, and this one sits at the bottom
+                  of the legal pages where it is the obvious way home. */}
+              <Link
+                href="/"
+                aria-label={`${siteConfig.name} home`}
+                className="w-fit transition-opacity duration-300 hover:opacity-70"
+              >
+                <Logo />
+              </Link>
 
-            <Link
-              href={finalCta.primaryCta.href}
-              className="group inline-flex w-fit shrink-0 items-center gap-3 rounded-pill border border-white/20 py-3 pr-3 pl-6 text-[0.9375rem] font-medium text-white transition-colors duration-300 hover:border-white/40"
-            >
-              {finalCta.primaryCta.label}
-              <span className="bg-brand flex size-9 items-center justify-center rounded-full transition-transform duration-300 ease-[var(--ease-out-soft)] group-hover:rotate-45">
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </span>
-            </Link>
-          </div>
+              <p className="max-w-[34ch] text-[0.9375rem] leading-relaxed text-muted">
+                {siteConfig.blurb}
+              </p>
+            </div>
 
-          {/* Navigation as one ruled row. Each column is a label above its
-              links, so nine items read at a glance instead of filling a
-              grid with air. */}
-          <nav
-            aria-label="Footer"
-            className="grid gap-x-8 gap-y-10 py-12 sm:grid-cols-2 lg:grid-cols-4"
-          >
+            {/* Link columns. */}
             {footerNavigation.map((column) => (
-              <div
+              <nav
                 key={column.title}
+                aria-label={column.title}
                 data-animate="reveal"
                 className="flex flex-col gap-4"
               >
-                <h2 className="text-eyebrow text-white/30">{column.title}</h2>
+                <h2 className="text-eyebrow">{column.title}</h2>
                 <ul className="flex flex-col gap-3">
                   {column.items.map((item) => (
                     <li key={`${column.title}-${item.label}`}>
                       <Link
                         href={item.href}
-                        className="group relative inline-flex items-center text-[0.9375rem] text-white/55 transition-colors duration-300 hover:text-white"
+                        className="group relative inline-flex items-center text-[0.9375rem] text-muted transition-colors duration-300 hover:text-foreground"
                       >
                         {item.label}
                         <span
@@ -267,61 +133,118 @@ export function Footer() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </nav>
             ))}
 
-            {/* Fourth column: socials and status, so the grid resolves
-                evenly instead of leaving a gap. */}
+            {/* Ways to reach us. */}
             <div data-animate="reveal" className="flex flex-col gap-4">
-              <h2 className="text-eyebrow text-white/30">Follow</h2>
-
-              <ul className="flex gap-2.5">
-                {siteConfig.socials.map((social) => (
-                  <li key={social.id}>
-                    <Link
-                      href={social.href}
-                      aria-label={social.label}
-                      className="flex size-10 items-center justify-center rounded-full border border-white/12 text-white/60 transition-[border-color,background-color,color,transform] duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.06] hover:text-white"
-                    >
-                      <BrandGlyph name={social.id} className="size-4" inherit />
-                    </Link>
+              <h2 className="text-eyebrow">Get in touch</h2>
+              <ul className="flex flex-col gap-3.5">
+                {siteConfig.contact.map((item) => (
+                  <li key={item.label}>
+                    <ContactRow item={item} />
                   </li>
                 ))}
               </ul>
             </div>
-          </nav>
+          </div>
 
           {/* Baseline */}
-          <div className="flex flex-col gap-4 border-t border-white/10 py-8 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-[0.8125rem] text-white/35">
-              © {siteConfig.copyrightYear} {siteConfig.name}, Inc.
-            </p>
+          <div className="flex flex-col gap-4 border-t border-line py-8 sm:flex-row sm:items-center sm:justify-between">
+            {/* The copyright and the legal links read as one line, so they
+                are one flex row with a rule between each item rather than
+                two blocks with their own spacing. The separators are drawn
+                on the list items themselves — a `<span>` between them would
+                be read aloud as content. */}
+            <ul className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[0.8125rem] text-muted">
+              <li>
+                {/* One expression, not two source lines: JSX collapses the
+                    line break to a space, but leaves the sentence liable to
+                    wrap in the middle of "All rights reserved". */}
+                {`© ${siteConfig.copyrightYear} ${siteConfig.name} by SuperMIA. All rights reserved.`}
+              </li>
 
-            <ul className="flex flex-wrap gap-x-6 gap-y-2">
               {siteConfig.legal.map((item) => (
-                <li key={item.label}>
+                <li
+                  key={item.label}
+                  className="before:mr-4 before:text-line-strong before:content-['|']"
+                >
                   <Link
                     href={item.href}
-                    className="text-[0.8125rem] text-white/35 transition-colors duration-300 hover:text-white/75"
+                    className="transition-colors duration-300 hover:text-foreground"
                   >
                     {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
+
+            <p className="text-[0.8125rem] text-muted">
+              {siteConfig.credit.prefix}{" "}
+              <span className="font-semibold text-muted-strong">
+                {siteConfig.credit.name}
+              </span>
+            </p>
           </div>
         </Container>
-
-        {/* The floor: the wordmark, full bleed and clipped by the page
-            edge. Decorative — the name is already in the copyright line
-            above, so it is hidden from assistive tech. */}
-        <p
-          aria-hidden="true"
-          className="text-display pointer-events-none translate-y-[0] text-center text-[19vw] leading-none font-semibold tracking-[-0.04em] text-white/[0.07] select-none"
-        >
-          {siteConfig.name}
-        </p>
       </div>
     </footer>
+  );
+}
+
+/** The icon for each kind of contact detail. */
+const CONTACT_ICONS = {
+  email: Mail,
+  site: Globe,
+  link: ArrowUpRight,
+  address: MapPin,
+} as const;
+
+type ContactItem = (typeof siteConfig.contact)[number];
+
+/**
+ * One line in "Get in touch".
+ *
+ * The address has nowhere to link to, so it renders as plain text rather
+ * than as a dead anchor — a link that goes nowhere is worse than no link.
+ * Everything else is a real destination.
+ */
+function ContactRow({ item }: { item: ContactItem }) {
+  const Icon = CONTACT_ICONS[item.kind];
+
+  const body = (
+    <>
+      <span
+        aria-hidden="true"
+        className="mt-0.5 flex size-4 shrink-0 items-center justify-center text-muted"
+      >
+        <Icon className="size-4" strokeWidth={1.75} />
+      </span>
+      <span className="leading-snug">{item.label}</span>
+    </>
+  );
+
+  if (!("href" in item) || !item.href) {
+    return (
+      <span className="flex items-start gap-3 text-[0.9375rem] text-muted">
+        {body}
+      </span>
+    );
+  }
+
+  /* External destinations open in a new tab; `noreferrer` with `noopener`
+     is the safe default for a target we do not control. */
+  const external = item.href.startsWith("http");
+
+  return (
+    <Link
+      href={item.href}
+      {...(external
+        ? { target: "_blank", rel: "noopener noreferrer" }
+        : null)}
+      className="group flex items-start gap-3 text-[0.9375rem] text-muted transition-colors duration-300 hover:text-foreground"
+    >
+      {body}
+    </Link>
   );
 }

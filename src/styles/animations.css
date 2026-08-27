@@ -111,9 +111,10 @@
   animation: cx-marquee var(--marquee-duration, 42s) linear infinite;
 }
 
-.cx-marquee:hover .cx-marquee-track {
-  animation-play-state: paused;
-}
+/* The rail deliberately does not pause on hover. It is a decorative band
+   of destinations, not a list anyone needs to stop and read, and pausing
+   under the cursor made it look broken — the row simply froze whenever the
+   pointer crossed the section on its way down the page. */
 
 @media (prefers-reduced-motion: reduce) {
   .js-motion [data-animate="reveal"],

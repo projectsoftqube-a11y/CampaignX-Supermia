@@ -101,6 +101,8 @@ export function Pricing() {
 
                 <Link
                   href={siteConfig.signupUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     "mt-7 inline-flex h-12 items-center justify-center rounded-pill px-6 text-[0.9375rem] font-medium transition-[background-color,border-color,box-shadow,transform,filter] duration-200 ease-[var(--ease-out-soft)]",
                     plan.featured

@@ -48,7 +48,8 @@ export function GalleryShowcase() {
     <section
       id={SECTION_IDS.gallery}
       aria-labelledby="gallery-heading"
-      className="relative isolate"
+      /* 60px on phones, 90px from sm up. */
+      className="relative isolate py-[60px] sm:py-[90px]"
     >
       <Container>
         <div ref={rootRef}>
@@ -75,7 +76,9 @@ export function GalleryShowcase() {
             {/* DomeGallery — full width, capped at 500px tall */}
             <div
               data-animate="reveal"
-              className="relative h-[500px] w-full overflow-hidden rounded-[var(--radius-lg)]"
+              /* Shorter on phones: 500px of dome on a 320px screen is most
+                 of the viewport given over to one decorative element. */
+              className="relative h-[320px] w-full overflow-hidden rounded-[var(--radius-lg)] sm:h-[420px] lg:h-[500px]"
             >
               <DomeGallery
                 images={Array.from(galleryShowcase.images)}

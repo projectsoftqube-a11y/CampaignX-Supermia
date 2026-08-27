@@ -35,6 +35,13 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       smoothWheel: true,
       touchMultiplier: 1.6,
       autoRaf: false,
+      /* Lenis sets `scroll-behavior: auto` on <html> while it is mounted,
+         which switches off the native smooth scrolling declared in
+         globals.css. Without this, every in-page anchor — the header nav,
+         the legal pages' contents rail — jumps instantly instead of
+         travelling, which reads as a page reload. `anchors` hands those
+         clicks to Lenis so they ease like everything else. */
+      anchors: { offset: -96 },
     });
 
     const onScroll = (): void => ScrollTrigger.update();
