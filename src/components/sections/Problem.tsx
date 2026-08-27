@@ -396,40 +396,7 @@ function CleanStageCard({
   );
 }
 
-/**
- * One stage, done in CampaignX (original light version — kept for reference).
- */
-function StageCard({
-  stage,
-  index,
-}: {
-  stage: (typeof stages)[number];
-  index: number;
-}) {
-  return (
-    <div className="relative flex items-center gap-4 rounded-panel border border-line bg-surface p-4 shadow-soft transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-px hover:border-accent-line hover:shadow-raise sm:p-5">
-      <span
-        aria-hidden="true"
-        className="bg-brand relative z-10 flex size-7 shrink-0 items-center justify-center rounded-full text-[0.625rem] font-semibold text-white shadow-brand"
-      >
-        0{index + 1}
-      </span>
 
-      <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-        <span className="text-display truncate text-[1.0625rem]">
-          {stage.role}
-        </span>
-        <span className="text-[0.8125rem] leading-snug text-muted">
-          {stage.instead}
-        </span>
-      </span>
-
-      <span className="text-display text-brand shrink-0 text-[1.25rem] leading-none">
-        {stage.time}
-      </span>
-    </div>
-  );
-}
 
 /**
  * One tool, and what it costs.
