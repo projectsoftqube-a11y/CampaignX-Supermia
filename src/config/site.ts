@@ -2,10 +2,20 @@
 const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 const url = (configuredUrl || "https://campaignx.ai").replace(/\/$/, "");
 
+/**
+ * The product itself, on its own subdomain. Every "Start a Campaign" and
+ * "Log in" control points here — this is the one place to change it.
+ */
+const APP_URL = "https://app.campaignx.supermia.ai";
+
 export const siteConfig = {
   name: "CampaignX",
   tagline: "The AI Campaign Agent",
   url,
+  appUrl: APP_URL,
+  /** Sign-up and sign-in entry points into the app. */
+  signupUrl: APP_URL,
+  loginUrl: `${APP_URL}/login`,
   description:
     "CampaignX transforms marketing briefs into strategy, creative, targeting, launch and optimization with AI.",
   title: "CampaignX — Turn One Brief Into a Complete Campaign",

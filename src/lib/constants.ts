@@ -19,6 +19,7 @@ export const MEDIA = {
 export const SECTION_IDS = {
   hero: "hero",
   how: "how",
+  gallery: "gallery",
   pricing: "pricing",
   start: "start",
 } as const;

@@ -7,6 +7,7 @@ import type {
   HowStep,
   Platform,
 } from "@/types/content";
+import { siteConfig } from "@/config/site";
 
 /* ---------------------------------------------------------------- hero -- */
 
@@ -21,7 +22,7 @@ export const hero = {
   ],
   supporting:
     "Describe the campaign once. CampaignX writes the strategy, generates the creative, and ships it to every channel in the format that channel expects.",
-  primaryCta: { label: "Start a Campaign", href: "#start" },
+  primaryCta: { label: "Start a Campaign", href: siteConfig.signupUrl },
   secondaryCta: { label: "See how it works", href: "#how" },
 
   /** The brief that types itself into the prompt bar. */
@@ -127,41 +128,67 @@ export const problem = {
       role: "Strategy",
       tool: "The doc",
       days: "4 days",
+      dayCount: 4,
       loss: "Written once, then nobody reopens it",
       time: "2 min",
+      minuteCount: 2,
       instead: "The brief is the strategy",
+      handoff: "Briefing call",
     },
     {
       role: "Creative",
       tool: "The design file",
       days: "7 days",
+      dayCount: 7,
       loss: "Off-brand by the third variant",
       time: "6 min",
+      minuteCount: 6,
       instead: "Every variant from one brand model",
+      handoff: "Review round",
     },
     {
       role: "Distribution",
       tool: "The ad manager",
       days: "6 days",
+      dayCount: 6,
       loss: "Each channel rebuilt by hand",
       time: "4 min",
+      minuteCount: 4,
       instead: "All channels generate together",
+      handoff: "Asset export",
     },
     {
       role: "Reporting",
       tool: "The spreadsheet",
       days: "4 days",
+      dayCount: 4,
       loss: "Lands after the budget is spent",
       time: "Live",
+      /* Live reporting is continuous, not a task with a duration — it takes
+         no slice of the compressed track at all. */
+      minuteCount: 0,
       instead: "Results feed the next campaign",
     },
-  ] as const satisfies readonly CampaignStage[],
+    /* Typed rather than `as const satisfies`: literal narrowing hides
+       `handoff` entirely on the one stage that omits it, so the timeline
+       cannot ask any stage whether it has one. */
+  ] as readonly CampaignStage[],
 
   /** The two totals, compared. */
   totals: {
     before: { value: "21", unit: "days", note: "four tools, three handoffs" },
     after: { value: "1", unit: "afternoon", note: "one brief, one workspace" },
   },
+
+  /**
+   * The line that lands once both tracks are drawn and their lengths can be
+   * read against each other.
+   */
+  punchline: "Same four stages. Same campaign. One afternoon instead of three weeks.",
+
+  /** Headings for the two halves of the split. */
+  beforeTitle: "Four tools that don't talk to each other",
+  afterTitle: "One workspace that does all four",
 } as const;
 
 /* -------------------------------------------------------- how it works -- */
@@ -216,6 +243,38 @@ export const howItWorks = {
   ] as readonly HowStep[],
 };
 
+/* ------------------------------------------------ gallery showcase -- */
+
+export const galleryShowcase = {
+  eyebrow: "AI-Generated Creative",
+  heading: "Every campaign ships with visuals that match your brand.",
+  headingHighlight: "visuals",
+  supporting:
+    "CampaignX doesn't just write copy — it generates the creative assets each channel needs, styled to your brand guidelines, ready to publish.",
+  points: [
+    "On-brand imagery from your colour palette and type system",
+    "Per-channel sizing — stories, posts, banners, emails",
+    "Regenerate any asset without starting the whole campaign over",
+    "No stock-photo searches, no Figma round-trips",
+  ],
+  images: [
+    "https://miachatbot.s3.us-east-1.amazonaws.com/campaginx/media_gallery/246/67a4c320-c893-4a7a-a203-1845231a8c53_708082b61a47477bb996b792adde9c07.png",
+    "https://miachatbot.s3.amazonaws.com/campaign_images/0602682b05a9468d9a226905badcba7a.png",
+    "https://miachatbot.s3.us-east-1.amazonaws.com/campaginx/media_gallery/246/0de39b3b-ede7-4970-9088-e62be0e65833_976c871ea23d47379874747e38f8b188.png",
+    "https://miachatbot.s3.amazonaws.com/campaign_images/648c964ce8464373a06bd172bc71f2b1.png",
+    "https://miachatbot.s3.amazonaws.com/campaign_images/47491756f3e04fc49edf2ee36ae0c334.png",
+    "https://miachatbot.s3.us-east-1.amazonaws.com/campaginx/media_gallery/246/83f720b6-a60e-4a55-9575-eae4966d49cb_a0382bd47c534581919e2bf301e24860.png",
+    "https://miachatbot.s3.amazonaws.com/campaign_images/9e7e5b8fc9c14a899f0ecc04c142038a.png",
+    "https://miachatbot.s3.amazonaws.com/campaign_images/ec5beb15c799452b814637bdec834839.png",
+    "https://miachatbot.s3.amazonaws.com/campaign_images/d0ca9a90351d4ee4be536e6dd7b2f659.png",
+    "https://miachatbot.s3.amazonaws.com/campaign_images/d7c5bf62e5ea4c129afddb4e0dc20b4c.png",
+    "https://miachatbot.s3.amazonaws.com/campaign_images/8355d483c1fc4362baf0bf8375eccbef.png",
+    "https://miachatbot.s3.amazonaws.com/campaign_images/a0952d8dece740c6844c654ecd7ca2e0.png",
+    "https://miachatbot.s3.amazonaws.com/campaign_images/0d0e4d1e71384862975c733c24c2623b.png",
+    "https://miachatbot.s3.amazonaws.com/campaign_images/178fce803b464215af9aa8886b4f10c0.png",
+  ],
+} as const;
+
 /* ----------------------------------------------------------- final cta -- */
 
 export const finalCta = {
@@ -223,7 +282,7 @@ export const finalCta = {
   headingHighlight: "sentence",
   supporting:
     "Strategy, creative and every channel — from one line of plain English.",
-  primaryCta: { label: "Start a Campaign", href: "#start" },
+  primaryCta: { label: "Start a Campaign", href: siteConfig.signupUrl },
   secondaryCta: { label: "See how it works", href: "#how" },
   /** The working prompt bar in the closing panel. */
   prompt: {
@@ -238,38 +297,31 @@ export const footerBlurb = "The AI campaign agent for teams who care about craft
 
 export const pricing = {
   eyebrow: "Pricing",
-  heading: "Start free. Pay when it ships work.",
-  headingHighlight: "Start free",
-  supporting: ["No card to begin. No per-seat surprise when the team grows."],
+  heading: "Free during Beta. Lock in Early Access.",
+  headingHighlight: "Free during Beta",
+  supporting: ["Join early access to lock in exclusive founder discounts before public launch."],
 
-  /**
-   * PLACEHOLDER PRICING — replace before launch.
-   *
-   * These figures are plausible SaaS tiers, not decided commercial terms.
-   * Nothing else needs changing when the real numbers land: the section
-   * reads plan shape, price and features straight from here.
-   */
   plans: [
     {
       name: "Starter",
-      summary: "For one marketer testing the water.",
-      monthly: 0,
-      priceNote: "Free forever",
-      cta: "Start a Campaign",
+      summary: "For individual marketers exploring AI campaigns.",
+      monthly: null,
+      priceNote: "Free in Beta",
+      cta: "Get Early Access",
       featured: false,
       features: [
-        "3 campaigns a month",
-        "2 channels",
-        "Brand model from one source",
+        "Full access during beta",
+        "All channel outputs",
+        "Brand voice model",
         "Community support",
       ],
     },
     {
       name: "Team",
-      summary: "For a marketing team shipping every week.",
-      monthly: 79,
-      priceNote: "per workspace, billed monthly",
-      cta: "Start a Campaign",
+      summary: "For growth teams shipping campaigns weekly.",
+      monthly: null,
+      priceNote: "Early Access",
+      cta: "Join Waitlist",
       featured: true,
       features: [
         "Unlimited campaigns",
@@ -281,10 +333,10 @@ export const pricing = {
     },
     {
       name: "Enterprise",
-      summary: "For teams with procurement and a security review.",
+      summary: "For custom volume and security requirements.",
       monthly: null,
       priceNote: "Custom",
-      cta: "Talk to us",
+      cta: "Talk to Us",
       featured: false,
       features: [
         "Everything in Team",

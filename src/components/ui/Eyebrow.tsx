@@ -5,6 +5,11 @@ interface EyebrowProps {
   className?: string;
   /** Opts the eyebrow into an enclosing <Reveal> stagger. */
   "data-animate"?: "reveal";
+  /**
+   * `invert` for dark surfaces. The default rules and label are tuned for
+   * the off-white page and disappear against `bg-foreground`.
+   */
+  tone?: "default" | "invert";
 }
 
 /**
@@ -22,7 +27,9 @@ export function Eyebrow({
   children,
   className,
   "data-animate": dataAnimate,
+  tone = "default",
 }: EyebrowProps) {
+  const invert = tone === "invert";
   return (
     <span
       data-animate={dataAnimate}
@@ -31,7 +38,12 @@ export function Eyebrow({
       {/* Left rule, fading in toward the label. */}
       <span
         aria-hidden="true"
-        className="hidden h-px w-8 bg-[linear-gradient(to_right,transparent,var(--border-strong))] sm:block"
+        className={cn(
+          "hidden h-px w-8 sm:block",
+          invert
+            ? "bg-[linear-gradient(to_right,transparent,rgba(255,255,255,0.35))]"
+            : "bg-[linear-gradient(to_right,transparent,var(--border-strong))]",
+        )}
       />
 
       {/* The marker: two stacked bars in the brand ramp, the shorter one
@@ -41,11 +53,23 @@ export function Eyebrow({
         <span className="bg-brand block h-1.5 w-[3px] rounded-full opacity-50" />
       </span>
 
-      <span className="text-eyebrow whitespace-nowrap">{children}</span>
+      <span
+        className={cn(
+          "text-eyebrow whitespace-nowrap",
+          invert && "text-white/45",
+        )}
+      >
+        {children}
+      </span>
 
       <span
         aria-hidden="true"
-        className="hidden h-px w-8 bg-[linear-gradient(to_left,transparent,var(--border-strong))] sm:block"
+        className={cn(
+          "hidden h-px w-8 sm:block",
+          invert
+            ? "bg-[linear-gradient(to_left,transparent,rgba(255,255,255,0.35))]"
+            : "bg-[linear-gradient(to_left,transparent,var(--border-strong))]",
+        )}
       />
     </span>
   );

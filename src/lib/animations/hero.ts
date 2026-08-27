@@ -38,29 +38,10 @@ export function playHeroIntro(
     return tl;
   }
 
-  if (lines.length) {
-    tl.fromTo(
-      lines,
-      { yPercent: 105, opacity: 0 },
-      {
-        yPercent: 0,
-        opacity: 1,
-        /* Deliberately quicker than the rest of the cascade. `expo.out`
-           spends its final third covering the last few percent, so a 1.4s
-           headline keeps visibly creeping long after it has effectively
-           arrived, which reads as the page still loading. */
-        duration: 0.72,
-        stagger: 0.07,
-        ease: EASE.expo,
-        /* Drop the inline transform once each line has arrived. Without
-           this the line keeps a `translate` GSAP owns, and any later React
-           re-render that discards it leaves the line offset inside its
-           overflow-hidden box — which reads as the headline vanishing. */
-        clearProps: "transform",
-      },
-      0.05,
-    );
-  }
+  /* The headline is not animated. It is the page's most important text, and
+     any entrance — however short — means it is absent for the first frames
+     and gone entirely if the script is slow, blocked or throws. It is left
+     to paint with the document; the cascade below starts underneath it. */
 
   if (supporting) {
     tl.fromTo(
@@ -187,23 +168,35 @@ export interface BriefRefs {
   readonly screens: readonly HTMLElement[];
 }
 
+export interface BriefSequence {
+  /** The one-shot draw. */
+  readonly timeline: gsap.core.Timeline;
+  /** The endless packet + flare loops, so the caller can pause them. */
+  readonly loops: readonly gsap.core.Timeline[];
+}
+
 /**
  * The one-shot half of act two: the three connectors draw downward out of
  * the prompt bar and each device screen wakes as its line lands.
  *
  * Separate from the typewriter because this happens once, on load, while the
  * typing loops forever.
+ *
+ * The endless packet and flare loops are handed back rather than left
+ * running: they tick every frame for the life of the page otherwise, which
+ * is most of what kept the hero below 60fps once it was scrolled past.
  */
-export function playBriefSequence(refs: BriefRefs): gsap.core.Timeline {
+export function playBriefSequence(refs: BriefRefs): BriefSequence {
   const { connectors, pulses, ports, screens } = refs;
   const tl = gsap.timeline({ defaults: { ease: EASE.out } });
+  const loops: gsap.core.Timeline[] = [];
 
   if (prefersReducedMotion()) {
     if (connectors.length) tl.set(connectors, { strokeDashoffset: 0 });
     if (ports.length) tl.set(ports, { opacity: 1 });
     if (screens.length) tl.set(screens, { opacity: 1 });
     /* The travelling pulse is a loop, so it never starts here. */
-    return tl;
+    return { timeline: tl, loops };
   }
 
   /* The centre line leads, the outer two follow: the fan reads as the brief
@@ -259,7 +252,7 @@ export function playBriefSequence(refs: BriefRefs): gsap.core.Timeline {
 
       const CYCLE = 2.2;
 
-      gsap
+      const packet = gsap
         .timeline({
           repeat: -1,
           delay: 1.2 + index * (CYCLE / pulses.length),
@@ -273,22 +266,24 @@ export function playBriefSequence(refs: BriefRefs): gsap.core.Timeline {
         /* Fade out over the last stretch so the packet arrives rather than
            vanishing at full strength. */
         .to(pulse, { opacity: 0, duration: 0.28 }, CYCLE - 0.28);
+      loops.push(packet);
 
       /* The landing node answers each arrival with a small flare. */
       const port = ports[index];
       if (port) {
-        gsap
+        const flare = gsap
           .timeline({
             repeat: -1,
             delay: 1.2 + index * (CYCLE / pulses.length) + CYCLE - 0.3,
           })
           .to(port, { scale: 1.9, duration: 0.22, transformOrigin: "center" })
           .to(port, { scale: 1, duration: 0.5, ease: "power2.out" });
+        loops.push(flare);
       }
     });
   }
 
-  return tl;
+  return { timeline: tl, loops };
 }
 
 /** Prepares the connectors so they can be drawn. Call before the sequence. */

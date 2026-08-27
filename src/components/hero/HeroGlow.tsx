@@ -62,8 +62,8 @@ export function HeroGlow() {
           rasterise several times the viewport area on every frame. The
           opacity is raised to compensate for the tighter falloff. */}
       <div className="absolute inset-x-0 bottom-[-18vh] h-[85vh]">
-        <div className="cx-drift absolute bottom-[10vh] left-[2vw] h-[58vh] w-[62vw] rounded-[50%] bg-[radial-gradient(closest-side,rgba(0,123,255,0.26),transparent)] blur-[40px]" />
-        <div className="cx-drift absolute right-[0vw] bottom-[4vh] h-[52vh] w-[56vw] rounded-[50%] bg-[radial-gradient(closest-side,rgba(208,0,255,0.20),transparent)] blur-[40px] [animation-delay:-7s]" />
+        <div className="cx-drift absolute bottom-[10vh] left-[2vw] h-[58vh] w-[62vw] rounded-[50%] bg-[radial-gradient(closest-side,rgba(0,123,255,0.26),rgba(0,123,255,0.13)_48%,transparent)]" />
+        <div className="cx-drift absolute right-[0vw] bottom-[4vh] h-[52vh] w-[56vw] rounded-[50%] bg-[radial-gradient(closest-side,rgba(208,0,255,0.20),rgba(208,0,255,0.10)_48%,transparent)] [animation-delay:-7s]" />
       </div>
 
       {/* A single bright bloom directly behind the prompt bar, so the focal

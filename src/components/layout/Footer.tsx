@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import {
   useEffect,
   useRef,
@@ -19,8 +18,8 @@ import { siteConfig } from "@/config/site";
 import { gsap, registerGsap } from "@/lib/animations/gsap";
 import { revealOnScroll } from "@/lib/animations/reveal";
 
-/** Where the prompt bar sends people. A placeholder until auth exists. */
-const LOGIN_HREF = "#login";
+/** Where the prompt bar sends people: straight into the app. */
+const START_HREF = siteConfig.signupUrl;
 
 /**
  * The closing CTA and footer.
@@ -29,24 +28,25 @@ const LOGIN_HREF = "#login";
  * last argument and the footer is what holds it up. Splitting them would
  * put a seam between the ask and the ground it sits on.
  *
- * `#start` lives here. Every "Start a Campaign" control in the header and
- * hero points at it, so without this section those buttons scroll nowhere.
+ * Every "Start a Campaign" control now leaves for the app itself, so this
+ * section is the page's closing argument rather than their scroll target.
+ * It keeps `id="start"` so the anchor stays a valid deep link.
  */
 export function Footer() {
   const rootRef = useRef<HTMLElement>(null);
   const [brief, setBrief] = useState("");
-  const router = useRouter();
 
-  /* The brief is carried to the login screen as a query param, so whatever
-     was typed survives sign-up instead of being retyped afterwards. */
+  /* The brief is carried into the app as a query param, so whatever was
+     typed survives sign-up instead of being retyped afterwards.
+
+     `window.location` rather than `router.push`: the app is a different
+     origin, and the Next router only handles routes within this app. */
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const trimmed = brief.trim();
-    router.push(
-      trimmed
-        ? `${LOGIN_HREF}?brief=${encodeURIComponent(trimmed)}`
-        : LOGIN_HREF,
-    );
+    window.location.href = trimmed
+      ? `${START_HREF}?brief=${encodeURIComponent(trimmed)}`
+      : START_HREF;
   };
 
   /* Enter submits; Shift+Enter keeps its usual newline, since this is a

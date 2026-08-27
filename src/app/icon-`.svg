@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <title>CampaignX</title>
+  <defs>
+    <!-- The ring sweeps cyan at the top through blue to indigo at the
+         bottom, sampled from the wordmark artwork rather than the
+         tokens.css ramp: the logo mark uses its own cooler gradient. -->
+    <linearGradient id="c" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#00b2fe"/>
+      <stop offset="0.42" stop-color="#007dfc"/>
+      <stop offset="1" stop-color="#3b01e8"/>
+    </linearGradient>
+    <!-- The pixel dissolve runs pink to orange, the logo's warm counterpoint. -->
+    <linearGradient id="p" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fa0382"/>
+      <stop offset="1" stop-color="#ff8500"/>
+    </linearGradient>
+  </defs>
+
+  <!-- The C. An arc, not a full ring: it opens toward the lower left,
+       where the pixel squares dissolve away from it. Drawn as a stroked
+       path so the aperture stays a true gap at any size. -->
+  <path
+    d="M9.7 24.9A11 11 0 1 1 21.4 6.4"
+    fill="none"
+    stroke="url(#c)"
+    stroke-width="4.6"
+    stroke-linecap="round"
+    transform="rotate(-18 16 16)"
+  />
+
+  <!-- Speech bubble inside the C, with its tail at the lower left.
+       At 16px the bars below are near-invisible, but the bubble's
+       silhouette still reads, which is what carries the mark. -->
+  <path
+    d="M12.4 10.5h8.3a2.2 2.2 0 0 1 2.2 2.2v5.2a2.2 2.2 0 0 1-2.2 2.2h-4.3l-3.6 3v-3h-0.4a2.2 2.2 0 0 1-2.2-2.2v-5.2a2.2 2.2 0 0 1 2.2-2.2z"
+    fill="url(#c)"
+  />
+
+  <!-- Three rising bars: the "campaign performance" read. Knocked out of
+       the bubble in white so they hold contrast on any tab background. -->
+  <g fill="#fff">
+    <rect x="13.4" y="16.1" width="1.9" height="2.6" rx="0.6"/>
+    <rect x="16.1" y="14.5" width="1.9" height="4.2" rx="0.6"/>
+    <rect x="18.8" y="12.9" width="1.9" height="5.8" rx="0.6"/>
+  </g>
+
+  <!-- Pixel dissolve off the C's open side. Three squares, shrinking and
+       fading as they travel away from the mark. -->
+  <g fill="url(#p)">
+    <rect x="1.2" y="14.4" width="3.4" height="3.4" rx="1" opacity="0.45"/>
+    <rect x="4.6" y="18.6" width="2.8" height="2.8" rx="0.9" opacity="0.72"/>
+    <rect x="2.6" y="10.2" width="2.4" height="2.4" rx="0.8" opacity="0.9"/>
+  </g>
+</svg>

@@ -6,6 +6,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { withHighlight } from "@/components/ui/Highlight";
 import { SectionGlow } from "@/components/ui/SectionGlow";
 import { pricing } from "@/config/content";
+import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 /**
@@ -99,7 +100,7 @@ export function Pricing() {
                 </p>
 
                 <Link
-                  href="#start"
+                  href={siteConfig.signupUrl}
                   className={cn(
                     "mt-7 inline-flex h-12 items-center justify-center rounded-pill px-6 text-[0.9375rem] font-medium transition-[background-color,border-color,box-shadow,transform,filter] duration-200 ease-[var(--ease-out-soft)]",
                     plan.featured

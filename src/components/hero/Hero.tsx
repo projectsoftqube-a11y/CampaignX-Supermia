@@ -32,6 +32,52 @@ export function Hero() {
   const rootRef = useRef<HTMLElement>(null);
   const copyRef = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<"idle" | "revealed">("idle");
+  /* Drives the ambient aurora. Starts active so the hero is never a frame
+     late on first paint; the observer below only ever turns it off. */
+  const [ambient, setAmbient] = useState<"active" | "idle">("active");
+  /* Populated by the GSAP effect below, read by the observer. A ref rather
+     than state: the observer only ever reads it, and re-rendering the hero
+     to store a list of timelines would discard the styles GSAP owns. */
+  const loopsRef = useRef<gsap.core.Timeline[]>([]);
+
+  /* The aurora, the connector pulses and the device videos are all purely
+     decorative, and all of them kept the compositor busy for the entire
+     length of the page — the hero is the only section that animates
+     continuously, which is why it was the only one dropping frames.
+     Everything here stops the moment the section leaves the viewport. */
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const visible = entry.isIntersecting;
+        setAmbient(visible ? "active" : "idle");
+        /* GSAP keeps ticking a paused timeline's parent but does no work on
+           the timeline itself, so this takes the packet, flare and
+           typewriter loops to zero cost while the hero is off screen. */
+        for (const loop of loopsRef.current) {
+          if (visible) loop.resume();
+          else loop.pause();
+        }
+
+        /* Video decoding is the other continuous cost here. Two clips
+           decoding behind the rest of the page buys nothing once the hero
+           is scrolled past. `play()` rejects if it is interrupted, which
+           is not an error worth surfacing. */
+        for (const video of root.querySelectorAll("video")) {
+          if (visible) void video.play().catch(() => {});
+          else video.pause();
+        }
+      },
+      /* A small margin so the aurora is already running by the time any of
+         it is actually on screen, rather than starting as it appears. */
+      { rootMargin: "150px" },
+    );
+
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     registerGsap();
@@ -88,20 +134,29 @@ export function Hero() {
 
       /* Act two, on its own timeline, overlapping the tail of act one: the
          overlap is what makes the whole thing feel like one gesture. */
-      playBriefSequence(brief).delay(0.75);
+      const sequence = playBriefSequence(brief);
+      sequence.timeline.delay(0.75);
 
-      /* The typewriter loops for as long as the page is open. */
-      playBriefTypewriter(
+      /* The typewriter loops for as long as the hero is on screen. */
+      const typewriter = playBriefTypewriter(
         root.querySelector("[data-hero-typed]"),
         root.querySelector("[data-hero-caret]"),
         hero.prompt.briefs,
-      ).delay(0.6);
+      );
+      typewriter.delay(0.6);
+
+      /* Every endless loop in the hero, in one list. Handed to the observer
+         below so they all stop together once the section is out of view. */
+      loopsRef.current = [...sequence.loops, typewriter];
 
       createHeroScroll(root, copyRef.current);
     }, root);
 
     return () => {
       window.clearTimeout(failsafe);
+      /* Dropped before the revert, so the observer can never resume a
+         timeline that GSAP has already killed. */
+      loopsRef.current = [];
       ctx.revert();
     };
   }, []);
@@ -111,6 +166,7 @@ export function Hero() {
       ref={rootRef}
       id={SECTION_IDS.hero}
       data-hero-state={state}
+      data-hero-ambient={ambient}
       className="relative flex min-h-[100svh] flex-col justify-center overflow-x-clip pt-28 pb-20 sm:pt-32 lg:pt-36"
     >
       <HeroGlow />

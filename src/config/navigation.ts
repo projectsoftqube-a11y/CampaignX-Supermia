@@ -1,4 +1,5 @@
 import type { FooterColumn, NavItem } from "@/types/navigation";
+import { siteConfig } from "@/config/site";
 
 /* Only two anchors exist on the page now, so the nav links to those
    rather than advertising sections that were removed. */
@@ -12,12 +13,12 @@ export const navigation: readonly NavItem[] = [
 
 export const primaryCta: NavItem = {
   label: "Start a Campaign",
-  href: "#start",
+  href: siteConfig.signupUrl,
 };
 
 export const secondaryCta: NavItem = {
   label: "Log in",
-  href: "#login",
+  href: siteConfig.loginUrl,
 };
 
 export const footerNavigation: readonly FooterColumn[] = [

@@ -24,12 +24,13 @@
    Scoped to the "idle" phase, which <Hero /> flips to "revealed" the moment
    the intro timeline completes. After that nothing here can hide the copy —
    important, because a React re-render would discard GSAP's inline styles and
-   leave a permanently invisible headline behind. */
-.js-motion [data-hero-state="idle"] [data-hero-line] {
-  opacity: 0;
-  transform: translate3d(0, 105%, 0);
-}
+   leave a permanently invisible headline behind.
 
+   The headline is deliberately NOT listed here. It is the first thing on the
+   page and the last thing that should wait on a script: hiding it pre-reveal
+   meant a slow, blocked or failed GSAP left the most important text on the
+   site invisible, while the copy around it — which only ever fades — still
+   appeared. It now paints with the document and never animates in. */
 .js-motion [data-hero-state="idle"] [data-hero-supporting],
 .js-motion [data-hero-state="idle"] [data-hero-prompt],
 .js-motion [data-hero-state="idle"] [data-hero-device] {
@@ -86,9 +87,22 @@
 
 .cx-drift {
   animation: cx-drift 14s var(--ease-in-out-soft) infinite;
-  /* Promotes the layer up front, so the blur is rasterised once rather
-     than on the first animated frame. */
+}
+
+/* The aurora is decorative and only ever visible behind the hero, but the
+   animation kept running — and kept the compositor working — for the whole
+   length of the page. <Hero /> flips this attribute once the section leaves
+   the viewport, which takes it to zero cost everywhere below.
+
+   `will-change` is set only while the layer is actually moving. Left on
+   permanently it pins both volumes into their own compositor layers for the
+   life of the page, which is memory spent on something standing still. */
+[data-hero-ambient="active"] .cx-drift {
   will-change: transform;
+}
+
+[data-hero-ambient="idle"] .cx-drift {
+  animation-play-state: paused;
 }
 
 /* Duration is a variable so each rail sets a pace suited to its width;

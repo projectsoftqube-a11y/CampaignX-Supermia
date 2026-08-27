@@ -58,14 +58,31 @@ export interface CampaignStage {
   readonly role: string;
   /** Before: the tool this stage happens in. */
   readonly tool: string;
-  /** Before: elapsed days. */
+  /** Before: elapsed days, as displayed. */
   readonly days: string;
+  /**
+   * Before: elapsed days as a number. The timeline sizes each block by this
+   * rather than parsing `days`, so copy like "a week" cannot silently break
+   * the geometry.
+   */
+  readonly dayCount: number;
   /** Before: what the handoff out of this stage costs. */
   readonly loss: string;
   /** After: elapsed time in CampaignX. */
   readonly time: string;
+  /**
+   * After: elapsed minutes as a number, for the compressed track. Zero means
+   * "no elapsed time at all" — the continuous stages, like live reporting.
+   */
+  readonly minuteCount: number;
   /** After: what happens instead. */
   readonly instead: string;
+  /**
+   * The handoff *out* of this stage — the wait between finishing here and
+   * starting the next stage. Absent on the last stage, which hands off to
+   * nothing. This is the "three handoffs" the totals refer to.
+   */
+  readonly handoff?: string;
 }
 
 /** One pricing tier. */
