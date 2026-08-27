@@ -1,0 +1,110 @@
+/* --------------------------------------------------------------------------
+   CampaignX 2.0 — Design Tokens
+   Single source of truth. Nothing in the app may hardcode a colour or radius.
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Surface / text ------------------------------------------------------- */
+  --background: #f8f8f6;
+  --foreground: #0a0a0a;
+
+  --surface: #fff;
+  --surface-soft: #f1f2ef;
+  --surface-sunk: #ebece8;
+  /* The warm cream the 3D step illustrations are rendered on, averaged
+     from the four corners of all four images after reversing the PNG row
+     filters — reading the raw corner byte gives a filtered value, not the
+     colour. Matching it exactly is what stops the artwork showing a visible
+     rectangle against the section. */
+  --surface-warm: #fdf8f4;
+
+  --border: #e5e5e0;
+  --border-strong: #d7d8d2;
+  --border-glass: #ffffffc7;
+
+  --muted: #6e6e6e;
+  --muted-strong: #454545;
+
+  /* Brand ----------------------------------------------------------------
+     The CampaignX signature: blue -> violet -> purple -> magenta. Used as a
+     controlled accent on CTAs, highlighted words and key figures, never as
+     a background wash. Stops are named so a component can reach for a
+     single hue without reproducing the whole ramp. */
+  --brand-blue: #007bff;
+  --brand-violet: #4b3cff;
+  --brand-purple: #8a2be2;
+  --brand-magenta: #d000ff;
+
+  --brand-gradient: linear-gradient(
+    135deg,
+    #007bff 0%,
+    #4b3cff 45%,
+    #8a2be2 72%,
+    #d000ff 100%
+  );
+
+  /* For tinted fills that must stay legible under text. */
+  --brand-gradient-soft: linear-gradient(
+    135deg,
+    rgba(0, 123, 255, 0.1),
+    rgba(91, 45, 255, 0.08),
+    rgba(208, 0, 255, 0.08)
+  );
+
+  --brand-blue-rgb: 0, 123, 255;
+
+  /* Accent — the single-colour half of the brand system --------------------
+     Anything that cannot take a gradient (an icon stroke, a 1px rule, a
+     focus ring) uses this. It is the gradient's opening blue, so the two
+     read as one system rather than two accents. */
+  --accent-rgb: var(--brand-blue-rgb);
+  --accent: rgb(var(--accent-rgb));
+  --accent-hover: #0063d1;
+  --accent-press: #0052ad;
+  --accent-ink: #fff;
+
+  --accent-soft: rgba(var(--accent-rgb), 0.07);
+  --accent-line: rgba(var(--accent-rgb), 0.2);
+
+  /* Coloured elevation for gradient surfaces. Tuned to sit under a button
+     without reading as a glow. */
+  --shadow-brand: 0 6px 20px -6px rgba(75, 60, 255, 0.35);
+  --shadow-brand-hover: 0 10px 26px -8px rgba(75, 60, 255, 0.45);
+
+  /* Radius --------------------------------------------------------------- */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 36px;
+  --radius-pill: 999px;
+
+  /* Glass ---------------------------------------------------------------- */
+  --glass-bg: #ffffff9e;
+  --glass-bg-strong: #ffffffc7;
+  --glass-bg-quiet: #ffffff70;
+
+  --glass-blur: 24px;
+  --glass-blur-sm: 14px;
+
+  /* Elevation ------------------------------------------------------------ */
+  --shadow-xs: 0 1px 2px #141e320a;
+  --shadow-sm: 0 4px 16px #141e320d;
+  --shadow-md: 0 12px 36px #141e3212;
+  --shadow-lg: 0 20px 60px #141e3214;
+  --shadow-xl: 0 40px 120px #141e321f;
+
+  /* Layout --------------------------------------------------------------- */
+  --container-max: 1520px;
+  --container-narrow: 1080px;
+  --container-wide: 1680px;
+  --header-max: 1480px;
+  --header-offset: 16px;
+  --section-y: clamp(5rem, 9vw, 9rem);
+
+  /* Motion --------------------------------------------------------------- */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-slow: 640ms;
+}

@@ -1,0 +1,200 @@
+/* --------------------------------------------------------------------------
+   Motion primitives. GSAP owns choreography; this file owns the resting
+   states so nothing flashes before hydration, plus a few ambient loops.
+   -------------------------------------------------------------------------- */
+
+[data-animate="reveal"],
+[data-animate="line"] {
+  will-change: transform, opacity;
+}
+
+/* Pre-hydration resting state. Removed by GSAP, or by the no-JS fallback. */
+.js-motion [data-animate="reveal"] {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+}
+
+.js-motion [data-animate="line"] {
+  opacity: 0;
+  transform: translate3d(0, 100%, 0);
+}
+
+/* Hero intro. GSAP applies these from-values one frame after paint, so they
+   are mirrored here to keep the first frame from showing the finished state.
+   Scoped to the "idle" phase, which <Hero /> flips to "revealed" the moment
+   the intro timeline completes. After that nothing here can hide the copy —
+   important, because a React re-render would discard GSAP's inline styles and
+   leave a permanently invisible headline behind. */
+.js-motion [data-hero-state="idle"] [data-hero-line] {
+  opacity: 0;
+  transform: translate3d(0, 105%, 0);
+}
+
+.js-motion [data-hero-state="idle"] [data-hero-supporting],
+.js-motion [data-hero-state="idle"] [data-hero-prompt],
+.js-motion [data-hero-state="idle"] [data-hero-device] {
+  opacity: 0;
+}
+
+/* Translate only — no scale.
+   A blurred element that merely moves can be promoted to its own layer and
+   composited, so the blur is rasterised once. Scaling it invalidates that
+   cache and forces the browser to re-blur the full area every frame, which
+   on the hero's three large volumes was enough to halve the frame rate. */
+@keyframes cx-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0);
+  }
+}
+
+@keyframes cx-pulse-ring {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes cx-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes cx-bar-rise {
+  from {
+    transform: scaleY(0.05);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.cx-drift {
+  animation: cx-drift 14s var(--ease-in-out-soft) infinite;
+  /* Promotes the layer up front, so the blur is rasterised once rather
+     than on the first animated frame. */
+  will-change: transform;
+}
+
+/* Duration is a variable so each rail sets a pace suited to its width;
+   a short track at 42s reads as barely moving. */
+.cx-marquee-track {
+  animation: cx-marquee var(--marquee-duration, 42s) linear infinite;
+}
+
+.cx-marquee:hover .cx-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-motion [data-animate="reveal"],
+  .js-motion [data-animate="line"],
+  .js-motion [data-hero-state] [data-hero-line],
+  .js-motion [data-hero-state] [data-hero-supporting],
+  .js-motion [data-hero-state] [data-hero-prompt],
+  .js-motion [data-hero-state] [data-hero-device] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .cx-drift,
+  .cx-marquee-track,
+  .cx-mock-progress,
+  .cx-mock-bubble,
+  .cx-mock-float {
+    animation: none;
+  }
+
+  /* Placeholder screens must still be fully visible when their entrance
+     animation is cancelled. */
+  .cx-mock-bubble {
+    opacity: 1;
+    transform: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hero device placeholder screens.
+
+   These are ambient loops inside the phone mockups, running until real
+   footage is dropped into config. Cheap by construction: transform and
+   opacity only, no layout properties, no blur.
+   -------------------------------------------------------------------------- */
+
+@keyframes cx-mock-progress {
+  0%,
+  100% {
+    transform: scaleX(0);
+  }
+  8%,
+  30% {
+    transform: scaleX(1);
+  }
+  38% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes cx-mock-bubble-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scale(0.96);
+  }
+  12%,
+  92% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -4px, 0) scale(0.98);
+  }
+}
+
+@keyframes cx-mock-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+}
+
+.cx-mock-progress {
+  transform-origin: left center;
+  animation: cx-mock-progress 7.2s linear infinite;
+}
+
+.cx-mock-bubble {
+  opacity: 0;
+  animation: cx-mock-bubble-in 7.2s var(--ease-in-out-soft) infinite;
+}
+
+.cx-mock-float {
+  animation: cx-mock-float 6s var(--ease-in-out-soft) infinite;
+}

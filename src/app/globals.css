@@ -1,0 +1,312 @@
+@import "../styles/tokens.css";
+@import "tailwindcss";
+@import "../styles/animations.css";
+
+/* --------------------------------------------------------------------------
+   Tailwind theme bridge — maps design tokens onto utility namespaces.
+   Radius uses semantic keys (card/panel/frame) so it never collides with the
+   raw --radius-* scale exposed in tokens.css.
+   -------------------------------------------------------------------------- */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+  --color-surface-sunk: var(--surface-sunk);
+  --color-surface-warm: var(--surface-warm);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-muted: var(--muted);
+  --color-muted-strong: var(--muted-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-line: var(--accent-line);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-violet: var(--brand-violet);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-magenta: var(--brand-magenta);
+
+  --radius-chip: var(--radius-sm);
+  --radius-card: var(--radius-md);
+  --radius-panel: var(--radius-lg);
+  --radius-frame: var(--radius-xl);
+  --radius-pill: var(--radius-pill);
+
+  --shadow-soft: var(--shadow-sm);
+  --shadow-raise: var(--shadow-md);
+  --shadow-float: var(--shadow-lg);
+  --shadow-cinema: var(--shadow-xl);
+  --shadow-brand: var(--shadow-brand);
+  --shadow-brand-hover: var(--shadow-brand-hover);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-display-sans), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-highlight: var(--font-highlight-hand), "Comic Sans MS", ui-rounded,
+    cursive;
+
+  --ease-soft: var(--ease-out-soft);
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  /* Lenis owns scrolling once mounted; native smooth would fight it. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  html.lenis {
+    scroll-behavior: auto;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Glass system — one implementation, three intensities.
+   Blur is expensive; it is applied only where it earns its place.
+   -------------------------------------------------------------------------- */
+@utility glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-lg);
+}
+
+@utility glass-quiet {
+  background: var(--glass-bg-quiet);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(140%);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-sm);
+}
+
+@utility glass-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-md);
+}
+
+/* Hairline highlight along the top edge — the detail that reads as "glass". */
+@utility glass-sheen {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0) 38%,
+      rgba(255, 255, 255, 0) 62%,
+      rgba(255, 255, 255, 0.55) 100%
+    );
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Typography helpers
+   -------------------------------------------------------------------------- */
+@utility text-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
+@utility text-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   Background texture
+   -------------------------------------------------------------------------- */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(10, 10, 10, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10, 10, 10, 0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* A dot field rather than a ruled grid: finer, less literal, and it does
+   not read as a chart sitting behind the headline. */
+@utility cx-dots {
+  background-image: radial-gradient(
+    circle at center,
+    rgba(10, 10, 10, 0.07) 1px,
+    transparent 1px
+  );
+  background-size: 26px 26px;
+}
+
+@utility bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+@utility mask-fade-edges {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+
+/* --------------------------------------------------------------------------
+   Heading highlight
+
+   Kalam is a brush-pen face with a smaller x-height than DM Sans and a
+   noticeably larger descender, so at a shared font-size it reads small and
+   sits low. The size bump lifts it to match the words either side; the
+   700 weight keeps it from looking thin beside DM Sans at heading weight.
+   -------------------------------------------------------------------------- */
+@utility text-highlight {
+  font-family: var(--font-highlight);
+  font-weight: 700;
+  font-size: 1.06em;
+  letter-spacing: 0;
+
+  /* Painted with the brand gradient rather than a flat colour. The solid
+     `color` underneath is what a browser without background-clip: text
+     falls back to, so the word is never invisible. */
+  color: var(--brand-violet);
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Kalam's descenders sit below the clipping box unless it is given room,
+     which otherwise crops the tail of a g or y. */
+  padding-bottom: 0.06em;
+}
+
+/* --------------------------------------------------------------------------
+   Brand gradient
+
+   Two utilities, deliberately few: one paints text, one paints a surface.
+   Everything gradient on the page goes through these, so the ramp is
+   defined once and cannot drift between components.
+   -------------------------------------------------------------------------- */
+
+/** Gradient-painted text. For keywords and figures, never a paragraph. */
+@utility text-brand {
+  color: var(--brand-violet);
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/** Gradient-painted surface. Primary CTAs and small decorative accents. */
+@utility bg-brand {
+  background-image: var(--brand-gradient);
+  background-size: 140% 140%;
+  background-position: 0% 50%;
+}
+
+/** The barely-there tint, for selected and active states. */
+@utility bg-brand-soft {
+  background-image: var(--brand-gradient-soft);
+}
+
+/* --------------------------------------------------------------------------
+   Disclosure animation
+
+   Native <details> snaps open with no transition. `interpolate-size` makes
+   `height: auto` animatable, and `::details-content` is the pseudo-element
+   that wraps everything after the <summary> — together they give a real
+   height transition without reaching for JS or measuring anything.
+
+   Both are progressive: where they are unsupported the panel simply snaps
+   as it always did, which is the behaviour we already shipped.
+   -------------------------------------------------------------------------- */
+:root {
+  interpolate-size: allow-keywords;
+}
+
+.cx-disclosure::details-content {
+  block-size: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    block-size var(--dur-base) var(--ease-out-soft),
+    content-visibility var(--dur-base) allow-discrete,
+    opacity 220ms var(--ease-out-soft);
+}
+
+.cx-disclosure[open]::details-content {
+  block-size: auto;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cx-disclosure::details-content {
+    transition: none;
+  }
+}
