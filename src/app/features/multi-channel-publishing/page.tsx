@@ -208,7 +208,7 @@ export default function MultiChannelPage() {
           {/* Top-aligned, not centred: the copy column is much shorter
               than the panel beside it, so centring it pushed the first
               paragraph down and opened a gap under the heading. */}
-          <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
+          <div className="grid min-w-0 items-start gap-x-8 gap-y-5 [&>*]:min-w-0 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
             <div>
               <p className="text-[1.125rem] leading-[1.65] text-foreground">
                 Named, not estimated. These are the channels a CampaignX
@@ -300,7 +300,7 @@ export default function MultiChannelPage() {
           tone="warm"
           heading="Social media scheduling from one calendar"
         >
-          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-14">
+          <div className="grid min-w-0 items-start gap-x-8 gap-y-5 [&>*]:min-w-0 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-14">
             <div>
               <p className="text-[1.125rem] leading-[1.65] text-foreground">
                 A campaign that runs on six channels should not need six
@@ -342,7 +342,7 @@ export default function MultiChannelPage() {
           total={TOTAL}
           heading="Connect other tools with webhooks"
         >
-          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-14">
+          <div className="grid min-w-0 items-start gap-x-8 gap-y-5 [&>*]:min-w-0 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-14">
             <WebhookFlow />
 
             <div>

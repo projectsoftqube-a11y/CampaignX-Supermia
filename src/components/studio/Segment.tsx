@@ -294,13 +294,21 @@ export function CompareTable({
   left,
   right,
   rows,
-  tone = "ink",
+  tone = "light",
 }: {
   /** Column heading above the row labels. */
   question: string;
   left: string;
   right: string;
   rows: readonly { label: string; left: string; right: string }[];
+  /**
+   * Defaults to `light`, matching `Annotation`.
+   *
+   * It used to default to `ink` — white text, for a dark band. Every
+   * call site is on a light segment and has to pass `tone="light"`,
+   * and forgetting it renders the table white-on-white rather than
+   * failing loudly. The safe case is the better default.
+   */
   tone?: "ink" | "light";
 }) {
   const ink = tone === "ink";

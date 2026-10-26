@@ -200,7 +200,7 @@ export default function AiCreativePage() {
           tone="tint"
           heading="Visuals made for each channel"
         >
-          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14">
+          <div className="grid min-w-0 items-start gap-x-8 gap-y-5 [&>*]:min-w-0 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14">
             <div>
               <p className="text-[1.125rem] leading-[1.65] text-foreground">
                 One asset resized seven times is still one asset. Each surface
@@ -288,7 +288,7 @@ export default function AiCreativePage() {
           tone="warm"
           heading="Matched to your brand, and yours to change"
         >
-          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14">
+          <div className="grid min-w-0 items-start gap-x-8 gap-y-5 [&>*]:min-w-0 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14">
             <BrandMatch />
 
             <div>

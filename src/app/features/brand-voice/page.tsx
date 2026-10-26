@@ -208,7 +208,7 @@ export default function BrandVoicePage() {
           tone="tint"
           heading="What an AI brand voice model is"
         >
-          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14">
+          <div className="grid min-w-0 items-start gap-x-8 gap-y-5 [&>*]:min-w-0 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14">
             <div>
               <p className="text-[1.125rem] leading-[1.65] text-foreground">
                 Ask a team to describe their own voice and you get three
@@ -262,16 +262,16 @@ export default function BrandVoicePage() {
           total={TOTAL}
           heading="The same brief, written two ways"
         >
-          <div className="mx-auto max-w-[46rem] text-center">
-            <p className="text-[1.0625rem] leading-[1.7] text-muted-strong">
-              One is what a generic model produces from the brief. The other
-              is what comes out once CampaignX has read your own material.
-              The difference is rarely length — it is which words survive.
-            </p>
-          </div>
+          {/* Left-aligned under a left-aligned heading. A centred intro
+              under a ranged-left display heading read as two different
+              layouts stacked on top of each other. */}
+          <p className="max-w-[46rem] text-[1.0625rem] leading-[1.7] text-muted-strong">
+            One is what a generic model produces from the brief. The other is
+            what comes out once CampaignX has read your own material. The
+            difference is rarely length — it is which words survive.
+          </p>
 
-
-          <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-14">
+          <div className="mt-9 grid min-w-0 items-start gap-x-8 gap-y-5 [&>*]:min-w-0 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-12">
             <CompareTable
               tone="light"
               question="Same brief, two ways"
@@ -296,7 +296,7 @@ export default function BrandVoicePage() {
           tone="warm"
           heading="What to give it, and why it matters"
         >
-          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-14">
+          <div className="grid min-w-0 items-start gap-x-8 gap-y-5 [&>*]:min-w-0 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-14">
             <InputStack />
 
             <div>
