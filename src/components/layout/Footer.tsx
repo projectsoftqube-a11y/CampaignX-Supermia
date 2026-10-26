@@ -2,22 +2,31 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { ArrowUpRight, Globe, Mail, MapPin } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Globe, Mail, MapPin } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Logo } from "@/components/ui/Logo";
-import { footerNavigation } from "@/config/navigation";
+import { demoCta, footerNavigation, primaryCta } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { gsap, registerGsap } from "@/lib/animations/gsap";
 import { revealOnScroll } from "@/lib/animations/reveal";
 
-
 /**
  * The site footer.
  *
- * Purely a directory now — the closing CTA panel that used to sit above it
- * was removed, along with its working prompt bar. The page's ask is made in
- * the hero and by the header's "Start a Campaign", both of which leave for
- * the app directly, so there is nothing left here to scroll to.
+ * Laid out as a masthead and a directory, in that order:
+ *
+ *   1. A masthead row — the logo, what CampaignX is, and the two actions
+ *      someone has at the end of a page. This is the part that has to
+ *      work; the rest is navigation.
+ *   2. The directory — one row of equal link columns, with contact
+ *      details in their own column at the end.
+ *   3. The baseline — copyright, legal, credit.
+ *
+ * The previous version declared four grid columns and was handed six
+ * children once the navigation became page-based, so the last two wrapped
+ * onto a second row and sat stranded under the first. The directory now
+ * sizes itself from the number of columns it is given, and the contact
+ * block is part of that same row rather than a fifth element fighting it.
  */
 export function Footer() {
   const rootRef = useRef<HTMLElement>(null);
@@ -32,8 +41,7 @@ export function Footer() {
       /* Must run on every path, not just reduced motion: the CSS in
          animations.css keeps [data-animate="reveal"] hidden until GSAP
          clears it, so skipping this leaves the content invisible. */
-      revealOnScroll(root, { stagger: 0.07, start: "top 85%" });
-
+      revealOnScroll(root, { stagger: 0.06, start: "top 88%" });
     }, root);
 
     return () => ctx.revert();
@@ -41,74 +49,80 @@ export function Footer() {
 
   return (
     <footer ref={rootRef} className="relative">
-
-
-
-
-      {/* ---------------------------------------------------------------
-          Footer.
-
-          A conventional column layout, deliberately: the footer is where
-          people go to check the product is real and find a way to contact
-          someone. That is a job for a legible directory, not a composition
-          — so the logo and what-we-are sentence sit on the left, the links
-          in two short columns beside them, and the ways to reach us on the
-          right, each with its own icon.
-
-          Light, like the rest of the page. The closing CTA above is the
-          one inverted panel; repeating that here would give the page two
-          dark blocks stacked with only a gutter between them.
-
-          Every link resolves to a real destination. Columns that would
-          only be padding are not here.
-          --------------------------------------------------------------- */}
       <div className="relative isolate overflow-hidden border-t border-line bg-surface-soft/60">
-        {/* Backdrop.
-
-            The footer was a flat panel with content floating on it. This
-            is the hero's own dot field, faded out toward the baseline, so
-            the top and bottom of the page are made of the same material —
-            plus a low brand glow so the page ends on colour rather than on
-            grey. Decorative throughout. */}
+        {/* Backdrop. The hero's own dot field faded out toward the
+            baseline, plus one low brand volume so the page ends on colour
+            rather than on grey. Decorative throughout. */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10"
         >
-          {/* Dots, strongest at the top edge where the footer meets the
-              page and gone by the legal line. */}
           <div className="cx-dots absolute inset-0 opacity-70 [mask-image:linear-gradient(to_bottom,#000,transparent_78%)]" />
-
-          {/* One wide, low brand volume. Sized in vw so it stays a wash at
-              any width rather than becoming a visible disc. */}
           <div className="absolute -bottom-[38vh] left-1/2 h-[60vh] w-[120vw] max-w-[1800px] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(closest-side,rgba(var(--brand-blue-rgb),0.10),rgba(138,43,226,0.05)_58%,transparent)]" />
-
-          {/* A hairline of brand along the top border, so the seam between
-              the page and the footer is not a plain grey rule. */}
           <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(to_right,transparent,rgba(var(--brand-blue-rgb),0.35),rgba(208,0,255,0.25),transparent)]" />
         </div>
 
         <Container className="relative">
-          {/* The directory. */}
-          <div className="grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.2fr)_repeat(2,minmax(0,0.65fr))_minmax(0,1.3fr)] lg:gap-8 lg:py-20">
-            {/* Who we are. */}
-            <div data-animate="reveal" className="flex flex-col gap-5">
-              {/* Linked, like the header's: a logo that does nothing when
-                  clicked reads as broken, and this one sits at the bottom
-                  of the legal pages where it is the obvious way home. */}
+          {/* ---------------------------------------------------------
+              1. Masthead
+              --------------------------------------------------------- */}
+          <div
+            data-animate="reveal"
+            className="flex flex-col gap-8 border-b border-line py-12 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:py-14"
+          >
+            <div className="max-w-[34rem]">
               <Link
                 href="/"
                 aria-label={`${siteConfig.name} home`}
-                className="w-fit transition-opacity duration-300 hover:opacity-70"
+                className="inline-block w-fit transition-opacity duration-300 hover:opacity-70"
               >
                 <Logo />
               </Link>
 
-              <p className="max-w-[34ch] text-[0.9375rem] leading-relaxed text-muted">
+              <p className="text-display mt-5 text-[clamp(1.25rem,2.1vw,1.75rem)] font-medium leading-[1.2] tracking-[-0.025em]">
+                Write one sentence. Get a whole campaign back.
+              </p>
+
+              <p className="mt-3 text-[0.9375rem] leading-relaxed text-muted">
                 {siteConfig.blurb}
               </p>
             </div>
 
-            {/* Link columns. */}
+            {/* The two actions, kept together so the end of the page has
+                one obvious next step and one quieter alternative. */}
+            <div className="flex shrink-0 flex-wrap items-center gap-3">
+              <Link
+                href={primaryCta.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-brand shadow-brand group inline-flex h-12 items-center gap-2 rounded-pill pl-6 pr-5 text-[0.9375rem] font-medium text-white transition-[box-shadow,transform,filter] duration-200 ease-[var(--ease-out-soft)] hover:-translate-y-px hover:brightness-[1.07] hover:shadow-brand-hover"
+              >
+                {primaryCta.label}
+                <ArrowRight
+                  aria-hidden="true"
+                  className="size-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                />
+              </Link>
+
+              <Link
+                href={demoCta.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-12 items-center rounded-pill border border-line-strong bg-surface px-6 text-[0.9375rem] font-medium transition-colors duration-200 hover:bg-surface-soft"
+              >
+                {demoCta.label}
+              </Link>
+            </div>
+          </div>
+
+          {/* ---------------------------------------------------------
+              2. Directory
+
+              One row. `footerNavigation.length + 1` columns — the link
+              columns plus contact — so adding a section to the navigation
+              can never again leave an orphan row.
+              --------------------------------------------------------- */}
+          <div className="grid gap-x-8 gap-y-10 py-12 sm:grid-cols-2 lg:grid-cols-[repeat(4,minmax(0,0.8fr))_minmax(0,1.15fr)] lg:py-14">
             {footerNavigation.map((column) => (
               <nav
                 key={column.title}
@@ -117,7 +131,7 @@ export function Footer() {
                 className="flex flex-col gap-4"
               >
                 <h2 className="text-eyebrow">{column.title}</h2>
-                <ul className="flex flex-col gap-3">
+                <ul className="flex flex-col gap-2.5">
                   {column.items.map((item) => (
                     <li key={`${column.title}-${item.label}`}>
                       <Link
@@ -136,10 +150,14 @@ export function Footer() {
               </nav>
             ))}
 
-            {/* Ways to reach us. */}
-            <div data-animate="reveal" className="flex flex-col gap-4">
+            {/* Ways to reach us: last in the row, widest, because the
+                address needs more line than a list of page names. */}
+            <div
+              data-animate="reveal"
+              className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1"
+            >
               <h2 className="text-eyebrow">Get in touch</h2>
-              <ul className="flex flex-col gap-3.5">
+              <ul className="flex flex-col gap-3">
                 {siteConfig.contact.map((item) => (
                   <li key={item.label}>
                     <ContactRow item={item} />
@@ -149,18 +167,15 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Baseline */}
-          <div className="flex flex-col gap-4 border-t border-line py-8 sm:flex-row sm:items-center sm:justify-between">
-            {/* The copyright and the legal links read as one line, so they
-                are one flex row with a rule between each item rather than
-                two blocks with their own spacing. The separators are drawn
-                on the list items themselves — a `<span>` between them would
-                be read aloud as content. */}
+          {/* ---------------------------------------------------------
+              3. Baseline
+              --------------------------------------------------------- */}
+          <div className="flex flex-col gap-4 border-t border-line py-7 sm:flex-row sm:items-center sm:justify-between">
+            {/* Copyright and legal read as one line, so they are one flex
+                row with a rule drawn on each item. A `<span>` separator
+                would be read aloud as content. */}
             <ul className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[0.8125rem] text-muted">
               <li>
-                {/* One expression, not two source lines: JSX collapses the
-                    line break to a space, but leaves the sentence liable to
-                    wrap in the middle of "All rights reserved". */}
                 {`© ${siteConfig.copyrightYear} ${siteConfig.name} by SuperMIA. All rights reserved.`}
               </li>
 
@@ -239,9 +254,7 @@ function ContactRow({ item }: { item: ContactItem }) {
   return (
     <Link
       href={item.href}
-      {...(external
-        ? { target: "_blank", rel: "noopener noreferrer" }
-        : null)}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : null)}
       className="group flex items-start gap-3 text-[0.9375rem] text-muted transition-colors duration-300 hover:text-foreground"
     >
       {body}

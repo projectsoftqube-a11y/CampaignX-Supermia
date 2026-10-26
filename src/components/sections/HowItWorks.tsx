@@ -199,7 +199,7 @@ function PinnedSequence({ active }: { active: number }) {
               {/* The figure and its takeaway on one baseline.
 
                   The number and its unit sit together as a single phrase —
-                  "1 sentence", "9 channels" — rather than stacking the label
+                  "1 sentence", "7 channels" — rather than stacking the label
                   under the figure, which read as two unrelated fragments.
                   The takeaway follows on the same line at reading size, so
                   the whole thing scans as one sentence. */}

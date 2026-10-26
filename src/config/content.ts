@@ -217,8 +217,8 @@ export const howItWorks = {
       description:
         "Point it at your site, your guidelines, or a campaign you liked. It builds a private model of how you sound.",
       image: "/images/how-02-brand.png",
-      points: ["Private to you", "Voice and tone", "Never trained on"],
-      stat: { value: "100%", label: "private" },
+      points: ["Private to you", "Voice and tone", "Not used to train shared models"],
+      stat: { value: "Yours", label: "alone" },
       takeaway: "Your model never leaves your workspace.",
     },
     {
@@ -228,8 +228,8 @@ export const howItWorks = {
         "An email is not a story frame with different margins. Each channel gets copy written for how people read it there.",
       image: "/images/how-03-channels.png",
       points: ["Per-channel copy", "Native formats", "On-brand by default"],
-      stat: { value: "9", label: "channels" },
-      takeaway: "One brief. Nine formats. All of them on brand.",
+      stat: { value: "7", label: "channels" },
+      takeaway: "One brief. Seven channels. All of them on brand.",
     },
     {
       step: "04",
@@ -237,7 +237,7 @@ export const howItWorks = {
       description:
         "Results go straight back into the model. The next campaign starts from what performed, not a blank page.",
       image: "/images/how-04-learn.png",
-      points: ["Live performance", "Reallocates spend", "Rewrites the losers"],
+      points: ["Live performance", "Reach and engagement", "Rewrites the losers"],
       stat: { value: "24/7", label: "optimising" },
       takeaway: "Every campaign makes the next one better.",
     },
@@ -393,7 +393,7 @@ export const pricing = {
       featured: true,
       features: [
         "Unlimited campaigns",
-        "All nine channels",
+        "All seven channels, plus webhooks",
         "Full brand model with approvals",
         "Performance loop and reporting",
         "Unlimited seats",

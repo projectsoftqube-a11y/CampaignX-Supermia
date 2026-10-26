@@ -52,36 +52,12 @@
   }
 }
 
-@keyframes cx-pulse-ring {
-  0% {
-    opacity: 0.5;
-    transform: scale(0.9);
-  }
-  70% {
-    opacity: 0;
-    transform: scale(1.5);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.5);
-  }
-}
-
 @keyframes cx-marquee {
   from {
     transform: translate3d(0, 0, 0);
   }
   to {
     transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@keyframes cx-bar-rise {
-  from {
-    transform: scaleY(0.05);
-  }
-  to {
-    transform: scaleY(1);
   }
 }
 
@@ -131,11 +107,49 @@
   .cx-marquee-track,
   .cx-mock-progress,
   .cx-mock-bubble,
-  .cx-mock-float {
-    animation: none;
+  .cx-mock-float,
+  .cx-art-glint,
+  .cx-art-settle,
+  .cx-art-caret,
+  .cx-art-pulse,
+  .cx-art-travel,
+  .cx-act-write,
+  .cx-act-send,
+  .cx-act-react,
+  .cx-act-count,
+  .cx-act-schedule,
+  .cx-act-status,
+  .cx-act-status-out,
+    /* The travelling border is decoration; with motion off the card
+     keeps its own static border and the ring is simply hidden. */
+    /* With activity cancelled, each drawing rests in its finished state:
+     the written line is full width, the sent message is in place, and
+     the "done" status is the one showing. */
+  .cx-act-write,
+  .cx-act-schedule {
+    transform: scaleX(1);
   }
 
-  /* Placeholder screens must still be fully visible when their entrance
+  .cx-act-send,
+  .cx-act-react,
+  .cx-act-status {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cx-act-status-out {
+    opacity: 0;
+  }
+
+  /* The drawings are complete without their ambient motion; only the
+     moving decorations are hidden. */
+  .cx-art-glint,
+  .cx-art-travel {
+    opacity: 0;
+  }
+
+  .cx-art-settle,
+    /* Placeholder screens must still be fully visible when their entrance
      animation is cancelled. */
   .cx-mock-bubble {
     opacity: 1;
@@ -213,3 +227,290 @@
 .cx-mock-float {
   animation: cx-mock-float 6s var(--ease-in-out-soft) infinite;
 }
+
+/* --------------------------------------------------------------------------
+   Channel artwork — ambient life.
+
+   An earlier version swept every bar in from zero and reset, which read
+   as a skeleton loader: content endlessly arriving and vanishing. These
+   keyframes instead animate things a finished interface actually does.
+   Nothing disappears and reappears; the content is always present.
+
+   - `glint`  a highlight travelling across an image block, as on a
+              glossy surface catching light
+   - `settle` a very small lift and return, so a card feels held rather
+              than pinned
+   - `cursor` a caret blinking in a compose field
+   - `beat`   a live status dot
+   - `tick`   a reaction count nudging up
+   - `travel` a packet moving along a wire
+
+   All transform- or opacity-only, so the compositor handles them off the
+   main thread — there can be eight drawings on one page. `--d` offsets
+   each element so a grid never pulses in lockstep.
+   -------------------------------------------------------------------------- */
+
+@keyframes cx-art-glint {
+  0% {
+    transform: translateX(-120%);
+  }
+  55%,
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+@keyframes cx-art-settle {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -1.5px, 0);
+  }
+}
+
+@keyframes cx-art-cursor {
+  0%,
+  48% {
+    opacity: 1;
+  }
+  50%,
+  98% {
+    opacity: 0;
+  }
+}
+
+@keyframes cx-art-beat {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+@keyframes cx-art-travel {
+  0% {
+    opacity: 0;
+    offset-distance: 0%;
+  }
+  14%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    offset-distance: 100%;
+  }
+}
+
+/* A highlight crossing an image block. The block itself never changes;
+   only the sheen moves, so the artwork always looks complete. */
+.cx-art-glintwrap {
+  overflow: hidden;
+}
+
+.cx-art-glint {
+  animation: cx-art-glint 6.5s var(--ease-in-out-soft) infinite;
+  animation-delay: var(--d, 0s);
+}
+
+.cx-art-settle {
+  animation: cx-art-settle 5s var(--ease-in-out-soft) infinite;
+  animation-delay: var(--d, 0s);
+}
+
+.cx-art-caret {
+  animation: cx-art-cursor 1.1s steps(1) infinite;
+}
+
+.cx-art-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cx-art-beat 2.2s var(--ease-in-out-soft) infinite;
+  animation-delay: var(--d, 0s);
+}
+
+.cx-art-travel {
+  offset-rotate: 0deg;
+  animation: cx-art-travel 3.4s linear infinite;
+  animation-delay: var(--d, 0s);
+}
+
+/* --------------------------------------------------------------------------
+   Channel artwork — activity.
+
+   The ambient set above keeps a drawing alive. This set shows something
+   *happening* in it: a new line being written into a post, a message
+   being sent, a reaction landing, a scheduler ticking over.
+
+   The rule throughout: the drawing is always complete. Activity is
+   carried by elements that are additions to the finished state — a new
+   line, an incoming bubble, a status flip — never by the base content
+   vanishing and returning, which is what made the first attempt read as
+   a loading skeleton.
+   -------------------------------------------------------------------------- */
+
+/* A line being written into an existing post. Starts at zero width and
+   stays at full width for most of the cycle, so the post looks finished
+   far longer than it looks in progress. */
+@keyframes cx-act-write {
+  0%,
+  4% {
+    transform: scaleX(0);
+  }
+  18%,
+  92% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+
+/* An outgoing message leaving the compose row and joining the thread. */
+@keyframes cx-act-send {
+  0%,
+  10% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.96);
+  }
+  22%,
+  90% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -4px, 0) scale(0.98);
+  }
+}
+
+/* A reaction landing on a post: overshoots, then settles. */
+@keyframes cx-act-react {
+  0%,
+  46% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  56% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+  64%,
+  94% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+/* A counter stepping up as the reaction lands. */
+@keyframes cx-act-count {
+  0%,
+  54% {
+    transform: translate3d(0, 0, 0);
+  }
+  60% {
+    transform: translate3d(0, -2px, 0);
+  }
+  68%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* A scheduling slot filling, then holding. */
+@keyframes cx-act-schedule {
+  0%,
+  8% {
+    transform: scaleX(0.12);
+  }
+  40%,
+  96% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0.12);
+  }
+}
+
+/* A status chip flipping from working to done. */
+@keyframes cx-act-status {
+  0%,
+  44% {
+    opacity: 0;
+  }
+  54%,
+  96% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cx-act-status-out {
+  0%,
+  44% {
+    opacity: 1;
+  }
+  54%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* The shared clock. Every drawing runs on the same 7s cycle so a grid of
+   eight reads as one system, with `--d` offsetting each card. */
+.cx-act-write {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: cx-act-write 7s var(--ease-out-soft) infinite;
+  animation-delay: var(--d, 0s);
+}
+
+.cx-act-send {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cx-act-send 7s var(--ease-out-soft) infinite;
+  animation-delay: var(--d, 0s);
+}
+
+.cx-act-react {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cx-act-react 7s var(--ease-out-soft) infinite;
+  animation-delay: var(--d, 0s);
+}
+
+.cx-act-count {
+  transform-box: fill-box;
+  animation: cx-act-count 7s var(--ease-out-soft) infinite;
+  animation-delay: var(--d, 0s);
+}
+
+.cx-act-schedule {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: cx-act-schedule 7s var(--ease-in-out-soft) infinite;
+  animation-delay: var(--d, 0s);
+}
+
+.cx-act-status {
+  animation: cx-act-status 7s steps(1) infinite;
+  animation-delay: var(--d, 0s);
+}
+
+.cx-act-status-out {
+  animation: cx-act-status-out 7s steps(1) infinite;
+  animation-delay: var(--d, 0s);
+}
+

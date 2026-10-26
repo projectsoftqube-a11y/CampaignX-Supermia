@@ -5,7 +5,13 @@ import { useEffect, useRef, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { ArrowRight, X } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
-import { navigation, primaryCta, secondaryCta } from "@/config/navigation";
+import {
+  demoCta,
+  navGroups,
+  navLinks,
+  primaryCta,
+  secondaryCta,
+} from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { useLenisRef } from "@/hooks/useLenis";
 import { gsap, prefersReducedMotion } from "@/lib/animations/gsap";
@@ -179,27 +185,53 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         className="flex flex-1 flex-col px-5 pb-8 sm:px-8"
       >
         <ul className="flex flex-col">
-          {navigation.map((item) => (
+          {/* Grouped to match the desktop dropdowns (Navigation Spec §5).
+              Every group is open: an accordion on a menu this size hides
+              the one link the visitor came for behind an extra tap. */}
+          {navGroups.map((group) => (
+            <li key={group.label} data-menu-row>
+              <p className="pt-5 pb-1 text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-muted">
+                {group.label}
+              </p>
+              <ul>
+                {group.items.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      onClick={onClose}
+                      className="group flex items-center justify-between gap-4 border-b border-line py-3.5"
+                    >
+                      <span className="flex min-w-0 flex-col gap-0.5">
+                        <span className="text-display text-[1.125rem] leading-tight tracking-[-0.02em]">
+                          {item.label}
+                        </span>
+                        {item.description ? (
+                          <span className="text-[0.8125rem] leading-snug text-muted">
+                            {item.description}
+                          </span>
+                        ) : null}
+                      </span>
+                      <ArrowRight
+                        className="size-4 shrink-0 text-muted transition-transform duration-300 group-hover:translate-x-0.5"
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+
+          {[...navLinks, demoCta].map((item) => (
             <li key={item.href} data-menu-row>
-              {/* Label and description stacked: at 320px a large label and
-                  its description cannot share a row without both wrapping
-                  into each other. */}
               <Link
                 href={item.href}
                 onClick={onClose}
                 className="group flex items-center justify-between gap-4 border-b border-line py-4"
               >
-                <span className="flex min-w-0 flex-col gap-0.5">
-                  <span className="text-display text-[1.375rem] leading-tight tracking-[-0.02em]">
-                    {item.label}
-                  </span>
-                  {item.description ? (
-                    <span className="text-[0.8125rem] leading-snug text-muted">
-                      {item.description}
-                    </span>
-                  ) : null}
+                <span className="text-display text-[1.375rem] leading-tight tracking-[-0.02em]">
+                  {item.label}
                 </span>
-
                 <ArrowRight
                   className="size-4 shrink-0 text-muted transition-transform duration-300 group-hover:translate-x-0.5"
                   aria-hidden="true"

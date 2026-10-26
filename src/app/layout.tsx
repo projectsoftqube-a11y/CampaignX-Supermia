@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   applicationName: siteConfig.name,
   keywords: [
-    "AI marketing campaigns",
-    "campaign automation",
-    "AI campaign generator",
-    "cross-channel marketing",
-    "marketing workspace",
+    "ai marketing agent",
+    "ai campaign agent",
+    "multi-channel marketing campaign",
+    "ai campaign management",
+    "marketing campaign software",
   ],
   alternates: { canonical: "/" },
   openGraph: {
@@ -59,7 +59,16 @@ const NO_JS_RESET = `
 [data-hero-line],
 [data-hero-supporting],
 [data-hero-prompt],
-[data-hero-device] {
+[data-hero-device],
+[data-hero-item],
+[data-hero-word],
+[data-stat],
+[data-head],
+[data-rise],
+[data-card],
+[data-chip],
+[data-node],
+[data-hub] {
   opacity: 1 !important;
   transform: none !important;
 }

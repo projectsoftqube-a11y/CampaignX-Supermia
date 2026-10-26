@@ -52,6 +52,26 @@
   );
 
   --brand-blue-rgb: 0, 123, 255;
+  --brand-violet-rgb: 75, 60, 255;
+  --brand-purple-rgb: 138, 43, 226;
+  --brand-magenta-rgb: 208, 0, 255;
+
+  /* Deep grounds ----------------------------------------------------------
+     The dark surfaces inner pages use for their hero card and for the
+     segments that carry a product mock.
+
+     These are not neutral greys tinted blue: each is the brand ramp taken
+     down to a near-black, so a dark section reads as the same system as a
+     CTA rather than as a separate dark theme. `ink` is the base, `ink-lift`
+     the raised panel inside it, and `ink-line` the hairline between them.
+
+     An earlier version hardcoded #1a1333, which sits outside the ramp and
+     read as muddy indigo next to the blue accent. */
+  --ink: #0b0a1f;
+  --ink-deep: #07061a;
+  --ink-lift: #151331;
+  --ink-line: rgba(255, 255, 255, 0.09);
+  --ink-line-strong: rgba(255, 255, 255, 0.16);
 
   /* Accent — the single-colour half of the brand system --------------------
      Anything that cannot take a gradient (an icon stroke, a 1px rule, a

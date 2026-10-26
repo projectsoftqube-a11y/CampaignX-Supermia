@@ -1,6 +1,6 @@
 /** Overridable per environment so canonical + OG URLs are correct on previews. */
 const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-const url = (configuredUrl || "https://campaignx.ai").replace(/\/$/, "");
+const url = (configuredUrl || "https://campaignx.supermia.ai").replace(/\/$/, "");
 
 /**
  * The product itself, on its own subdomain. Every "Start a Campaign" and
@@ -17,9 +17,9 @@ export const siteConfig = {
   signupUrl: APP_URL,
   loginUrl: `${APP_URL}/login`,
   description:
-    "CampaignX transforms marketing briefs into strategy, creative, targeting, launch and optimization with AI.",
-  title: "CampaignX: Turn One Brief Into a Complete Campaign",
-  twitter: "@campaignx",
+    "CampaignX is an AI marketing agent. Write one brief and get an on-brand campaign for Instagram, Facebook, LinkedIn, Google Business, X, email and SMS — approved by you before anything ships.",
+  title: "CampaignX: AI Marketing Agent for Multi-Channel Campaigns",
+  twitter: "@supermia_ai",
   /** Social links for the footer. Placeholders until the accounts exist. */
   socials: [
     { id: "x", label: "X", href: "#x" },

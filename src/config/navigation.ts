@@ -1,25 +1,91 @@
 import type { FooterColumn, NavItem } from "@/types/navigation";
 import { siteConfig } from "@/config/site";
+import { ROUTES, routesInSection } from "@/config/routes";
 
 /**
- * Absolute hrefs (`/#problem`, not `#problem`).
+ * Page-based menu, replacing the five on-page anchors (Navigation Spec §4,
+ * SEO audit issue #8). Anchors passed no relevance to any page that could
+ * rank, and there was no sign-up or demo action in the header.
  *
- * The header and footer render on /privacy and /terms as well as the
- * homepage, and a bare `#problem` there resolves to `/privacy#problem` — a
- * section that does not exist on that page, so the link silently does
- * nothing. Rooting them at `/` sends the visitor home and to the right
- * section from anywhere on the site.
+ * Every item is built from the route registry, so the Spec's rule that
+ * "nothing in the menu may link to a 404" is enforced by `live` rather than
+ * by remembering to edit two files.
  */
+
+export interface NavGroup {
+  label: string;
+  /** Where the group label itself points, for keyboard and touch users. */
+  href?: string;
+  /** Rendered as a two-column dropdown when present. */
+  items: readonly NavItem[];
+}
+
+function toNavItems(section: Parameters<typeof routesInSection>[0]) {
+  return routesInSection(section).map(
+    (route): NavItem => ({
+      label: route.label,
+      href: route.href,
+      description: route.description,
+      icon: route.icon,
+    }),
+  );
+}
+
+export const navGroups: readonly NavGroup[] = [
+  {
+    label: "Features",
+    href: ROUTES.productIndex.href,
+    items: toNavItems("product"),
+  },
+  {
+    label: "Channels",
+    href: ROUTES.channelsIndex.href,
+    items: toNavItems("channels"),
+  },
+  {
+    label: "Use Cases",
+    href: ROUTES.useCasesIndex.href,
+    items: toNavItems("useCases"),
+  },
+  {
+    label: "Resources",
+    items: [
+      {
+        label: ROUTES.faq.label,
+        href: ROUTES.faq.href,
+        description: ROUTES.faq.description,
+        icon: ROUTES.faq.icon,
+      },
+      {
+        label: ROUTES.blog.label,
+        href: ROUTES.blog.href,
+        description: ROUTES.blog.description,
+        icon: ROUTES.blog.icon,
+      },
+      {
+        label: ROUTES.about.label,
+        href: ROUTES.about.href,
+        description: ROUTES.about.description,
+        icon: ROUTES.about.icon,
+      },
+    ],
+  },
+] as const;
+
+/** Flat items sitting between the dropdowns and the CTAs. */
+export const navLinks: readonly NavItem[] = [
+  { label: "Pricing", href: ROUTES.pricing.href },
+];
+
+/** Kept for the homepage in-page jump links. */
 export const navigation: readonly NavItem[] = [
-  { label: "Why CampaignX", href: "/#problem", description: "The cost of four tools" },
-  { label: "How it works", href: "/#how", description: "Brief to shipped campaign" },
-  { label: "Channels", href: "/#channels", description: "Everywhere your audience is" },
-  { label: "Pricing", href: "/#pricing", description: "Start free, pay when it ships" },
-  { label: "FAQ", href: "/#faq", description: "The things people ask first" },
+  { label: "How it works", href: "/#how" },
+  { label: "Pricing", href: ROUTES.pricing.href },
+  { label: "FAQ", href: ROUTES.faq.href },
 ];
 
 export const primaryCta: NavItem = {
-  label: "Start a Campaign",
+  label: "Start free",
   href: siteConfig.signupUrl,
 };
 
@@ -29,28 +95,39 @@ export const secondaryCta: NavItem = {
 };
 
 /**
- * Two short columns rather than three padded ones.
- *
- * Every link here resolves to a section that actually exists on the page or
- * to the app itself. The previous version advertised About, Careers, Help
- * centre and Status, none of which had anywhere to go.
+ * Book a demo points at the existing SuperMIA scheduler.
+ * [CONFIRM] Fact Sheet: should this go to supermia.ai/schedule-demo/ or a
+ * CampaignX page once one exists?
  */
+export const demoCta: NavItem = {
+  label: "Book a demo",
+  href: "https://supermia.ai/schedule-demo/",
+};
+
 export const footerNavigation: readonly FooterColumn[] = [
   {
-    title: "Explore",
+    title: "Features",
+    items: toNavItems("product").map(({ label, href }) => ({ label, href })),
+  },
+  {
+    title: "Channels",
     items: [
-      { label: "Why CampaignX", href: "/#problem" },
+      ...toNavItems("channels").map(({ label, href }) => ({ label, href })),
       { label: "How it works", href: "/#how" },
-      { label: "Channels", href: "/#channels" },
     ],
   },
   {
-    title: "Try it",
+    title: "Use cases",
+    items: toNavItems("useCases").map(({ label, href }) => ({ label, href })),
+  },
+  {
+    title: "Company",
     items: [
-      { label: "Start a Campaign", href: siteConfig.signupUrl },
-      { label: "Watch the demo", href: "/#demo" },
-      { label: "Pricing", href: "/#pricing" },
-      { label: "Download brochure", href: "/#brochure" },
+      { label: ROUTES.pricing.label, href: ROUTES.pricing.href },
+      { label: ROUTES.about.label, href: ROUTES.about.href },
+      { label: ROUTES.faq.label, href: ROUTES.faq.href },
+      { label: ROUTES.blog.label, href: ROUTES.blog.href },
+      { label: "Start free", href: siteConfig.signupUrl },
     ],
   },
 ];

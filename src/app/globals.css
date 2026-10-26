@@ -26,6 +26,9 @@
   --color-brand-violet: var(--brand-violet);
   --color-brand-purple: var(--brand-purple);
   --color-brand-magenta: var(--brand-magenta);
+  --color-ink: var(--ink);
+  --color-ink-deep: var(--ink-deep);
+  --color-ink-lift: var(--ink-lift);
 
   --radius-chip: var(--radius-sm);
   --radius-card: var(--radius-md);
@@ -61,6 +64,28 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+  }
+
+  /* Tailwind v4's Preflight sets `button { cursor: default }`, which
+     left every button on the site without a pointer. Restore it here
+     once rather than adding `cursor-pointer` to each component, and
+     cover the other interactive roles while we are at it.
+
+     `:disabled` and `[aria-disabled]` keep the default arrow, since a
+     pointer on a control that cannot be used is a false affordance. */
+  button:not(:disabled):not([aria-disabled="true"]),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="tab"]:not([aria-disabled="true"]),
+  summary,
+  label[for],
+  select:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  button[aria-disabled="true"],
+  [role="button"][aria-disabled="true"] {
+    cursor: default;
   }
 
   /* Lenis owns scrolling once mounted; native smooth would fight it. */
@@ -309,4 +334,31 @@
   .cx-disclosure::details-content {
     transition: none;
   }
+}
+
+/* --------------------------------------------------------------------------
+   Inverted header.
+
+   The cinematic hero is a dark, full-bleed stage, and the header floats
+   transparent over it until the first scroll step — so its dark-on-light
+   tokens left the nav almost unreadable.
+
+   Rather than branch every nav component, `data-header-theme="dark"` on
+   the page root remaps the handful of tokens the header reads while it is
+   still at the top. Once `scrolled` adds its own light glass background,
+   the override is dropped and the normal tokens apply again.
+   -------------------------------------------------------------------------- */
+[data-header-theme="dark"] header:not(:has([class*="bg-white"])) {
+  --foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.55);
+  --muted-strong: rgba(255, 255, 255, 0.78);
+  --surface-soft: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(255, 255, 255, 0.28);
+}
+
+/* The wordmark artwork is dark ink, so it needs inverting on the dark
+   stage. Scoped to the same state as the tokens above. */
+[data-header-theme="dark"] header:not(:has([class*="bg-white"])) img[alt*="CampaignX" i] {
+  filter: brightness(0) invert(1);
 }
