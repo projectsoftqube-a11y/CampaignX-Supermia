@@ -292,16 +292,45 @@ export const BLOG_CATEGORIES = [
     slug: "campaign-strategy",
     label: "Campaign Strategy",
     description: "Briefs, planning and multi-channel campaigns.",
+    /* A direct answer to "what is this subject", stated plainly enough
+       to be quoted on its own. A category page with three cards and a
+       one-line description is thin for a reader and gives an answer
+       engine nothing to extract. */
+    answer:
+      "Campaign strategy is the work done before anything is written: deciding what you are promoting, who it is for, which channels carry it, and how long it runs. Most campaigns fail here rather than in the copy, because an unclear brief produces unclear work on every channel at once.",
+    /* What someone arriving on this page is usually trying to settle. */
+    covers: [
+      "Writing a brief that answers the questions a writer will otherwise guess at",
+      "Choosing a channel mix instead of posting everywhere by default",
+      "Setting a campaign window, and what changes when it is two weeks rather than six",
+      "Deciding what to measure before the campaign runs, not after",
+    ],
   },
   {
     slug: "social-media",
     label: "Social Media",
     description: "Planning and running social campaigns.",
+    answer:
+      "A social campaign is one message adapted to several feeds, not the same post copied across them. Each surface has its own length, tone and reason people are there, so the useful question is what changes between them and what has to stay identical.",
+    covers: [
+      "Adapting one announcement to feeds that reward different things",
+      "Planning a month of posts without running out of ideas in week three",
+      "What to post on the days between a launch and a deadline",
+      "Deciding how often to post, and when not to",
+    ],
   },
   {
     slug: "email-sms",
     label: "Email and SMS",
     description: "Direct channels that still need a brand voice.",
+    answer:
+      "Email and SMS reach people directly rather than waiting for them to scroll, which makes both effective and easy to overuse. The constraint is not length but permission: these arrive in an inbox or on a lock screen, and the recipient can leave in one tap.",
+    covers: [
+      "Writing a subject line and preview text as one unit rather than two fields",
+      "The character budget an SMS actually has once the sender name and opt-out are counted",
+      "Timing, frequency, and what drives people to unsubscribe",
+      "Keeping the direct channels in the same voice as everything else",
+    ],
   },
 ] as const;
 

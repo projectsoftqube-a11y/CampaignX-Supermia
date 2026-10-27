@@ -199,12 +199,18 @@ export function PostDeck({ className }: PostDeckProps) {
             hidden={i !== active}
             className="overflow-hidden rounded-panel border border-line bg-surface shadow-float"
           >
-            {/* Platform chrome. */}
-            <header className="flex items-center gap-2.5 border-b border-line px-4 py-2.5">
+            {/* Platform chrome.
+
+                The row wraps below 360px: avatar, two lines of text and
+                the character-limit badge together left the brand name
+                about 42px at 320px, so "Instagram" rendered as "Inst…".
+                Letting the badge drop to its own line gives the name
+                the full width instead. */}
+            <header className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 border-b border-line px-4 py-2.5">
               <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-line bg-surface-soft">
                 <BrandGlyph name={post.platform} className="size-3.5" />
               </span>
-              <span className="min-w-0 flex-1">
+              <span className="min-w-[7rem] flex-1">
                 <span className="block truncate text-[0.875rem] font-medium leading-tight text-foreground">
                   Your brand
                 </span>

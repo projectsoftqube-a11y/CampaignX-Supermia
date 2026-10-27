@@ -40,9 +40,15 @@ export function Logo({ className, markOnly = false }: LogoProps) {
         sizes="200px"
         /* Height drives the size and `w-auto` keeps the 400x95 ratio, so
            the wordmark never distorts. Capped at 40px because the header
-           rail is 64px tall and the mark needs breathing room inside it. */
+           rail is 64px tall and the mark needs breathing room inside it.
+
+           `max-w-full` matters: `w-auto` resolves against the 400px
+           intrinsic width, so in the window before the height rule
+           takes effect the mark lays out at 400px and briefly pushes
+           the header past a 320px viewport. The cap makes that
+           impossible rather than merely unlikely. */
         className={cn(
-          "h-9 w-auto shrink-0 object-contain object-left sm:h-10",
+          "h-9 w-auto max-w-full shrink-0 object-contain object-left sm:h-10",
           markOnly && "aspect-square",
         )}
       />

@@ -50,7 +50,7 @@ export function Footer() {
               <Link
                 href="/"
                 aria-label={`${siteConfig.name} home`}
-                className="inline-block w-fit transition-opacity duration-300 hover:opacity-70"
+                className="inline-block w-fit max-w-full transition-opacity duration-300 hover:opacity-70"
               >
                 <Logo />
               </Link>

@@ -64,6 +64,11 @@ export function PricingCards({
   isPageHeading = false,
 }: Props) {
   const Heading = isPageHeading ? "h1" : "h2";
+  /* Plan names sit one level below the section heading. On /pricing
+     that heading is the h1, so they are h2; elsewhere the section is
+     an h2 and they are h3. Hard-coding h3 left /pricing jumping
+     straight from h1 to h3. */
+  const PlanHeading = isPageHeading ? "h2" : "h3";
 
   return (
     <section
@@ -136,7 +141,9 @@ export function PricingCards({
                     same line across cards whose summaries differ. */}
                 <div className="min-h-[5.5rem]">
                   <div className="flex items-center justify-between gap-3">
-                    <h3 className="text-display text-[1.25rem]">{plan.name}</h3>
+                    <PlanHeading className="text-display text-[1.25rem]">
+                      {plan.name}
+                    </PlanHeading>
                     {plan.isCustom ? (
                       <span className="rounded-pill border border-accent-line px-2.5 py-1 text-[0.875rem] font-medium text-accent">
                         Sales

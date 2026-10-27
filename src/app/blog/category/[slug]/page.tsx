@@ -158,6 +158,50 @@ export default async function BlogCategoryPage({ params }: Params) {
         </section>
 
         {/* ------------------------------------------------------------
+            What the subject is, answered directly.
+
+            A category page that is three cards and a one-line
+            description is thin for a reader and gives an answer engine
+            nothing to quote. The answer is stated in one paragraph that
+            stands on its own, followed by what the subject actually
+            covers.
+            ------------------------------------------------------------ */}
+        <section className="relative pt-[clamp(2.5rem,4vw,3.5rem)]">
+          <Container>
+            <div className="grid min-w-0 gap-8 [&>*]:min-w-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
+              <div>
+                <h2 className="text-display text-[clamp(1.375rem,2.4vw,1.75rem)] font-medium leading-[1.15] tracking-[-0.025em]">
+                  What {category.label.toLowerCase()} means here
+                </h2>
+                <p className="mt-4 text-[1.0625rem] leading-[1.7] text-foreground">
+                  {category.answer}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-eyebrow border-b border-line pb-3">
+                  What this covers
+                </p>
+                <ul className="mt-1">
+                  {category.covers.map((item) => (
+                    <li
+                      key={item}
+                      className="flex gap-3 border-b border-line py-3 text-[0.9375rem] leading-relaxed text-muted-strong"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-[0.5rem] size-1.5 shrink-0 rounded-full bg-accent"
+                      />
+                      <span className="min-w-0">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* ------------------------------------------------------------
             The posts.
             ------------------------------------------------------------ */}
         {posts.length > 0 ? (

@@ -211,8 +211,14 @@ function Block({ block }: { block: LegalBlock }) {
       return (
         /* Scrolls rather than wrapping. A three-column table squeezed into
            320px becomes unreadable, and these carry the specifics people
-           come to a privacy policy to check. */
-        <div className="-mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
+           come to a privacy policy to check.
+
+           No negative margin: bleeding the scroller past the text column
+           made it 40px wider than its parent at every width below the
+           breakpoint, which the parent then reported as overflow. The
+           table scrolls within the column instead, and `min-w-0` stops
+           the 34rem table from setting the flex column's width. */
+        <div className="cx-scroll-slim w-full min-w-0 overflow-x-auto">
           <table className="w-full min-w-[34rem] border-collapse text-left text-[0.875rem]">
             <thead>
               <tr className="border-b border-line-strong">

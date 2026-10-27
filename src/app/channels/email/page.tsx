@@ -321,13 +321,13 @@ export default function Page() {
 
             <div className="mt-9 overflow-hidden rounded-frame border border-white/12">
               <div className="grid grid-cols-[minmax(0,0.8fr)_minmax(0,1.1fr)_minmax(0,1.1fr)] border-b border-white/12 bg-white/[0.04]">
-                <span className="px-4 py-2.5 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-white/40">
+                <span className="px-2 py-2.5 font-mono text-[0.6875rem] uppercase tracking-[0.12em] sm:px-4 text-white/40">
                   &nbsp;
                 </span>
-                <span className="px-4 py-2.5 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-white/40">
+                <span className="px-2 py-2.5 font-mono text-[0.6875rem] uppercase tracking-[0.12em] sm:px-4 text-white/40">
                   Written separately
                 </span>
-                <span className="px-4 py-2.5 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-accent">
+                <span className="px-2 py-2.5 font-mono text-[0.6875rem] uppercase tracking-[0.12em] sm:px-4 text-accent">
                   Written as a pair
                 </span>
               </div>

@@ -256,7 +256,10 @@ export default function UseCasesIndexPage() {
                     key={href}
                     className="flex flex-wrap items-baseline gap-x-4 gap-y-1.5 p-5 sm:p-6"
                   >
-                    <dt className="w-[9rem] shrink-0 text-[0.9375rem] font-medium text-foreground">
+                    {/* Full width below sm: a fixed 9rem term leaves the
+                        description about 78px at 320px, which is
+                        narrower than the words in it. */}
+                    <dt className="w-full shrink-0 text-[0.9375rem] font-medium text-foreground sm:w-[9rem]">
                       {page.eyebrow}
                     </dt>
                     <dd className="min-w-0 flex-1 text-[0.9375rem] leading-relaxed text-muted-strong">
