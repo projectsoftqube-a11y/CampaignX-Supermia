@@ -109,7 +109,7 @@ export function StatBand({ stats }: StatBandProps) {
                   {stat.label}
                 </p>
                 {stat.note ? (
-                  <p className="mt-1.5 text-[0.8125rem] leading-snug text-white/55">
+                  <p className="mt-1.5 text-[0.875rem] leading-snug text-white/55">
                     {stat.note}
                   </p>
                 ) : null}

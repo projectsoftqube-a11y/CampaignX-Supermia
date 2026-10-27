@@ -7,7 +7,7 @@ import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Terms and Conditions",
-  description: `The agreement governing your access to and use of ${siteConfig.name}.`,
+  description: `The agreement governing your access to and use of ${siteConfig.name}, including what you must approve before anything publishes to your accounts.`,
   alternates: { canonical: "/terms" },
 };
 

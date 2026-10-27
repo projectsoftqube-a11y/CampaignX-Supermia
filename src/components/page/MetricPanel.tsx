@@ -116,7 +116,7 @@ export function MetricPanel({
             Spring offer
           </p>
         </div>
-        <span className="inline-flex items-center gap-1 rounded-pill bg-accent-soft px-2.5 py-1 text-[0.75rem] text-accent">
+        <span className="inline-flex items-center gap-1 rounded-pill bg-accent-soft px-2.5 py-1 text-[0.875rem] text-accent">
           <ArrowUpRight aria-hidden="true" className="size-3" />
           Engagement
         </span>
@@ -127,7 +127,7 @@ export function MetricPanel({
           <li key={row.name} data-row className="opacity-0">
             <div className="flex items-center gap-3">
               <BrandGlyph name={row.name} className="size-4 shrink-0" />
-              <span className="w-[7.5rem] shrink-0 truncate text-[0.8125rem] text-muted-strong">
+              <span className="w-[7.5rem] shrink-0 truncate text-[0.875rem] text-muted-strong">
                 {row.label}
               </span>
 
@@ -143,7 +143,7 @@ export function MetricPanel({
         ))}
       </ul>
 
-      <p className="mt-6 border-t border-line pt-4 text-[0.75rem] leading-relaxed text-muted">
+      <p className="mt-6 border-t border-line pt-4 text-[0.875rem] leading-relaxed text-muted">
         Illustration of the report layout, not customer data. Figures shown
         are relative shares, not performance claims.
       </p>

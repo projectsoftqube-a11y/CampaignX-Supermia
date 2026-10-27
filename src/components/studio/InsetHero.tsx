@@ -140,7 +140,7 @@ export function InsetHero({
         <div className="mx-auto max-w-[52rem] text-center">
           <span
             data-rise
-            className="inline-flex items-center gap-1.5 rounded-pill border border-line bg-surface px-3 py-1.5 text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-muted-strong opacity-0 shadow-soft"
+            className="inline-flex items-center gap-1.5 rounded-pill border border-line bg-surface px-3 py-1.5 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted-strong opacity-0 shadow-soft"
           >
             <span className="bg-brand size-1.5 rounded-full" />
             {tag}
@@ -202,7 +202,7 @@ export function InsetHero({
             <dl className="mx-auto mt-9 grid max-w-[46rem] gap-x-10 gap-y-5 sm:grid-cols-3">
               {facts.slice(0, 3).map((fact) => (
                 <div key={fact.label} className="text-center">
-                  <dt className="text-[0.625rem] font-medium uppercase tracking-[0.16em] text-muted">
+                  <dt className="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-muted">
                     {fact.label}
                   </dt>
                   <dd className="text-display mt-1 text-[1rem] font-medium tracking-[-0.01em]">

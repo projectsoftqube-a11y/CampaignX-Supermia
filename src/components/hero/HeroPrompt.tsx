@@ -51,7 +51,7 @@ export function HeroPrompt() {
               <span className="flex size-8 items-center justify-center rounded-full border border-line bg-white/80 transition-colors duration-300 group-hover:border-line-strong">
                 <Paperclip className="size-3.5" aria-hidden="true" />
               </span>
-              <span className="hidden text-[0.8125rem] sm:inline">
+              <span className="hidden text-[0.875rem] sm:inline">
                 {hero.prompt.hint}
               </span>
             </span>

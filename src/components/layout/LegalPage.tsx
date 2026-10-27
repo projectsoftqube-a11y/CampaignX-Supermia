@@ -76,7 +76,7 @@ export function LegalPage({ doc }: { doc: LegalDocument }) {
                   <li key={section.heading}>
                     <a
                       href={`#${slug(section.heading)}`}
-                      className="group flex gap-3 rounded-[10px] px-3 py-2 text-[0.8125rem] leading-snug text-muted transition-colors duration-200 hover:bg-surface-soft hover:text-foreground"
+                      className="group flex gap-3 rounded-[10px] px-3 py-2 text-[0.875rem] leading-snug text-muted transition-colors duration-200 hover:bg-surface-soft hover:text-foreground"
                     >
                       <span
                         aria-hidden="true"
@@ -113,7 +113,7 @@ export function LegalPage({ doc }: { doc: LegalDocument }) {
                   <div className="flex items-baseline gap-4">
                     <span
                       aria-hidden="true"
-                      className="text-accent shrink-0 text-[0.8125rem] font-semibold tabular-nums"
+                      className="text-accent shrink-0 text-[0.6875rem] font-semibold tabular-nums"
                     >
                       {pad(index + 1)}
                     </span>
@@ -296,7 +296,7 @@ function Span({ span }: { span: LegalSpan }) {
 
 function Stamp({ label, value }: { label: string; value: string }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-pill border border-line bg-surface px-3.5 py-1.5 text-[0.8125rem] text-muted">
+    <span className="inline-flex items-center gap-2 rounded-pill border border-line bg-surface px-3.5 py-1.5 text-[0.875rem] text-muted">
       <span aria-hidden="true" className="bg-brand block size-1.5 rounded-full" />
       <span className="font-medium text-foreground">{label}</span>
       {value}

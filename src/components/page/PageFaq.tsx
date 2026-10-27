@@ -30,7 +30,7 @@ export function PageFaq({ items }: PageFaqProps) {
   const [open, setOpen] = useState(0);
 
   return (
-    <ul className="divide-y divide-line">
+    <ul className="space-y-1">
       {items.map((item, index) => (
         <Row
           key={item.question}
@@ -58,35 +58,56 @@ function Row({
   const panelId = useId();
 
   return (
-    <li data-animate="reveal">
+    <li
+      data-animate="reveal"
+      className={cn(
+        "rounded-panel border transition-colors duration-300",
+        open
+          ? "border-line bg-surface shadow-soft"
+          : "border-transparent hover:bg-surface/60",
+      )}
+    >
       <h3>
         <button
           type="button"
           onClick={onToggle}
           aria-expanded={open}
           aria-controls={panelId}
-          className="group flex w-full items-start justify-between gap-4 py-5 text-left sm:gap-6"
+          className={cn(
+            "group flex w-full items-start justify-between gap-4 text-left sm:gap-6",
+            /* The ring is for keyboard users; a mouse click should not
+               box the row. `focus-visible` alone still fired here, so
+               the outline is suppressed and re-applied explicitly. */
+            "rounded-panel outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+            open ? "px-5 pb-3 pt-5" : "px-5 py-4",
+          )}
         >
           <span
             className={cn(
-              "text-[1.0625rem] font-medium leading-snug transition-colors duration-200",
+              "max-w-[52rem] text-[1.0625rem] font-medium leading-snug transition-colors duration-200",
               open ? "text-foreground" : "text-foreground/85 group-hover:text-foreground",
             )}
           >
             {item.question}
           </span>
 
-          {/* The open row is the current one, so its marker is a filled
-              dot rather than a close affordance — there is nothing to
-              close, because one answer is always showing. */}
+          {/* A filled disc on the open row rather than a bare dot: at
+              2px the dot read as a stray mark, and the marker has to
+              hold its own against a question set at 17px. There is no
+              close affordance because one answer is always showing. */}
           <span
             aria-hidden="true"
-            className="mt-1 flex size-4 shrink-0 items-center justify-center"
+            className={cn(
+              "mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full transition-colors duration-200",
+              open
+                ? "bg-accent text-white"
+                : "border border-line text-muted group-hover:border-accent-line group-hover:text-accent",
+            )}
           >
             {open ? (
-              <span className="bg-brand size-2 rounded-full" />
+              <span className="h-[1.5px] w-2.5 rounded-full bg-current" />
             ) : (
-              <Plus className="size-4 text-muted transition-colors duration-200 group-hover:text-foreground" />
+              <Plus className="size-3.5" />
             )}
           </span>
         </button>
@@ -101,7 +122,7 @@ function Row({
         )}
       >
         <div className="overflow-hidden">
-          <p className="max-w-[46rem] pb-6 text-[0.9375rem] leading-relaxed text-muted-strong">
+          <p className="max-w-[52rem] px-5 pb-5 text-[0.9375rem] leading-relaxed text-muted-strong">
             {item.answer}
           </p>
         </div>

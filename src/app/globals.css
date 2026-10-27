@@ -64,6 +64,65 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    /* The site is light-only, so tell the UA to render form controls
+       and any unstyled scroller to match rather than guessing. */
+    color-scheme: light;
+    /* Firefox has no pseudo-elements for this; these two properties
+       are the whole API there. */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+
+  /* WebKit and Blink. The default bar is a grey slab against a grey
+     track that sits on top of the page's own surfaces; this makes it
+     a thin brand-tinted thumb on the page ground, and widens it on
+     hover so it is still easy to grab. */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--surface-soft);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--border-strong);
+    border-radius: 999px;
+    /* A transparent border with background-clip is what gives the
+       thumb breathing room inside the track without a second element. */
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--muted);
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background-color: var(--accent);
+  }
+
+  /* Where the two bars meet. Left unstyled it renders as a pale
+     square that does not match either track. */
+  ::-webkit-scrollbar-corner {
+    background: var(--surface-soft);
+  }
+
+  /* Scrollers inside a panel get a narrower, quieter bar: at the page
+     width the 12px bar is right, but inside a card it competes with
+     the content. */
+  .cx-scroll-slim::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .cx-scroll-slim::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .cx-scroll-slim::-webkit-scrollbar-thumb {
+    border-width: 2px;
   }
 
   /* Tailwind v4's Preflight sets `button { cursor: default }`, which
@@ -201,6 +260,8 @@
 }
 
 @utility text-eyebrow {
+  /* Chrome, not reading text: an eyebrow is scanned, and at the 14px
+     body floor it competes with the heading it introduces. */
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.16em;

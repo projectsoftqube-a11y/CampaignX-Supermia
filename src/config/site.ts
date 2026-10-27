@@ -17,7 +17,7 @@ export const siteConfig = {
   signupUrl: APP_URL,
   loginUrl: `${APP_URL}/login`,
   description:
-    "CampaignX is an AI marketing agent. Write one brief and get an on-brand campaign for Instagram, Facebook, LinkedIn, Google Business, X, email and SMS — approved by you before anything ships.",
+    "Write one brief and get an on-brand campaign for Instagram, Facebook, LinkedIn, Google Business, X, email and SMS — approved by you before anything ships.",
   title: "CampaignX: AI Marketing Agent for Multi-Channel Campaigns",
   twitter: "@supermia_ai",
   /** Social links for the footer. Placeholders until the accounts exist. */

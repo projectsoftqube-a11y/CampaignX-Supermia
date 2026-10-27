@@ -155,14 +155,14 @@ export function BrandMatch({ className }: BrandMatchProps) {
                 {isTarget ? (
                   <span
                     data-badge
-                    className="bg-brand absolute right-1.5 top-1.5 z-10 rounded-pill px-2 py-0.5 text-[0.5625rem] font-medium uppercase tracking-[0.08em] text-white shadow-brand"
+                    className="bg-brand absolute right-1.5 top-1.5 z-10 rounded-pill px-2 py-0.5 text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-white shadow-brand"
                   >
                     Regenerating
                   </span>
                 ) : null}
               </div>
 
-              <p className="mt-1.5 truncate text-[0.625rem] text-muted">
+              <p className="mt-1.5 truncate text-[0.875rem] text-muted">
                 {isTarget ? "This one only" : "Unchanged"}
               </p>
             </li>
@@ -172,7 +172,7 @@ export function BrandMatch({ className }: BrandMatchProps) {
 
       {/* The palette the new composition is drawn from. */}
       <div className="mt-4 flex items-center gap-3 rounded-panel border border-line bg-surface p-3">
-        <span className="shrink-0 text-[0.5625rem] font-medium uppercase tracking-[0.14em] text-muted">
+        <span className="shrink-0 text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-muted">
           Your palette
         </span>
         <span className="flex gap-1.5">
@@ -190,7 +190,7 @@ export function BrandMatch({ className }: BrandMatchProps) {
             />
           ))}
         </span>
-        <span className="ml-auto shrink-0 text-[0.625rem] text-muted">
+        <span className="ml-auto shrink-0 text-[0.875rem] text-muted">
           From your brand model
         </span>
       </div>

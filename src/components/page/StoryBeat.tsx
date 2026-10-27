@@ -181,7 +181,7 @@ export function StoryBeat({
                 />
 
                 {caption ? (
-                  <figcaption className="glass-quiet absolute bottom-3 left-3 rounded-pill px-3 py-1.5 text-[0.75rem] text-foreground">
+                  <figcaption className="glass-quiet absolute bottom-3 left-3 rounded-pill px-3 py-1.5 text-[0.875rem] text-foreground">
                     {caption}
                   </figcaption>
                 ) : null}

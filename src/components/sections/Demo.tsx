@@ -146,7 +146,7 @@ export function Demo() {
                   would rather watch it there. */}
               <div
                 data-animate="reveal"
-                className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-5 text-[0.8125rem] text-muted"
+                className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-5 text-[0.875rem] text-muted"
               >
                 <span className="inline-flex items-center gap-2">
                   <Clock
@@ -243,7 +243,7 @@ export function Demo() {
                     <span className="text-[0.9375rem] leading-snug font-semibold text-white sm:text-base">
                       {demo.videoTitle}
                     </span>
-                    <span className="text-[0.75rem] text-white/65">
+                    <span className="text-[0.875rem] text-white/65">
                       {demo.channel}
                     </span>
                   </span>

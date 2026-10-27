@@ -206,7 +206,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                           {item.label}
                         </span>
                         {item.description ? (
-                          <span className="text-[0.8125rem] leading-snug text-muted">
+                          <span className="text-[0.875rem] leading-snug text-muted">
                             {item.description}
                           </span>
                         ) : null}

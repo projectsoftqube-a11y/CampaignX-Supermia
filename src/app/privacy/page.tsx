@@ -7,7 +7,7 @@ import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: `How ${siteConfig.name} collects, uses, stores, shares and protects your personal information.`,
+  description: `How ${siteConfig.name} collects, uses, stores and protects your personal information, which third-party processors are involved, and the choices you have.`,
   alternates: { canonical: "/privacy" },
 };
 

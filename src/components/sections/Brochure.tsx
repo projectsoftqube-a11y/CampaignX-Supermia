@@ -103,7 +103,7 @@ export function Brochure() {
                     className="relative h-px w-10 bg-white/25"
                   />
 
-                  <span className="relative text-[0.625rem] font-medium tracking-[0.18em] text-white/70">
+                  <span className="relative text-[0.875rem] font-medium tracking-[0.09em] text-white/70">
                     {brochure.cover.footnote}
                   </span>
                 </div>
@@ -171,7 +171,7 @@ export function Brochure() {
                   return (
                     <li
                       key={fact.label}
-                      className="inline-flex items-center gap-2 text-[0.8125rem] text-muted"
+                      className="inline-flex items-center gap-2 text-[0.875rem] text-muted"
                     >
                       <Icon
                         className="text-accent size-3.5 shrink-0"

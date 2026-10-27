@@ -150,7 +150,7 @@ function ChatMock() {
 
         <span className="block size-7 rounded-full bg-[linear-gradient(135deg,var(--brand-blue),var(--brand-magenta))]" />
         <span
-          className="text-[0.5625rem] font-medium"
+          className="text-[0.875rem] font-medium"
           style={{ color: SMS.text }}
         >
           Northwave
@@ -160,7 +160,7 @@ function ChatMock() {
       {/* Thread. iOS has no wallpaper — plain white is the real look. */}
       <div className="flex flex-1 flex-col justify-end gap-1.5 overflow-hidden px-2.5 pt-3 pb-1">
         <span
-          className="mx-auto mb-1 text-[0.4375rem] font-medium"
+          className="mx-auto mb-1 text-[0.875rem] font-medium"
           style={{ color: SMS.meta }}
         >
           Text Message &middot; Today 09:41
@@ -198,7 +198,7 @@ function ChatMock() {
             {message.image ? <CampaignCreative /> : null}
 
             <span
-              className="block text-[0.6875rem] leading-[1.35]"
+              className="block text-[0.875rem] leading-[1.35]"
               style={{ color: message.mine ? "#FFFFFF" : SMS.text }}
             >
               {message.text}
@@ -206,7 +206,7 @@ function ChatMock() {
 
             {message.mine && i === 2 ? (
               <span
-                className="absolute right-0 -bottom-3.5 text-[0.4375rem] font-medium whitespace-nowrap"
+                className="absolute right-0 -bottom-3.5 text-[0.875rem] font-medium whitespace-nowrap"
                 style={{ color: SMS.meta }}
               >
                 Delivered
@@ -241,7 +241,7 @@ function ChatMock() {
           className="flex flex-1 items-center justify-between gap-1.5 rounded-full px-2.5 py-1.5"
           style={{ border: "1px solid rgba(0,0,0,0.14)" }}
         >
-          <span className="text-[0.5625rem]" style={{ color: SMS.meta }}>
+          <span className="text-[0.875rem]" style={{ color: SMS.meta }}>
             Text Message
           </span>
           <svg
@@ -421,7 +421,7 @@ export function PhoneMock({ channel, className }: PhoneMockProps) {
             aria-hidden="true"
             className="bg-brand block size-1.5 shrink-0 rounded-full"
           />
-          <span className="text-[0.75rem] leading-tight text-muted">
+          <span className="text-[0.875rem] leading-tight text-muted">
             {channel.output}
           </span>
         </span>

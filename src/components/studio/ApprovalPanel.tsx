@@ -171,18 +171,18 @@ export function ApprovalPanel({ className }: ApprovalPanelProps) {
       >
         {/* Who is reviewing. Named, because that is the point. */}
         <div className="flex items-center gap-2.5 border-b border-line bg-surface-soft px-3.5 py-2.5">
-          <span className="bg-brand flex size-6 shrink-0 items-center justify-center rounded-full text-[0.5625rem] font-semibold text-white">
+          <span className="bg-brand flex size-6 shrink-0 items-center justify-center rounded-full text-[0.875rem] font-semibold text-white">
             RK
           </span>
           <span className="min-w-0">
-            <span className="block truncate text-[0.75rem] font-medium leading-tight text-foreground">
+            <span className="block truncate text-[0.875rem] font-medium leading-tight text-foreground">
               Rhea Kapoor
             </span>
-            <span className="block truncate text-[0.5625rem] uppercase tracking-[0.12em] text-muted">
+            <span className="block truncate text-[0.6875rem] uppercase tracking-[0.12em] text-muted">
               Approver
             </span>
           </span>
-          <span className="ml-auto shrink-0 rounded-[0.25rem] bg-surface px-1.5 py-1 font-mono text-[0.5625rem] uppercase tracking-[0.1em] text-muted">
+          <span className="ml-auto shrink-0 rounded-[0.25rem] bg-surface px-1.5 py-1 font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-muted">
             <span data-remaining>4</span> to review
           </span>
         </div>
@@ -211,10 +211,10 @@ export function ApprovalPanel({ className }: ApprovalPanelProps) {
                 </span>
 
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[0.75rem] font-medium leading-tight text-foreground">
+                  <span className="block truncate text-[0.875rem] font-medium leading-tight text-foreground">
                     {asset.label}
                   </span>
-                  <span className="mt-0.5 block truncate text-[0.6875rem] leading-tight text-muted">
+                  <span className="mt-0.5 block truncate text-[0.875rem] leading-tight text-muted">
                     {/* The rejected line is replaced once regenerated,
                         so the fix is visible rather than implied. */}
                     <span className="group-data-[state=regenerating]:hidden group-data-[state=approved]:hidden">
@@ -236,16 +236,16 @@ export function ApprovalPanel({ className }: ApprovalPanelProps) {
                 <span className="shrink-0">
                   <span className="block size-4 rounded-full border border-dashed border-line-strong group-data-[state=reviewing]:hidden group-data-[state=rejected]:hidden group-data-[state=regenerating]:hidden group-data-[state=approved]:hidden" />
 
-                  <span className="hidden font-mono text-[0.5625rem] uppercase tracking-[0.1em] text-muted group-data-[state=reviewing]:inline">
+                  <span className="hidden font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-muted group-data-[state=reviewing]:inline">
                     Reading
                   </span>
 
-                  <span className="hidden items-center gap-1 font-mono text-[0.5625rem] uppercase tracking-[0.1em] text-foreground group-data-[state=rejected]:inline-flex">
+                  <span className="hidden items-center gap-1 font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-foreground group-data-[state=rejected]:inline-flex">
                     <Pencil aria-hidden="true" className="size-2.5" />
                     Sent back
                   </span>
 
-                  <span className="hidden items-center gap-1 font-mono text-[0.5625rem] uppercase tracking-[0.1em] text-accent group-data-[state=regenerating]:inline-flex">
+                  <span className="hidden items-center gap-1 font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-accent group-data-[state=regenerating]:inline-flex">
                     <RotateCcw aria-hidden="true" className="size-2.5" />
                     Rewritten
                   </span>
@@ -269,14 +269,14 @@ export function ApprovalPanel({ className }: ApprovalPanelProps) {
           data-ready="false"
           className="group/gate flex items-center gap-2 border-t border-line bg-surface-soft px-3.5 py-2.5"
         >
-          <span className="font-mono text-[0.5625rem] uppercase tracking-[0.1em] text-muted">
+          <span className="font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-muted">
             Nothing sends without approval
           </span>
           {/* `bg-brand` is a utility, not a variable, so the ready
               state swaps the whole class rather than a gradient var. */}
           <span
             className={cn(
-              "ml-auto rounded-pill px-3 py-1.5 text-[0.6875rem] font-medium transition-[background-color,color,box-shadow] duration-300",
+              "ml-auto rounded-pill px-3 py-1.5 text-[0.875rem] font-medium transition-[background-color,color,box-shadow] duration-300",
               "bg-surface-sunk text-muted",
               "group-data-[ready=true]/gate:bg-accent group-data-[ready=true]/gate:text-white group-data-[ready=true]/gate:shadow-brand",
             )}

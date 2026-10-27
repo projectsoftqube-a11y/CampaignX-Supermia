@@ -162,6 +162,52 @@ export function webPageSchema({
   };
 }
 
+export interface BlogPostingInput {
+  /** Path with a leading slash. */
+  path: string;
+  headline: string;
+  description: string;
+  /** ISO date. */
+  published: string;
+  modified?: string;
+}
+
+/**
+ * BlogPosting markup for a single post.
+ *
+ * `mainEntityOfPage` points at the post's own WebPage node rather than
+ * repeating the URL as a bare string, so the graph stays connected and
+ * the post is unambiguously the subject of its page.
+ */
+export function blogPostingSchema({
+  path,
+  headline,
+  description,
+  published,
+  modified,
+}: BlogPostingInput): Json {
+  const url = `${siteConfig.url}${path}`;
+  return {
+    "@type": "BlogPosting",
+    "@id": `${url}#post`,
+    headline,
+    description,
+    url,
+    datePublished: published,
+    dateModified: modified ?? published,
+    inLanguage: "en-US",
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+    mainEntityOfPage: { "@id": `${url}#webpage` },
+    image: {
+      "@type": "ImageObject",
+      url: `${url}/opengraph-image`,
+      width: 1200,
+      height: 630,
+    },
+  };
+}
+
 export interface FaqItem {
   question: string;
   answer: string;

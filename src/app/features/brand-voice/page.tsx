@@ -383,7 +383,7 @@ export default function BrandVoicePage() {
                         key={topic}
                         className="flex items-baseline gap-3 text-[0.875rem] leading-snug text-muted-strong"
                       >
-                        <span className="text-display w-4 shrink-0 text-[0.75rem] tabular-nums text-accent">
+                        <span className="text-display w-4 shrink-0 text-[0.6875rem] tabular-nums text-accent">
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         {topic}
@@ -396,7 +396,7 @@ export default function BrandVoicePage() {
                 {/* The onward links, as a footer to the rail rather than
                     a card floating under it. */}
                 <div className="border-t border-line pt-6">
-                  <p className="text-[0.8125rem] leading-relaxed text-muted">
+                  <p className="text-[0.875rem] leading-relaxed text-muted">
                     The{" "}
                     <Link
                       href={ROUTES.faq.href}
@@ -415,7 +415,7 @@ export default function BrandVoicePage() {
                       <Link
                         key={link.href}
                         href={link.href}
-                        className="rounded-pill border border-line bg-surface px-3 py-1.5 text-[0.8125rem] text-muted-strong transition-colors duration-200 hover:border-accent-line hover:text-accent"
+                        className="rounded-pill border border-line bg-surface px-3 py-1.5 text-[0.875rem] text-muted-strong transition-colors duration-200 hover:border-accent-line hover:text-accent"
                       >
                         {link.label}
                       </Link>

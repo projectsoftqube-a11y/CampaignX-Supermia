@@ -201,7 +201,7 @@ export function FanOut({ brief, className }: FanOutProps) {
       {/* The brief */}
       <div className="mx-auto w-full sm:w-[min(34rem,92%)]">
         <div className="flex items-center gap-2 rounded-pill border border-line bg-surface py-2.5 pl-4 pr-2 shadow-float sm:gap-3 sm:pl-6 sm:pr-2.5">
-          <p className="min-w-0 flex-1 truncate text-[0.8125rem] text-foreground sm:text-[1rem]">
+          <p className="min-w-0 flex-1 truncate text-[0.875rem] text-foreground sm:text-[1rem]">
             <span data-type>{brief}</span>
             <span
               data-caret
@@ -283,11 +283,11 @@ export function FanOut({ brief, className }: FanOutProps) {
           >
             <span className="flex items-center gap-1.5">
               <BrandGlyph name={channel.name} className="size-3.5 shrink-0" />
-              <span className="truncate text-[0.625rem] font-medium text-muted-strong">
+              <span className="truncate text-[0.875rem] font-medium text-muted-strong">
                 {channel.label}
               </span>
             </span>
-            <span className="mt-1.5 block truncate text-[0.6875rem] leading-snug text-muted">
+            <span className="mt-1.5 block truncate text-[0.875rem] leading-snug text-muted">
               {channel.line}
             </span>
           </li>

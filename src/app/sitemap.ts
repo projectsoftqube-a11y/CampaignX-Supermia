@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { BLOG_POSTS } from "@/config/pages/blog";
 import { BLOG_CATEGORIES, absoluteUrl, routeList } from "@/config/routes";
 import { siteConfig } from "@/config/site";
 
@@ -25,5 +26,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...pages, ...categories];
+  /* Posts are not in the route registry — they live in the blog
+     config — so they are added here. Each carries its own publish
+     date rather than today's, which is what `lastModified` is for. */
+  const posts = BLOG_POSTS.map((post) => ({
+    url: absoluteUrl(`/blog/${post.slug}`, siteConfig.url),
+    lastModified: new Date(post.published),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...pages, ...categories, ...posts];
 }

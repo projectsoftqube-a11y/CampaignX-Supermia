@@ -160,7 +160,7 @@ export function Segment({
           <div data-seg className="flex items-center gap-4 opacity-0">
             <span
               className={cn(
-                "shrink-0 rounded-[0.25rem] px-2 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.12em]",
+                "shrink-0 rounded-[0.25rem] px-2 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.12em]",
                 ink ? "bg-accent text-white" : "bg-accent-soft text-accent",
               )}
             >
@@ -168,7 +168,7 @@ export function Segment({
             </span>
             <span
               className={cn(
-                "shrink-0 text-[0.625rem] font-medium uppercase tracking-[0.18em]",
+                "shrink-0 text-[0.6875rem] font-medium uppercase tracking-[0.16em]",
                 ink ? "text-white/50" : "text-muted",
               )}
             >
@@ -207,7 +207,7 @@ export function Segment({
             </span>
             <span
               className={cn(
-                "hidden shrink-0 text-[0.625rem] tabular-nums sm:block",
+                "hidden shrink-0 text-[0.6875rem] tabular-nums sm:block",
                 ink ? "text-white/45" : "text-muted",
               )}
             >
@@ -264,7 +264,7 @@ export function Annotation({
     >
       <span
         className={cn(
-          "inline-block rounded-[0.25rem] px-2 py-0.5 text-[0.5625rem] font-semibold uppercase tracking-[0.14em]",
+          "inline-block rounded-[0.25rem] px-2 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-[0.14em]",
           ink ? "bg-accent text-white" : "bg-accent-soft text-accent",
         )}
       >
@@ -317,7 +317,7 @@ export function CompareTable({
     <div>
       <p
         className={cn(
-          "text-[0.625rem] font-medium uppercase tracking-[0.16em]",
+          "text-[0.6875rem] font-medium uppercase tracking-[0.14em]",
           ink ? "text-white/40" : "text-muted",
         )}
       >
@@ -363,7 +363,7 @@ export function CompareTable({
               <th
                 scope="row"
                 className={cn(
-                  "py-4 pr-4 text-[0.8125rem] font-medium",
+                  "py-4 pr-4 text-[0.875rem] font-medium",
                   ink ? "text-white" : "text-foreground",
                 )}
               >
@@ -371,7 +371,7 @@ export function CompareTable({
               </th>
               <td
                 className={cn(
-                  "py-4 pr-4 text-[0.8125rem] leading-snug",
+                  "py-4 pr-4 text-[0.875rem] leading-snug",
                   ink ? "text-white/45" : "text-muted",
                 )}
               >
@@ -380,7 +380,7 @@ export function CompareTable({
               </td>
               <td
                 className={cn(
-                  "py-4 text-[0.8125rem] leading-snug",
+                  "py-4 text-[0.875rem] leading-snug",
                   ink ? "text-white/85" : "text-foreground",
                 )}
               >

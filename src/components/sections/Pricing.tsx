@@ -99,7 +99,7 @@ export async function Pricing() {
                 )}
               >
                 {plan.featured ? (
-                  <span className="bg-brand shadow-brand absolute -top-3 left-7 rounded-pill px-3 py-1 text-[0.625rem] font-semibold tracking-[0.12em] text-white uppercase">
+                  <span className="bg-brand shadow-brand absolute -top-3 left-7 rounded-pill px-3 py-1 text-[0.6875rem] font-semibold tracking-[0.12em] text-white uppercase">
                     Most teams
                   </span>
                 ) : null}
@@ -110,7 +110,7 @@ export async function Pricing() {
                   <div className="flex items-center justify-between gap-3">
                     <h3 className="text-display text-[1.25rem]">{plan.name}</h3>
                     {plan.isCustom ? (
-                      <span className="rounded-pill border border-accent-line px-2.5 py-1 text-[0.6875rem] font-medium text-accent">
+                      <span className="rounded-pill border border-accent-line px-2.5 py-1 text-[0.875rem] font-medium text-accent">
                         Enterprise
                       </span>
                     ) : null}

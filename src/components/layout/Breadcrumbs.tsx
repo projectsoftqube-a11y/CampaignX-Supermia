@@ -23,7 +23,7 @@ export function Breadcrumbs({ steps }: BreadcrumbsProps) {
 
   return (
     <nav aria-label="Breadcrumb">
-      <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[0.8125rem] text-muted">
+      <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[0.875rem] text-muted">
         {trail.map((step, index) => {
           const last = index === trail.length - 1;
 

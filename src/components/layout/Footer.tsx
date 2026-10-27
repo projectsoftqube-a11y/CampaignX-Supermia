@@ -1,14 +1,9 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useRef } from "react";
 import { ArrowRight, ArrowUpRight, Globe, Mail, MapPin } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Logo } from "@/components/ui/Logo";
 import { demoCta, footerNavigation, primaryCta } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
-import { gsap, registerGsap } from "@/lib/animations/gsap";
-import { revealOnScroll } from "@/lib/animations/reveal";
 
 /**
  * The site footer.
@@ -29,26 +24,8 @@ import { revealOnScroll } from "@/lib/animations/reveal";
  * block is part of that same row rather than a fifth element fighting it.
  */
 export function Footer() {
-  const rootRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    registerGsap();
-
-    const root = rootRef.current;
-    if (!root) return;
-
-    const ctx = gsap.context(() => {
-      /* Must run on every path, not just reduced motion: the CSS in
-         animations.css keeps [data-animate="reveal"] hidden until GSAP
-         clears it, so skipping this leaves the content invisible. */
-      revealOnScroll(root, { stagger: 0.06, start: "top 88%" });
-    }, root);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <footer ref={rootRef} className="relative">
+    <footer className="relative">
       <div className="relative isolate overflow-hidden border-t border-line bg-surface-soft/60">
         {/* Backdrop. The hero's own dot field faded out toward the
             baseline, plus one low brand volume so the page ends on colour
@@ -67,7 +44,6 @@ export function Footer() {
               1. Masthead
               --------------------------------------------------------- */}
           <div
-            data-animate="reveal"
             className="flex flex-col gap-8 border-b border-line py-12 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:py-14"
           >
             <div className="max-w-[34rem]">
@@ -127,7 +103,6 @@ export function Footer() {
               <nav
                 key={column.title}
                 aria-label={column.title}
-                data-animate="reveal"
                 className="flex flex-col gap-4"
               >
                 <h2 className="text-eyebrow">{column.title}</h2>
@@ -153,7 +128,6 @@ export function Footer() {
             {/* Ways to reach us: last in the row, widest, because the
                 address needs more line than a list of page names. */}
             <div
-              data-animate="reveal"
               className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1"
             >
               <h2 className="text-eyebrow">Get in touch</h2>
@@ -174,7 +148,7 @@ export function Footer() {
             {/* Copyright and legal read as one line, so they are one flex
                 row with a rule drawn on each item. A `<span>` separator
                 would be read aloud as content. */}
-            <ul className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[0.8125rem] text-muted">
+            <ul className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[0.875rem] text-muted">
               <li>
                 {`© ${siteConfig.copyrightYear} ${siteConfig.name} by SuperMIA. All rights reserved.`}
               </li>
@@ -194,7 +168,7 @@ export function Footer() {
               ))}
             </ul>
 
-            <p className="text-[0.8125rem] text-muted">
+            <p className="text-[0.875rem] text-muted">
               {siteConfig.credit.prefix}{" "}
               <span className="font-semibold text-muted-strong">
                 {siteConfig.credit.name}

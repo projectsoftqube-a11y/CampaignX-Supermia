@@ -155,10 +155,10 @@ export function CreativeForge({ className }: CreativeForgeProps) {
         className="mx-auto flex w-full max-w-[26rem] items-center gap-3 rounded-panel border border-line bg-surface p-3.5 shadow-soft"
       >
         <div className="min-w-0 flex-1">
-          <p className="text-[0.5625rem] font-medium uppercase tracking-[0.16em] text-muted">
+          <p className="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-muted">
             One brief
           </p>
-          <p className="mt-1 truncate text-[0.8125rem] text-foreground">
+          <p className="mt-1 truncate text-[0.875rem] text-foreground">
             Spring offer, two weeks
           </p>
         </div>
@@ -219,7 +219,7 @@ export function CreativeForge({ className }: CreativeForgeProps) {
           >
             <div className="flex items-center gap-1.5">
               <BrandGlyph name={frame.channel} className="size-3 shrink-0" />
-              <span className="truncate text-[0.5625rem] font-medium uppercase tracking-[0.1em] text-muted">
+              <span className="truncate text-[0.6875rem] font-medium uppercase tracking-[0.1em] text-muted">
                 {frame.label}
               </span>
             </div>
@@ -255,7 +255,7 @@ export function CreativeForge({ className }: CreativeForgeProps) {
         ))}
       </ul>
 
-      <p className="mt-3 text-center text-[0.6875rem] text-muted">
+      <p className="mt-3 text-center text-[0.875rem] text-muted">
         One brief, three formats, generated together
       </p>
     </div>

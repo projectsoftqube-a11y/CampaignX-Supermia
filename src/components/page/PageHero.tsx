@@ -170,7 +170,7 @@ export function PageHero({
               {highlights.map((item) => (
                 <li
                   key={item}
-                  className="rounded-pill border border-line bg-surface-soft px-3.5 py-1.5 text-[0.8125rem] text-muted-strong"
+                  className="rounded-pill border border-line bg-surface-soft px-3.5 py-1.5 text-[0.875rem] text-muted-strong"
                 >
                   {item}
                 </li>
@@ -197,7 +197,7 @@ export function PageHero({
               />
             </Link>
 
-            <span className="text-[0.8125rem] text-muted">
+            <span className="text-[0.875rem] text-muted">
               Free during Beta. Nothing ships without your approval.
             </span>
           </div>

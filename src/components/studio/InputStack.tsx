@@ -152,7 +152,7 @@ export function InputStack({ className }: InputStackProps) {
                 </p>
                 <span
                   className={cn(
-                    "shrink-0 rounded-pill px-2 py-0.5 text-[0.5625rem] uppercase tracking-[0.1em]",
+                    "shrink-0 rounded-pill px-2 py-0.5 text-[0.6875rem] uppercase tracking-[0.1em]",
                     i === 0
                       ? "bg-accent-soft text-accent"
                       : "bg-surface-sunk text-muted",
@@ -161,7 +161,7 @@ export function InputStack({ className }: InputStackProps) {
                   {source.weight}
                 </span>
               </div>
-              <p className="mt-1 text-[0.8125rem] leading-snug text-muted">
+              <p className="mt-1 text-[0.875rem] leading-snug text-muted">
                 {source.note}
               </p>
             </div>
@@ -204,7 +204,7 @@ export function InputStack({ className }: InputStackProps) {
           <p className="text-[0.875rem] font-medium text-foreground">
             Your brand model
           </p>
-          <p className="mt-0.5 text-[0.8125rem] leading-snug text-muted">
+          <p className="mt-0.5 text-[0.875rem] leading-snug text-muted">
             Private to your workspace, improving with every approval
           </p>
         </div>

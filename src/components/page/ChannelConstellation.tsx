@@ -216,7 +216,7 @@ export function ChannelConstellation({
     <div
       ref={rootRef}
       aria-hidden="true"
-      className="relative mx-auto w-full max-w-[26rem] select-none lg:max-w-none"
+      className="relative mx-auto w-full max-w-[26rem] select-none lg:max-w-[30rem]"
     >
       {/* One panel, not a full-width table. The brief sits at the top,
           the fan carries it down, and the channels stack below — so the
@@ -232,7 +232,7 @@ export function ChannelConstellation({
         />
 
         {/* Console bar. */}
-        <div className="flex items-center gap-2 border-b border-line bg-surface-soft px-3.5 py-2.5">
+        <div className="flex items-center gap-2 border-b border-line bg-surface-soft px-4 py-3">
           <span className="relative flex size-1.5">
             <span className="bg-brand absolute inset-0 rounded-full" />
             <span
@@ -240,20 +240,20 @@ export function ChannelConstellation({
               className="bg-brand absolute inset-0 rounded-full"
             />
           </span>
-          <span className="text-[0.5625rem] font-medium uppercase tracking-[0.14em] text-muted">
+          <span className="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-muted/70">
             Dispatching
           </span>
-          <span className="ml-auto font-mono text-[0.5625rem] tabular-nums text-muted">
+          <span className="ml-auto font-mono text-[0.6875rem] tabular-nums text-muted">
             <span data-count>0</span>/7
           </span>
         </div>
 
         {/* The brief. */}
-        <div className="px-3.5 pb-3.5 pt-3">
-          <p className="text-[0.5625rem] font-medium uppercase tracking-[0.14em] text-muted">
+        <div className="px-4 pb-4 pt-3.5">
+          <p className="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-muted/70">
             The brief
           </p>
-          <p className="mt-1.5 text-[0.875rem] leading-snug text-foreground">
+          <p className="mt-2 text-[0.875rem] font-medium leading-snug text-foreground">
             Spring offer, two weeks, for existing customers.
           </p>
 
@@ -268,12 +268,12 @@ export function ChannelConstellation({
         {/* A labelled seam instead of drawn connectors. It states the
             relationship the fan was trying to illustrate, and unlike
             the fan it stays true at any panel width. */}
-        <div className="flex items-center gap-2 border-y border-line bg-surface-soft px-3.5 py-1.5">
-          <span className="text-[0.5625rem] font-medium uppercase tracking-[0.14em] text-muted">
+        <div className="flex items-center gap-2 border-y border-line bg-surface-soft px-4 py-2">
+          <span className="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-muted/70">
             Becomes
           </span>
           <span aria-hidden="true" className="h-px flex-1 bg-line" />
-          <span className="font-mono text-[0.5625rem] uppercase tracking-[0.1em] text-muted">
+          <span className="font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-muted/70">
             7 drafts
           </span>
         </div>
@@ -298,7 +298,7 @@ export function ChannelConstellation({
                   className="pointer-events-none absolute inset-y-0 left-0 w-0 bg-[linear-gradient(to_right,rgba(var(--brand-blue-rgb),0.09),transparent)] transition-[width] duration-700 ease-[var(--ease-out-soft)] group-data-[sent]:w-full"
                 />
 
-                <div className="relative flex items-center gap-2.5 px-3.5 py-2">
+                <div className="relative flex items-center gap-3 px-4 py-3">
                   <span
                     className={cn(
                       "flex size-7 shrink-0 items-center justify-center rounded-[0.4rem] border border-line bg-surface-soft",
@@ -310,15 +310,15 @@ export function ChannelConstellation({
                   </span>
 
                   <span className="min-w-0 flex-1">
-                    <span className="flex items-baseline gap-1.5">
-                      <span className="truncate text-[0.75rem] font-medium leading-tight text-foreground">
+                    <span className="flex items-center gap-2">
+                      <span className="truncate text-[0.875rem] font-semibold leading-tight text-foreground">
                         {channel.label}
                       </span>
-                      <span className="shrink-0 font-mono text-[0.5625rem] uppercase tracking-[0.06em] text-muted">
+                      <span className="shrink-0 rounded-[0.25rem] bg-surface-soft px-1.5 py-0.5 font-mono text-[0.6875rem] leading-none text-muted/80">
                         {draft.spec}
                       </span>
                     </span>
-                    <span className="mt-0.5 block truncate text-[0.6875rem] leading-tight text-muted">
+                    <span className="mt-1 block truncate text-[0.875rem] leading-snug text-muted">
                       {draft.line}
                     </span>
                   </span>
@@ -348,7 +348,7 @@ export function ChannelConstellation({
         {/* The seam above already says "becomes 7 drafts", so the
             footer carries the one fact it does not: what reaches the
             systems CampaignX is not. */}
-        <p className="flex items-center justify-between border-t border-line bg-surface-soft px-3.5 py-2 font-mono text-[0.5625rem] uppercase tracking-[0.1em] text-muted">
+        <p className="flex items-center justify-between border-t border-line bg-surface-soft px-4 py-2.5 font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-muted/70">
           <span>Approve before publish</span>
           <span>+ webhooks</span>
         </p>

@@ -168,7 +168,7 @@ function DesktopNavMenu() {
                             {item.label}
                           </span>
                           {item.description ? (
-                            <span className="mt-1 block text-[0.75rem] leading-snug text-muted">
+                            <span className="mt-1 block text-[0.875rem] leading-snug text-muted">
                               {item.description}
                             </span>
                           ) : null}
@@ -186,7 +186,7 @@ function DesktopNavMenu() {
                     <Link
                       href={group.href}
                       tabIndex={expanded ? 0 : -1}
-                      className="group/all mt-1.5 flex items-center justify-between rounded-card border-t border-line px-2.5 pb-2.5 pt-3 text-[0.8125rem] font-medium text-accent transition-colors duration-200 hover:bg-accent-soft"
+                      className="group/all mt-1.5 flex items-center justify-between rounded-card border-t border-line px-2.5 pb-2.5 pt-3 text-[0.875rem] font-medium text-accent transition-colors duration-200 hover:bg-accent-soft"
                     >
                       All {group.label.toLowerCase()}
                       <ArrowUpRight

@@ -230,7 +230,7 @@ export function PageOpening({
               />
             </Link>
 
-            <span className="text-[0.8125rem] text-muted">
+            <span className="text-[0.875rem] text-muted">
               Free during Beta. Nothing ships without your approval.
             </span>
           </div>
@@ -295,7 +295,7 @@ export function PageOpening({
                 <li key={name} data-chip className="flex justify-center">
                   <span className="inline-flex items-center gap-2 rounded-pill border border-line bg-surface px-3.5 py-2 shadow-soft">
                     <BrandGlyph name={name} className="size-4" />
-                    <span className="whitespace-nowrap text-[0.8125rem] text-muted-strong">
+                    <span className="whitespace-nowrap text-[0.875rem] text-muted-strong">
                       {CHANNEL_LABELS[name]}
                     </span>
                   </span>
@@ -304,7 +304,7 @@ export function PageOpening({
             </ul>
           </div>
 
-          <p className="mt-5 text-[0.8125rem] text-muted">
+          <p className="mt-5 text-[0.875rem] text-muted">
             + Facebook, X, Google Business and SMS, from the same brief.
           </p>
 

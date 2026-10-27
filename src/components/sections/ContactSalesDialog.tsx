@@ -57,7 +57,7 @@ type Props = {
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} role="alert" className="mt-1.5 text-[0.8125rem] text-[#d92d20]">
+    <p id={id} role="alert" className="mt-1.5 text-[0.875rem] text-[#d92d20]">
       {message}
     </p>
   );
@@ -285,7 +285,7 @@ export function ContactSalesDialog({ open, onClose }: Props) {
     );
 
   const labelClass =
-    "mb-1.5 block text-[0.8125rem] font-medium text-foreground";
+    "mb-1.5 block text-[0.875rem] font-medium text-foreground";
 
   return (
     <div
@@ -524,7 +524,7 @@ export function ContactSalesDialog({ open, onClose }: Props) {
                       message={fieldErrors.phone_number}
                     />
                     {!fieldErrors.phone_number && (
-                      <p className="mt-1.5 text-[0.8125rem] text-muted">
+                      <p className="mt-1.5 text-[0.875rem] text-muted">
                         {phoneDigits.length > 0
                           ? `${phoneDigits.length} of ${maxDigits} digits`
                           : `${maxDigits} digits for ${country.name}`}
@@ -593,14 +593,14 @@ export function ContactSalesDialog({ open, onClose }: Props) {
                 <p
                   id={errorId}
                   role="alert"
-                  className="mt-4 rounded-[14px] border border-[#f5c2c2] bg-[#fdf1f1] px-4 py-3 text-[0.8125rem] leading-normal text-[#b42318]"
+                  className="mt-4 rounded-[14px] border border-[#f5c2c2] bg-[#fdf1f1] px-4 py-3 text-[0.875rem] leading-normal text-[#b42318]"
                 >
                   {error}
                 </p>
               )}
 
               <div className="mt-6 flex flex-col-reverse items-center gap-3 sm:flex-row sm:justify-between">
-                <p className="m-0 text-[0.75rem] text-muted">
+                <p className="m-0 text-[0.875rem] text-muted">
                   We use your details only to respond to this inquiry.
                 </p>
 

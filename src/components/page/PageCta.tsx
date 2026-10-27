@@ -153,7 +153,7 @@ export function PageCta({
             data-rise
             className="mx-auto mt-8 flex w-full max-w-[32rem] items-center gap-2 rounded-pill border border-line bg-surface py-2.5 pl-4 pr-2 opacity-0 shadow-float sm:gap-3 sm:pl-6 sm:pr-2.5"
           >
-            <p className="min-w-0 flex-1 truncate text-left text-[0.8125rem] text-foreground sm:text-[0.9375rem]">
+            <p className="min-w-0 flex-1 truncate text-left text-[0.875rem] text-foreground sm:text-[0.9375rem]">
               <span data-type>Launch the spring range across every channel.</span>
               <span
                 data-caret
@@ -204,7 +204,7 @@ export function PageCta({
                 <span className="flex size-6 items-center justify-center rounded-full bg-surface ring-1 ring-[var(--border)]">
                   <BrandGlyph name={channel.name} className="size-3" />
                 </span>
-                <span className="whitespace-nowrap text-[0.75rem] text-muted">
+                <span className="whitespace-nowrap text-[0.875rem] text-muted">
                   {channel.label}
                 </span>
               </li>

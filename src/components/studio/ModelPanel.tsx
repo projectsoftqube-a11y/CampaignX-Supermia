@@ -126,7 +126,7 @@ export function ModelPanel({ className }: ModelPanelProps) {
                 />
               </span>
               <span className="min-w-0">
-                <span className="block truncate text-[0.6875rem] text-muted-strong">
+                <span className="block truncate text-[0.875rem] text-muted-strong">
                   {source}
                 </span>
                 <span className="mt-1 block h-1 w-10 rounded-full bg-surface-sunk" />
@@ -193,7 +193,7 @@ export function ModelPanel({ className }: ModelPanelProps) {
           <ul className="mt-4 space-y-3">
             {TRAITS.map((trait) => (
               <li key={trait.label} className="flex items-center gap-3">
-                <span className="w-12 shrink-0 text-[0.625rem] uppercase tracking-[0.08em] text-muted sm:w-14 sm:text-[0.6875rem]">
+                <span className="w-12 shrink-0 text-[0.6875rem] uppercase tracking-[0.14em] text-muted sm:w-14 sm:text-[0.6875rem]">
                   {trait.label}
                 </span>
 
@@ -213,7 +213,7 @@ export function ModelPanel({ className }: ModelPanelProps) {
             ))}
           </ul>
 
-          <p className="mt-4 border-t border-line pt-3 text-[0.625rem] text-muted">
+          <p className="mt-4 border-t border-line pt-3 text-[0.875rem] text-muted">
             Private to your workspace
           </p>
         </div>

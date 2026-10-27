@@ -375,7 +375,7 @@ function CleanStageCard({
       {/* The node on the spine */}
       <span
         aria-hidden="true"
-        className="bg-brand relative z-10 flex size-7 shrink-0 items-center justify-center rounded-full text-[0.625rem] font-semibold text-white shadow-brand"
+        className="bg-brand relative z-10 flex size-7 shrink-0 items-center justify-center rounded-full text-[0.875rem] font-semibold text-white shadow-brand"
       >
         0{index + 1}
       </span>
@@ -384,7 +384,7 @@ function CleanStageCard({
         <span className="text-display truncate text-[1.0625rem] font-semibold">
           {stage.role}
         </span>
-        <span className="text-[0.8125rem] leading-snug text-muted">
+        <span className="text-[0.875rem] leading-snug text-muted">
           {stage.instead}
         </span>
       </span>
@@ -418,14 +418,14 @@ function ToolCard({
         <span className="flex flex-col gap-1">
           <span
             aria-hidden="true"
-            className="text-[0.625rem] tabular-nums text-muted/45"
+            className="text-[0.6875rem] tabular-nums text-muted/45"
           >
             0{index + 1}
           </span>
           <span className="text-display text-[1.0625rem] text-muted-strong">
             {stage.role}
           </span>
-          <span className="text-[0.8125rem] text-muted">in {stage.tool}</span>
+          <span className="text-[0.875rem] text-muted">in {stage.tool}</span>
         </span>
 
         <span className="text-display shrink-0 text-[1.375rem] leading-none text-muted-strong">
@@ -433,13 +433,13 @@ function ToolCard({
         </span>
       </div>
 
-      <p className="mt-4 border-t border-line pt-3.5 text-[0.8125rem] leading-snug text-muted line-through decoration-muted/25">
+      <p className="mt-4 border-t border-line pt-3.5 text-[0.875rem] leading-snug text-muted line-through decoration-muted/25">
         {stage.loss}
       </p>
 
       {/* The handoff out of this tool, where the time actually goes. */}
       {stage.handoff ? (
-        <p className="mt-3 flex items-center gap-2 text-[0.75rem] text-muted">
+        <p className="mt-3 flex items-center gap-2 text-[0.875rem] text-muted">
           <span
             aria-hidden="true"
             className="flex size-4 shrink-0 items-center justify-center rounded-full border border-line-strong"

@@ -125,7 +125,7 @@ export function WebhookFlow({ className }: WebhookFlowProps) {
           data-source
           className="rounded-panel border border-line bg-surface p-3 shadow-soft sm:p-3.5"
         >
-          <p className="text-[0.5625rem] font-medium uppercase tracking-[0.14em] text-muted">
+          <p className="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-muted">
             Campaign events
           </p>
           <ul className="mt-2.5 space-y-1.5">
@@ -133,7 +133,7 @@ export function WebhookFlow({ className }: WebhookFlowProps) {
               <li
                 key={event}
                 data-event
-                className="truncate rounded-[0.3rem] bg-surface-soft px-2 py-1 font-mono text-[0.625rem] text-muted-strong"
+                className="truncate rounded-[0.3rem] bg-surface-soft px-2 py-1 font-mono text-[0.6875rem] text-muted-strong"
               >
                 {event}
               </li>
@@ -210,10 +210,10 @@ export function WebhookFlow({ className }: WebhookFlowProps) {
                   <Icon aria-hidden="true" className="size-3.5" strokeWidth={1.75} />
                 </span>
                 <span className="min-w-0">
-                  <span className="block truncate text-[0.6875rem] font-medium text-foreground">
+                  <span className="block truncate text-[0.875rem] font-medium text-foreground">
                     {target.label}
                   </span>
-                  <span className="block truncate text-[0.625rem] text-muted">
+                  <span className="block truncate text-[0.875rem] text-muted">
                     {target.note}
                   </span>
                 </span>
@@ -223,7 +223,7 @@ export function WebhookFlow({ className }: WebhookFlowProps) {
         </ul>
       </div>
 
-      <p className="mt-3 text-center text-[0.6875rem] text-muted">
+      <p className="mt-3 text-center text-[0.875rem] text-muted">
         CampaignX publishes, then tells the rest of your stack
       </p>
     </div>

@@ -191,7 +191,7 @@ export function DemoModal({
                     <span className="block truncate text-[0.875rem] font-medium text-white">
                       {demo.videoTitle}
                     </span>
-                    <span className="block text-[0.75rem] text-white/45">
+                    <span className="block text-[0.875rem] text-white/45">
                       {demo.channel} · {demo.duration}
                     </span>
                   </span>

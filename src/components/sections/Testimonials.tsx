@@ -275,7 +275,7 @@ export function Testimonials() {
                   {/* Avatar placeholder: initials, not a stock photo. */}
                   <span
                     aria-hidden="true"
-                    className="bg-brand-soft text-accent flex size-10 shrink-0 items-center justify-center rounded-full text-[0.8125rem] font-semibold"
+                    className="bg-brand-soft text-accent flex size-10 shrink-0 items-center justify-center rounded-full text-[0.875rem] font-semibold"
                   >
                     {item.name
                       .split(" ")
@@ -287,7 +287,7 @@ export function Testimonials() {
                     <span className="truncate text-[0.9375rem] font-medium">
                       {item.name}
                     </span>
-                    <span className="truncate text-[0.8125rem] text-muted">
+                    <span className="truncate text-[0.875rem] text-muted">
                       {item.role}, {item.company}
                     </span>
                   </span>

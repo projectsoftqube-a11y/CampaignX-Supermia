@@ -242,7 +242,7 @@ function Card({ card, index }: { card: ArtCard; index: number }) {
         {/* The spec, as a footer strip rather than another paragraph:
             it is metadata, and should not read as body copy. */}
         {card.spec ? (
-          <p className="mt-4 flex items-start gap-2 border-t border-line pt-3 text-[0.75rem] leading-snug text-muted">
+          <p className="mt-4 flex items-start gap-2 border-t border-line pt-3 text-[0.875rem] leading-snug text-muted">
             <span
               aria-hidden="true"
               className="bg-brand mt-[0.3125rem] size-1 shrink-0 rounded-full"

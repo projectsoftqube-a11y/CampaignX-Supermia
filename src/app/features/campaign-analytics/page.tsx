@@ -16,7 +16,7 @@ import { breadcrumbSchema, buildGraph } from "@/lib/schema";
    so the built page matches what was signed off in the content package. */
 const TITLE = "Marketing Campaign Analytics and Reporting | CampaignX";
 const DESCRIPTION =
-  "See how each campaign performs across channels in one report, and let what worked shape your next brief.";
+  "See how each campaign performs across every channel it published to in one report, and let what worked shape the brief for your next one.";
 
 export const metadata = pageMetadata({
   title: TITLE,
@@ -289,7 +289,7 @@ export default function AnalyticsPage() {
           {/* Stating the boundary is more useful than implying it, and
               it keeps the page inside the claim rules. */}
           <div className="mt-9 rounded-panel border border-line bg-surface p-5 sm:p-6">
-            <p className="text-[0.625rem] font-medium uppercase tracking-[0.14em] text-muted">
+            <p className="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-muted">
               What it does not report on
             </p>
             <ul className="mt-3 grid gap-2.5 sm:grid-cols-3 sm:gap-6">
@@ -332,7 +332,7 @@ export default function AnalyticsPage() {
             <dl className="divide-y divide-line overflow-hidden rounded-panel border border-line bg-surface">
               {READING.map((row, i) => (
                 <div key={row.term} className="flex gap-4 p-5">
-                  <span className="text-display w-5 shrink-0 text-[0.75rem] tabular-nums text-accent">
+                  <span className="text-display w-5 shrink-0 text-[0.6875rem] tabular-nums text-accent">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="min-w-0">
@@ -448,7 +448,7 @@ export default function AnalyticsPage() {
                         key={topic}
                         className="flex items-baseline gap-3 text-[0.875rem] leading-snug text-muted-strong"
                       >
-                        <span className="text-display w-4 shrink-0 text-[0.75rem] tabular-nums text-accent">
+                        <span className="text-display w-4 shrink-0 text-[0.6875rem] tabular-nums text-accent">
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         {topic}
@@ -458,7 +458,7 @@ export default function AnalyticsPage() {
                 </div>
 
                 <div className="border-t border-line pt-6">
-                  <p className="text-[0.8125rem] leading-relaxed text-muted">
+                  <p className="text-[0.875rem] leading-relaxed text-muted">
                     The{" "}
                     <Link
                       href={ROUTES.faq.href}
@@ -477,7 +477,7 @@ export default function AnalyticsPage() {
                       <Link
                         key={link.href}
                         href={link.href}
-                        className="rounded-pill border border-line bg-surface px-3 py-1.5 text-[0.8125rem] text-muted-strong transition-colors duration-200 hover:border-accent-line hover:text-accent"
+                        className="rounded-pill border border-line bg-surface px-3 py-1.5 text-[0.875rem] text-muted-strong transition-colors duration-200 hover:border-accent-line hover:text-accent"
                       >
                         {link.label}
                       </Link>

@@ -7,7 +7,7 @@ import { StatBand } from "@/components/page/StatBand";
 import { ROUTES, routesInSection } from "@/config/routes";
 import { pageMetadata } from "@/lib/metadata";
 
-const TITLE = "CampaignX Product: Brand Voice, Creative, Publishing and Approvals";
+const TITLE = "Product: Brand Voice, Creative and Publishing | CampaignX";
 const DESCRIPTION =
   "Everything CampaignX does between a one-sentence brief and a published campaign: brand voice, AI creative, multi-channel publishing, approvals and reporting.";
 

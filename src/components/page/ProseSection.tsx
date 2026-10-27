@@ -122,7 +122,7 @@ export function ProseSection({
             {eyebrow ? (
               <p
                 data-head
-                className="text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-accent opacity-0"
+                className="text-[0.6875rem] font-medium uppercase tracking-[0.1em] text-accent opacity-0"
               >
                 {eyebrow}
               </p>
@@ -152,7 +152,7 @@ export function ProseSection({
                   <li key={block.heading}>
                     <a
                       href={`#${slug(block.heading)}`}
-                      className="group block border-l-2 border-transparent py-2 pl-4 text-[0.8125rem] leading-snug text-muted transition-colors duration-200 hover:border-accent hover:text-foreground"
+                      className="group block border-l-2 border-transparent py-2 pl-4 text-[0.875rem] leading-snug text-muted transition-colors duration-200 hover:border-accent hover:text-foreground"
                     >
                       <span className="mr-2 tabular-nums text-muted/60">
                         {String(i + 1).padStart(2, "0")}
@@ -165,7 +165,7 @@ export function ProseSection({
 
               {aside ? (
                 <div className="rounded-panel border border-line bg-surface p-5 lg:mt-7">
-                  <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted">
+                  <p className="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-muted">
                     {aside.heading}
                   </p>
                   <div className="mt-2.5 text-[0.875rem] leading-relaxed text-muted-strong">
@@ -190,7 +190,7 @@ export function ProseSection({
                   <div className="flex items-baseline gap-3">
                     <span
                       aria-hidden="true"
-                      className="text-display text-[0.8125rem] font-medium tabular-nums text-accent"
+                      className="text-display text-[0.6875rem] font-medium tabular-nums text-accent"
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>

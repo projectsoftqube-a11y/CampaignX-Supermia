@@ -158,7 +158,7 @@ export function ScheduleBoard({ className }: ScheduleBoardProps) {
     >
       {/* Header: the fortnight. */}
       <div className="flex items-center gap-2">
-        <span className="w-[4.5rem] shrink-0 text-[0.5625rem] font-medium uppercase tracking-[0.14em] text-muted sm:w-[5.5rem]">
+        <span className="w-[4.5rem] shrink-0 text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-muted sm:w-[5.5rem]">
           Fortnight
         </span>
         <div className="grid flex-1 grid-cols-[repeat(14,minmax(0,1fr))] gap-[2px]">
@@ -167,7 +167,7 @@ export function ScheduleBoard({ className }: ScheduleBoardProps) {
               key={i}
               data-day
               className={cn(
-                "text-center text-[0.5rem] tabular-nums",
+                "text-center text-[0.6875rem] tabular-nums",
                 i % 7 >= 5 ? "text-muted/50" : "text-muted",
               )}
             >
@@ -183,7 +183,7 @@ export function ScheduleBoard({ className }: ScheduleBoardProps) {
           <div key={row.channel} data-row className="flex items-center gap-2">
             <span className="flex w-[4.5rem] shrink-0 items-center gap-1.5 sm:w-[5.5rem]">
               <BrandGlyph name={row.channel} className="size-3 shrink-0" />
-              <span className="truncate text-[0.625rem] text-muted-strong">
+              <span className="truncate text-[0.875rem] text-muted-strong">
                 {row.label}
               </span>
             </span>
@@ -232,7 +232,7 @@ export function ScheduleBoard({ className }: ScheduleBoardProps) {
         </span>
       </div>
 
-      <p className="mt-3 border-t border-line pt-2.5 text-[0.625rem] text-muted">
+      <p className="mt-3 border-t border-line pt-2.5 text-[0.875rem] text-muted">
         One campaign, one calendar — scheduled once your approver signs off
       </p>
     </div>
