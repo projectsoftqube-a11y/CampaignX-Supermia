@@ -64,6 +64,13 @@ export const siteConfig = {
 
   /** The build credit on the right of the baseline bar. */
   credit: { prefix: "by", name: "SuperMIA · Botfinity Inc." },
+
+  /** Who built the site. Rendered as a link under the build credit. */
+  builtBy: {
+    prefix: "Design & Develop by",
+    name: "Softqube Technologies LLC",
+    href: "https://softqubes.com/",
+  },
 } as const;
 
 export type SiteConfig = typeof siteConfig;

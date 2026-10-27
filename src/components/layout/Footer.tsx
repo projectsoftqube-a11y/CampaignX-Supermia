@@ -168,12 +168,26 @@ export function Footer() {
               ))}
             </ul>
 
-            <p className="text-[0.875rem] text-muted">
-              {siteConfig.credit.prefix}{" "}
-              <span className="font-semibold text-muted-strong">
-                {siteConfig.credit.name}
-              </span>
-            </p>
+            <div className="flex flex-col gap-1 text-[0.875rem] text-muted sm:items-end">
+              <p>
+                {siteConfig.credit.prefix}{" "}
+                <span className="font-semibold text-muted-strong">
+                  {siteConfig.credit.name}
+                </span>
+              </p>
+
+              <p>
+                {siteConfig.builtBy.prefix}{" "}
+                <Link
+                  href={siteConfig.builtBy.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-muted-strong transition-colors duration-300 hover:text-foreground"
+                >
+                  {siteConfig.builtBy.name}
+                </Link>
+              </p>
+            </div>
           </div>
         </Container>
       </div>

@@ -169,7 +169,7 @@ export const USE_CASE_PAGES: Record<UseCasePage["key"], UseCasePage> = {
       {
         question: "What does it cost?",
         answer:
-          "The Starter plan is free during Beta. Pricing sets out what each plan includes.",
+          "The Free plan costs nothing. Pricing sets out what each plan includes.",
       },
     ],
   },
@@ -280,7 +280,7 @@ export const USE_CASE_PAGES: Record<UseCasePage["key"], UseCasePage> = {
       {
         question: "How many seats do we get?",
         answer:
-          "The Team plan lists unlimited seats. Pricing sets out what each plan includes.",
+          "Workspaces scale with the plan. Pricing sets out what each one includes.",
       },
     ],
   },
@@ -497,7 +497,7 @@ export const USE_CASE_PAGES: Record<UseCasePage["key"], UseCasePage> = {
       {
         question: "What does it cost to start?",
         answer:
-          "The Starter plan is free during Beta. Pricing sets out what each plan includes.",
+          "The Free plan costs nothing. Pricing sets out what each plan includes.",
       },
       DATA_FAQ,
     ],

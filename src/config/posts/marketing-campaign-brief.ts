@@ -22,6 +22,7 @@ export const post: BlogPost = {
   excerpt:
     "Six things a brief has to answer before anyone writes a word, why most briefs fail on the second one, and a template you can copy.",
   category: "campaign-strategy",
+  art: "brief",
   published: "2026-10-27",
   readingMinutes: 8,
   standfirst:

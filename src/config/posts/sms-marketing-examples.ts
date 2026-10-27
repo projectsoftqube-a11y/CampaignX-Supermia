@@ -20,6 +20,7 @@ export const post: BlogPost = {
   excerpt:
     "Eight templates across four message types, the character budget that governs all of them, and the timing that decides whether people stay subscribed.",
   category: "email-sms",
+  art: "message",
   published: "2026-10-27",
   readingMinutes: 8,
   standfirst:

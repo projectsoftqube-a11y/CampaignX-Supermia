@@ -225,7 +225,7 @@ export const ROUTES = {
   pricing: {
     href: "/pricing",
     label: "Pricing",
-    description: "Free during Beta. Team and Enterprise plans.",
+    description: "A free plan, paid plans from $10 a month, and custom pricing.",
     icon: "tag",
     section: "company",
     live: true,

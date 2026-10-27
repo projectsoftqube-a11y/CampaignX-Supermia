@@ -24,6 +24,7 @@ export const post: BlogPost = {
   excerpt:
     "Five categories of AI marketing tool, what each is actually good at, and the questions worth asking before you pay for any of them.",
   category: "campaign-strategy",
+  art: "compare",
   published: "2026-10-27",
   readingMinutes: 9,
   standfirst:

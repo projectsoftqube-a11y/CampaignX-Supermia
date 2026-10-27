@@ -8,8 +8,8 @@ export const contentType = OG_CONTENT_TYPE;
 export default function Image() {
   return ogCard({
     eyebrow: "Pricing",
-    heading: "Free during Beta. Lock in early access.",
+    heading: "Plans that scale with the work.",
     sub: "Every plan publishes to the same seven channels.",
-    facts: ["Free in Beta", "No card to start"],
+    facts: ["Free plan available", "No card to start"],
   });
 }

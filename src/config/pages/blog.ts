@@ -1,3 +1,4 @@
+import type { PostArtName } from "@/components/studio/PostCardArt";
 import type { BlogCategorySlug } from "@/config/routes";
 import { post as campaignBrief } from "@/config/posts/marketing-campaign-brief";
 import { post as brandVoice } from "@/config/posts/brand-voice-guidelines";
@@ -39,6 +40,8 @@ export interface BlogPost {
   description: string;
   excerpt: string;
   category: BlogCategorySlug;
+  /** Which card drawing this post carries in the hub grid. */
+  art: PostArtName;
   /** ISO date. */
   published: string;
   readingMinutes: number;

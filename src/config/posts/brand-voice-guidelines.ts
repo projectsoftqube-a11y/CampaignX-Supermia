@@ -17,6 +17,7 @@ export const post: BlogPost = {
   excerpt:
     "Most tone documents are three adjectives nobody can act on. Here is what to write instead, and why examples beat descriptions.",
   category: "campaign-strategy",
+  art: "voice",
   published: "2026-10-27",
   readingMinutes: 8,
   standfirst:

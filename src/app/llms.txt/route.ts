@@ -11,12 +11,12 @@ export const dynamic = "force-static";
 
 const BODY = `# CampaignX by SuperMIA
 
-> CampaignX is an AI marketing agent from SuperMIA, operated by Botfinity Inc. in Grapevine, Texas. You write one brief, and it plans the campaign, writes and designs it in your brand voice, and formats it for Instagram, Facebook, LinkedIn, Google Business, X, email and SMS. Nothing is published without a named approver, and reporting shows what worked. CampaignX is free during Beta.
+> CampaignX is an AI marketing agent from SuperMIA, operated by Botfinity Inc. in Grapevine, Texas. You write one brief, and it plans the campaign, writes and designs it in your brand voice, and formats it for Instagram, Facebook, LinkedIn, Google Business, X, email and SMS. Nothing is published without a named approver, and reporting shows what worked. CampaignX has a free plan, with paid plans for higher volume.
 
 ## Product
 
 - [CampaignX home](${siteConfig.url}/): AI marketing agent that turns one brief into an on-brand, multi-channel campaign.
-- [Pricing](${siteConfig.url}/pricing): Starter (free during Beta), Team (Early Access), Enterprise (custom).
+- [Pricing](${siteConfig.url}/pricing): Free, Essentials, Premium and Custom plans. Current figures are on the page.
 - [FAQ](${siteConfig.url}/faq): channels, brand voice, approvals, pricing and data handling.
 - [Start or sign in](${siteConfig.appUrl}): the CampaignX web app.
 - [Demo video (under 2 minutes)](https://www.youtube.com/watch?v=3FYQj_urQiw)

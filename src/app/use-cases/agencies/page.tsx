@@ -43,7 +43,7 @@ const LINKS = [
   },
   {
     title: "Pricing",
-    body: "Unlimited seats are listed on the Team plan.",
+    body: "Workspaces scale with the plan you choose.",
     href: ROUTES.pricing.href,
   },
 ];
@@ -102,7 +102,7 @@ export default function Page() {
                   href={ROUTES.pricing.href}
                   className="bg-brand shadow-brand inline-flex h-11 items-center rounded-pill px-5 text-[0.9375rem] font-medium text-white transition-[box-shadow,transform,filter] duration-200 ease-[var(--ease-out-soft)] hover:-translate-y-px hover:brightness-[1.07] hover:shadow-brand-hover"
                 >
-                  Start free in Beta
+                  Start free
                 </Link>
                 <Link
                   href={ROUTES.brandVoice.href}
@@ -288,7 +288,7 @@ export default function Page() {
           intro="What agencies ask before moving a second client onto it."
           items={PAGE.faqs}
           links={LINKS}
-          note="Unlimited seats are listed on the Team plan. Pricing sets out what each plan includes."
+          note="Workspaces scale with the plan. Pricing sets out what each one includes."
         />
 
         <PageCta />

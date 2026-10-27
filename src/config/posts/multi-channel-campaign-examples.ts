@@ -19,6 +19,7 @@ export const post: BlogPost = {
   excerpt:
     "Three campaigns broken down channel by channel — what each surface carried, when it ran, and why the same words would have failed.",
   category: "campaign-strategy",
+  art: "channels",
   published: "2026-10-27",
   readingMinutes: 9,
   standfirst:

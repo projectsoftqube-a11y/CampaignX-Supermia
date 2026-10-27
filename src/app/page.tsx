@@ -48,11 +48,11 @@ export default function Home() {
         {/* Price only lands once the product is believed. */}
         <Pricing />
         {/* Testimonials are intentionally not rendered. The seven named
-            quotes have no source or consent on file and the product is in
-            Beta, so publishing them risks the FTC rules on endorsements
-            (SEO audit issue #2). The component stays in the repo: restore
-            it here once each quote is verified and consented. Never mark
-            these up as Review or AggregateRating. */}
+            quotes have no source or consent on file, so publishing them
+            risks the FTC rules on endorsements (SEO audit issue #2). The
+            component stays in the repo: restore it here once each quote
+            is verified and consented. Never mark these up as Review or
+            AggregateRating. */}
         {/* The FAQ mops up what price and security raise but don't settle,
             immediately before the closing ask. */}
         <FAQ />

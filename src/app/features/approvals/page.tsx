@@ -103,7 +103,7 @@ const FAQS = [
   {
     question: "Is the approval step on every plan?",
     answer:
-      "The full brand model with approvals is listed on the Team plan. Pricing sets out what each plan includes.",
+      "Approvals are on every plan, including the free one. Pricing sets out what each one includes.",
   },
 ];
 

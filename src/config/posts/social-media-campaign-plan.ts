@@ -17,6 +17,7 @@ export const post: BlogPost = {
   excerpt:
     "A social media campaign plan in five decisions, plus a 30-day calendar you can copy and a note on why most plans collapse in week three.",
   category: "social-media",
+  art: "calendar",
   published: "2026-10-27",
   readingMinutes: 9,
   standfirst:

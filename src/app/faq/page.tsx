@@ -12,7 +12,7 @@ import { breadcrumbSchema, buildGraph, faqPageSchema } from "@/lib/schema";
 
 const TITLE = "CampaignX FAQ: How It Works, Pricing and Your Data";
 const DESCRIPTION =
-  "CampaignX FAQ: which channels it publishes to, how it learns your brand voice, how approvals work, what Beta pricing includes and how your data is handled.";
+  "CampaignX FAQ: which channels it publishes to, how it learns your brand voice, how approvals work, what each plan includes and how your data is handled.";
 
 export const metadata = pageMetadata({
   title: TITLE,

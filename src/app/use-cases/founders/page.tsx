@@ -38,7 +38,7 @@ const LINKS = [
   },
   {
     title: "Pricing",
-    body: "Starter is free during Beta.",
+    body: "The Free plan costs nothing.",
     href: ROUTES.pricing.href,
   },
   {
@@ -100,7 +100,7 @@ export default function Page() {
                   href={ROUTES.pricing.href}
                   className="bg-brand shadow-brand inline-flex h-11 items-center rounded-pill px-5 text-[0.9375rem] font-medium text-white transition-[box-shadow,transform,filter] duration-200 ease-[var(--ease-out-soft)] hover:-translate-y-px hover:brightness-[1.07] hover:shadow-brand-hover"
                 >
-                  Start free in Beta
+                  Start free
                 </Link>
                 <Link
                   href={ROUTES.brandVoice.href}
@@ -288,7 +288,7 @@ export default function Page() {
           intro="What founders ask before writing the first brief."
           items={PAGE.faqs}
           links={LINKS}
-          note="Starter is free during Beta. Pricing sets out what each plan includes."
+          note="The Free plan costs nothing. Pricing sets out what each plan includes."
         />
 
         <PageCta />

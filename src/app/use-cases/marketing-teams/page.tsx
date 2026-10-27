@@ -102,7 +102,7 @@ export default function Page() {
                   href={ROUTES.pricing.href}
                   className="bg-brand shadow-brand inline-flex h-11 items-center rounded-pill px-5 text-[0.9375rem] font-medium text-white transition-[box-shadow,transform,filter] duration-200 ease-[var(--ease-out-soft)] hover:-translate-y-px hover:brightness-[1.07] hover:shadow-brand-hover"
                 >
-                  Start free in Beta
+                  Start free
                 </Link>
                 <Link
                   href={ROUTES.multiChannel.href}

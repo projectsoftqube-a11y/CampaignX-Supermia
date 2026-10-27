@@ -134,12 +134,12 @@ export const FAQ_GROUPS: readonly FaqGroup[] = [
       {
         question: "Is CampaignX free?",
         answer:
-          "CampaignX is free during Beta on the Starter plan, which includes full Beta access, all channel outputs, the brand voice model and community support. Pricing after Beta has not been published yet.",
+          "Yes. The Free plan costs nothing and includes one workspace, three connected accounts and three AI campaigns a month, with unlimited manual campaigns. Paid plans start at $10 a month.",
       },
       {
-        question: "What does the Team plan add?",
+        question: "What do the paid plans add?",
         answer:
-          "The Team plan, currently in Early Access, adds unlimited campaigns, the full brand model with approvals, the performance loop and reporting, and unlimited seats. Like Starter, it covers all channels.",
+          "Paid plans raise the limits rather than unlock the product. Essentials adds a second workspace, unlimited scheduled posts, X (Twitter) campaigns and basic analytics. Premium adds more workspaces, all connected accounts and a longer analytics history. Every plan publishes to the same channels and holds everything for approval.",
       },
       {
         question: "What does Enterprise include?",

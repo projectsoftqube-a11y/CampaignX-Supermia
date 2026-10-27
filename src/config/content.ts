@@ -365,53 +365,78 @@ export const finalCta = {
 
 export const pricing = {
   eyebrow: "Pricing",
-  heading: "Free during Beta. Lock in Early Access.",
-  headingHighlight: "Free during Beta",
-  supporting: ["Join early access to lock in exclusive founder discounts before public launch."],
+  heading: "Start free. Pay when the work grows.",
+  headingHighlight: "Start free",
+  supporting: [
+    "Every plan publishes to the same channels and holds everything for approval.",
+    "What changes is how much you run, and how far back the reporting goes.",
+  ],
 
+  /*
+   * Fallback plans, used only when the billing API is unreachable.
+   *
+   * These mirror the live plans the API returns (Free, Essentials,
+   * Premium, Custom) so a visitor never sees a different set of names
+   * or a different shape of offer during an outage. Prices are
+   * deliberately omitted — a stale figure is worse than none — and the
+   * section tells the reader it is showing plan outlines rather than
+   * silently presenting old numbers as current.
+   */
   plans: [
     {
-      name: "Starter",
-      summary: "For individual marketers exploring AI campaigns.",
+      name: "Free",
+      summary: "Best for getting started.",
       monthly: null,
-      priceNote: "Free in Beta",
-      cta: "Get Early Access",
+      priceNote: "See current pricing",
+      cta: "Get Started Free",
       featured: false,
       features: [
-        "Full access during beta",
-        "All channel outputs",
-        "Brand voice model",
-        "Community support",
+        "1 workspace",
+        "Up to 3 connected accounts",
+        "AI campaigns each month",
+        "Unlimited manual campaigns",
       ],
     },
     {
-      name: "Team",
-      summary: "For growth teams shipping campaigns weekly.",
+      name: "Essentials",
+      summary: "Best for solo creators and growing brands.",
       monthly: null,
-      priceNote: "Early Access",
-      cta: "Join Waitlist",
+      priceNote: "See current pricing",
+      cta: "Get Started",
+      featured: false,
+      features: [
+        "2 workspaces",
+        "Unlimited scheduled posts",
+        "X (Twitter) campaigns included",
+        "Basic analytics",
+      ],
+    },
+    {
+      name: "Premium",
+      summary: "Best for power creators and marketing pros.",
+      monthly: null,
+      priceNote: "See current pricing",
+      cta: "Get Started",
       featured: true,
       features: [
-        "Unlimited campaigns",
-        "All seven channels, plus webhooks",
-        "Full brand model with approvals",
-        "Performance loop and reporting",
-        "Unlimited seats",
+        "7 workspaces",
+        "All connected accounts included",
+        "More AI campaigns each month",
+        "Standard analytics with longer history",
       ],
     },
     {
-      name: "Enterprise",
-      summary: "For custom volume and security requirements.",
+      name: "Custom",
+      summary: "Best for large marketing organizations and high-volume brands.",
       monthly: null,
-      priceNote: "Custom",
-      cta: "Talk to Us",
+      priceNote: "Flexible Pricing",
+      cta: "Contact Sales",
       featured: false,
       features: [
-        "Everything in Team",
-        "SSO / SAML and SCIM",
-        "Data residency choice",
-        "Audit export and retention controls",
-        "Named support contact",
+        "Custom scaled workspaces",
+        "High-throughput X (Twitter) quota",
+        "Custom date range analytics and raw exports",
+        "Custom invoicing and dedicated support",
       ],
     },
   ] as const satisfies readonly PricingPlan[],

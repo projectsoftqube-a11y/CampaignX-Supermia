@@ -58,7 +58,7 @@ export default function ProductIndexPage() {
           { value: "1", label: "Brief to write", note: "A sentence is enough to start." },
           { value: "7", label: "Channels published", note: "Plus webhooks for other tools." },
           { value: "~10 min", label: "To a first campaign", note: "A trusted brand model takes about an afternoon." },
-          { value: "0", label: "Posts without approval", note: "A named approver signs off first." },
+          { value: "0", label: "Published without sign-off", note: "A named approver signs off first." },
         ]}
       />
 

@@ -231,7 +231,7 @@ export function PageOpening({
             </Link>
 
             <span className="text-[0.875rem] text-muted">
-              Free during Beta. Nothing ships without your approval.
+              Start free. Nothing ships without your approval.
             </span>
           </div>
 

@@ -49,12 +49,13 @@ const CHANNELS: readonly { name: PlatformName; label: string }[] = [
  *     to "and then what".
  *
  * The supporting line states the two facts that answer the hesitation
- * at this point: free during Beta, nothing publishes without approval.
+ * at this point: a free plan to start, and nothing publishes
+ * without approval.
  * Both are from the approved Fact Sheet; neither may become a promise.
  */
 export function PageCta({
   heading = "Write one sentence. Get a whole campaign back.",
-  body = "Free during Beta. Nothing sends without a named approver, and you can edit or regenerate any asset before it ships.",
+  body = "Start on the free plan. Nothing sends without a named approver, and you can edit or regenerate any asset before it ships.",
 }: PageCtaProps) {
   const rootRef = useRef<HTMLElement>(null);
 

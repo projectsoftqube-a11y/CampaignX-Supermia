@@ -105,7 +105,7 @@ const FAQS = [
   {
     question: "Is reporting on every plan?",
     answer:
-      "The performance loop and reporting are listed on the Team plan. Pricing sets out what each plan includes.",
+      "Analytics history runs from 7 days to a custom range, depending on the plan. Pricing sets out what each one includes.",
   },
   {
     question: "Does CampaignX report on paid ad spend?",

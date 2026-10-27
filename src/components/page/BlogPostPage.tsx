@@ -7,11 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { TopicArt, type TopicArtName } from "@/components/studio/TopicArt";
 import type { BlogBlock, BlogPost } from "@/config/pages/blog";
 import { BLOG_CATEGORIES, ROUTES } from "@/config/routes";
-import {
-  blogPostingSchema,
-  breadcrumbSchema,
-  buildGraph,
-} from "@/lib/schema";
+import { blogPostingSchema, breadcrumbSchema, buildGraph } from "@/lib/schema";
 
 /**
  * One blog post.
@@ -37,7 +33,7 @@ function Block({ block }: { block: BlogBlock }) {
       return (
         <h2
           id={slugify(block.text)}
-          className="text-display mt-11 scroll-mt-28 text-[clamp(1.375rem,2.4vw,1.75rem)] font-medium leading-snug tracking-[-0.02em]"
+          className="text-display mt-12 max-w-[42rem] scroll-mt-28 border-t border-line pt-7 text-[clamp(1.5rem,2.6vw,1.875rem)] font-medium leading-snug tracking-[-0.025em] first:mt-0 first:border-0 first:pt-0"
         >
           {block.text}
         </h2>
@@ -45,21 +41,24 @@ function Block({ block }: { block: BlogBlock }) {
 
     case "h3":
       return (
-        <h3 className="text-display mt-8 text-[1.125rem] font-medium leading-snug">
+        <h3 className="text-display mt-8 max-w-[42rem] text-[1.125rem] font-medium leading-snug">
           {block.text}
         </h3>
       );
 
     case "p":
       return (
-        <p className="mt-4 text-[1.0625rem] leading-[1.75] text-muted-strong">
+        <p className="mt-4 max-w-[42rem] text-[1.0625rem] leading-[1.75] text-muted-strong [h2+&]:mt-5 [h2+&]:text-foreground">
           {block.text}
         </p>
       );
 
     case "list":
+      /* Two columns once there is room. A bulleted list set to the
+         reading measure wastes half the column and makes the article
+         scroll further than it needs to. */
       return (
-        <ul className="mt-5 space-y-2.5">
+        <ul className="mt-5 grid gap-x-10 gap-y-3 md:grid-cols-2">
           {block.items.map((item) => (
             <li
               key={item}
@@ -72,19 +71,23 @@ function Block({ block }: { block: BlogBlock }) {
       );
 
     case "steps":
+      /* A card grid rather than a stack of full-width rows: the steps
+         are peers, and laying them side by side says so while using
+         the column the article actually has. */
       return (
-        <ol className="mt-6 space-y-px overflow-hidden rounded-frame border border-line bg-line">
+        <ol className="mt-6 grid gap-3 sm:grid-cols-2">
           {block.items.map((item, i) => (
-            <li key={item.title} className="bg-surface p-5">
-              <div className="flex items-baseline gap-3">
-                <span className="font-mono text-[0.875rem] tabular-nums text-accent">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="text-[1.0625rem] font-medium leading-snug text-foreground">
-                  {item.title}
-                </h3>
-              </div>
-              <p className="mt-2 pl-8 text-[1rem] leading-[1.7] text-muted-strong">
+            <li
+              key={item.title}
+              className="rounded-frame border border-line bg-surface p-5 transition-colors duration-200 hover:border-accent-line"
+            >
+              <span className="font-mono text-[0.875rem] tabular-nums text-accent">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-2 text-[1.0625rem] font-medium leading-snug text-foreground">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-[1rem] leading-[1.7] text-muted-strong">
                 {item.body}
               </p>
             </li>
@@ -93,12 +96,15 @@ function Block({ block }: { block: BlogBlock }) {
       );
 
     case "template":
+      /* A dark ground, so a template reads as something to copy
+         rather than as more prose in a box. */
       return (
-        <div className="mt-6 overflow-hidden rounded-frame border border-line bg-surface-soft">
-          <p className="border-b border-line px-4 py-2.5 font-mono text-[0.875rem] uppercase tracking-[0.1em] text-muted">
+        <div className="bg-ink mt-7 overflow-hidden rounded-frame">
+          <p className="flex items-center gap-2 border-b border-white/10 px-4 py-2.5 font-mono text-[0.875rem] uppercase tracking-[0.1em] text-white/50">
+            <span className="bg-brand size-1.5 rounded-full" />
             {block.label}
           </p>
-          <pre className="cx-scroll-slim overflow-x-auto px-4 py-4 font-mono text-[0.875rem] leading-[1.9] text-foreground">
+          <pre className="cx-scroll-slim overflow-x-auto px-4 py-4 font-mono text-[0.875rem] leading-[1.9] text-white/90">
             {block.lines.join("\n")}
           </pre>
         </div>
@@ -106,7 +112,7 @@ function Block({ block }: { block: BlogBlock }) {
 
     case "note":
       return (
-        <p className="mt-6 border-l-2 border-accent bg-accent-soft/30 py-3 pl-4 pr-4 text-[1rem] leading-[1.7] text-foreground">
+        <p className="mt-6 max-w-[48rem] rounded-r-frame border-l-2 border-accent bg-accent-soft/30 px-5 py-4 text-[1rem] leading-[1.7] text-foreground">
           {block.text}
         </p>
       );
@@ -222,19 +228,14 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
             ------------------------------------------------------------ */}
         <section className="relative py-[clamp(2.5rem,4vw,3.5rem)]">
           <Container>
-            <div className="mx-auto grid max-w-[60rem] gap-10 xl:max-w-none xl:grid-cols-[minmax(0,44rem)_minmax(0,14rem)] xl:gap-14">
-              <article className="min-w-0">
-                {post.body.map((block, i) => (
-                  <Block key={`${block.kind}-${i}`} block={block} />
-                ))}
-              </article>
-
-              {/* Contents, built from the post's own H2s. Sticky, so
-                  the column beside a long article is never idle. */}
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] lg:gap-12 xl:gap-16">
+              {/* Contents, on the left against the page edge. A rail
+                  floated on the right of a centred column reads as
+                  left over rather than placed. */}
               {headings.length > 1 ? (
                 <nav
                   aria-label="On this page"
-                  className="order-first xl:order-none xl:sticky xl:top-28 xl:self-start"
+                  className="lg:sticky lg:top-28 lg:self-start"
                 >
                   <p className="text-eyebrow border-b border-line pb-3">
                     On this page
@@ -244,7 +245,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
                       <li key={h}>
                         <a
                           href={`#${slugify(h)}`}
-                          className="flex gap-2.5 rounded-[0.4rem] px-2.5 py-2 text-[0.875rem] leading-snug text-muted transition-colors duration-200 hover:bg-surface-soft hover:text-foreground"
+                          className="flex gap-2.5 border-l-2 border-transparent py-2 pl-3 text-[0.875rem] leading-snug text-muted transition-colors duration-200 hover:border-accent hover:text-foreground"
                         >
                           <span className="shrink-0 font-mono text-[0.875rem] tabular-nums text-muted/60">
                             {String(i + 1).padStart(2, "0")}
@@ -254,25 +255,37 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
                       </li>
                     ))}
                   </ol>
+
+                  <p className="mt-6 border-t border-line pt-4 font-mono text-[0.875rem] uppercase tracking-[0.08em] text-muted">
+                    {post.readingMinutes} min read
+                  </p>
                 </nav>
               ) : null}
-            </div>
 
-            {/* Onward links the brief asks the post to carry. */}
-            <div className="mx-auto mt-12 max-w-[60rem] border-t border-line pt-7 xl:max-w-[62rem]">
-              <p className="text-eyebrow">Keep reading</p>
-              <ul className="mt-4 flex flex-wrap gap-2.5">
-                {post.related.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="inline-flex rounded-pill border border-line bg-surface px-4 py-2 text-[0.9375rem] text-muted-strong transition-colors duration-200 hover:border-accent-line hover:text-accent"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <div className="min-w-0">
+                <article>
+                  {post.body.map((block, i) => (
+                    <Block key={`${block.kind}-${i}`} block={block} />
+                  ))}
+                </article>
+
+                {/* Onward links the brief asks the post to carry. */}
+                <div className="mt-12 border-t border-line pt-7">
+                  <p className="text-eyebrow">Keep reading</p>
+                  <ul className="mt-4 flex flex-wrap gap-2.5">
+                    {post.related.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="inline-flex rounded-pill border border-line bg-surface px-4 py-2 text-[0.9375rem] text-muted-strong transition-colors duration-200 hover:border-accent-line hover:text-accent"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </Container>
         </section>
