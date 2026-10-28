@@ -4,8 +4,12 @@ out/
 build/
 .DS_Store
 *.pem
-.env*
-!.env.example
 next-env.d.ts
 .vercel
 *.tsbuildinfo
+
+# env files: every type (.env, .env.local, .env.development, .env.production, .env.example, *.env, .envrc)
+.env
+.env.*
+*.env
+.envrc
