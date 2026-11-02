@@ -1,6 +1,7 @@
-import Link from "next/link";
 import { ArrowUpRight, Paperclip, Sparkles } from "lucide-react";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { hero } from "@/config/content";
+import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
 
 /**
  * The floating prompt bar — the focal point of the hero.
@@ -16,10 +17,11 @@ import { hero } from "@/config/content";
 export function HeroPrompt() {
   return (
     <div data-hero-prompt className="w-full">
-      <Link
+      <TrackedLink
         href={hero.primaryCta.href}
-        target="_blank"
-        rel="noopener noreferrer"
+        event={ANALYTICS_EVENTS.signupClick}
+        location="hero_prompt"
+        external
         aria-label={`${hero.prompt.action} a campaign`}
         className="group glass-strong glass-sheen block rounded-[1.75rem] p-1.5 shadow-float transition-shadow duration-500 ease-[var(--ease-out-soft)] hover:shadow-cinema focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
       >
@@ -66,7 +68,7 @@ export function HeroPrompt() {
             </span>
           </div>
         </div>
-      </Link>
+      </TrackedLink>
     </div>
   );
 }

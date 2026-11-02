@@ -13,6 +13,8 @@ import { Container } from "@/components/layout/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { withHighlight } from "@/components/ui/Highlight";
 import { demo } from "@/config/content";
+import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
+import { track } from "@/lib/analytics/track";
 import { gsap, registerGsap } from "@/lib/animations/gsap";
 import { revealOnScroll } from "@/lib/animations/reveal";
 
@@ -204,7 +206,13 @@ export function Demo() {
               ) : (
                 <button
                   type="button"
-                  onClick={() => setPlaying(true)}
+                  onClick={() => {
+                    /* Fired on the facade click rather than from the YouTube
+                       player: the iframe is cross-origin, so its own play
+                       event is not observable from here. */
+                    track(ANALYTICS_EVENTS.demoPlay, { location: "demo_section" });
+                    setPlaying(true);
+                  }}
                   aria-label={`Play: ${demo.title}`}
                   className="group absolute inset-0 h-full w-full cursor-pointer"
                 >

@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { ContactSalesDialog } from "@/components/sections/ContactSalesDialog";
+import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
+import { track } from "@/lib/analytics/track";
 
 type Props = {
   label: string;
@@ -25,7 +27,16 @@ export function ContactSalesButton({ label, className }: Props) {
 
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)} className={className}>
+      <button
+        type="button"
+        onClick={() => {
+          /* Opening the dialog and completing it are separate events, so the
+             gap between them measures how much the form itself loses. */
+          track(ANALYTICS_EVENTS.contactSalesOpen, { location: "pricing_card" });
+          setOpen(true);
+        }}
+        className={className}
+      >
         {label}
       </button>
 

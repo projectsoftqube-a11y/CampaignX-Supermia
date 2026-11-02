@@ -7,6 +7,8 @@ import { DesktopNav } from "@/components/navigation/DesktopNav";
 import { MobileNav } from "@/components/navigation/MobileNav";
 import { Logo } from "@/components/ui/Logo";
 import { primaryCta, secondaryCta } from "@/config/navigation";
+import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
+import { track } from "@/lib/analytics/track";
 import { gsap, prefersReducedMotion } from "@/lib/animations/gsap";
 import { onScrollThreshold } from "@/lib/animations/scroll";
 import { HEADER_SCROLL_THRESHOLD } from "@/lib/constants";
@@ -71,6 +73,12 @@ export function Header() {
               href={secondaryCta.href}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                track(ANALYTICS_EVENTS.loginClick, {
+                  location: "header",
+                  destination: secondaryCta.href,
+                })
+              }
               className="hidden h-9 items-center rounded-pill px-3.5 text-[0.9375rem] text-muted-strong transition-colors hover:text-foreground sm:inline-flex"
             >
               {secondaryCta.label}
@@ -80,6 +88,12 @@ export function Header() {
               href={primaryCta.href}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                track(ANALYTICS_EVENTS.signupClick, {
+                  location: "header",
+                  destination: primaryCta.href,
+                })
+              }
               className="bg-brand shadow-brand group hidden h-11 items-center gap-2 rounded-pill pl-5 pr-4 text-[0.9375rem] font-medium text-white transition-[box-shadow,transform,filter] duration-200 ease-[var(--ease-out-soft)] hover:-translate-y-px hover:brightness-[1.07] hover:shadow-brand-hover sm:inline-flex"
             >
               {primaryCta.label}

@@ -13,6 +13,8 @@ import {
   secondaryCta,
 } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
+import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
+import { track } from "@/lib/analytics/track";
 import { useLenisRef } from "@/hooks/useLenis";
 import { gsap, prefersReducedMotion } from "@/lib/animations/gsap";
 
@@ -248,7 +250,13 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             href={primaryCta.href}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={onClose}
+            onClick={() => {
+              track(ANALYTICS_EVENTS.signupClick, {
+                location: "mobile_menu",
+                destination: primaryCta.href,
+              });
+              onClose();
+            }}
             className="bg-brand shadow-brand flex h-13 items-center justify-center gap-2 rounded-pill text-[0.9375rem] font-medium text-white"
           >
             {primaryCta.label}
@@ -259,7 +267,13 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             href={secondaryCta.href}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={onClose}
+            onClick={() => {
+              track(ANALYTICS_EVENTS.loginClick, {
+                location: "mobile_menu",
+                destination: secondaryCta.href,
+              });
+              onClose();
+            }}
             className="flex h-13 items-center justify-center rounded-pill border border-line bg-surface text-[0.9375rem] font-medium text-muted-strong"
           >
             {secondaryCta.label}

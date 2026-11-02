@@ -6,6 +6,8 @@ import { Container } from "@/components/layout/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { withHighlight } from "@/components/ui/Highlight";
 import { brochure } from "@/config/content";
+import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
+import { track } from "@/lib/analytics/track";
 import { gsap, registerGsap } from "@/lib/animations/gsap";
 import { revealOnScroll } from "@/lib/animations/reveal";
 
@@ -138,6 +140,12 @@ export function Brochure() {
                 <a
                   href={brochure.file}
                   download={brochure.fileName}
+                  onClick={() =>
+                    track(ANALYTICS_EVENTS.brochureDownload, {
+                      location: "brochure_section",
+                      method: "save",
+                    })
+                  }
                   className="bg-brand shadow-brand group inline-flex h-13 items-center justify-center gap-2.5 rounded-pill px-7 text-[0.9375rem] font-medium text-white transition-[box-shadow,transform,filter] duration-200 ease-[var(--ease-out-soft)] hover:-translate-y-px hover:brightness-[1.07] hover:shadow-brand-hover"
                 >
                   {brochure.cta}
@@ -150,6 +158,12 @@ export function Brochure() {
                   href={brochure.file}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    track(ANALYTICS_EVENTS.brochureDownload, {
+                      location: "brochure_section",
+                      method: "view",
+                    })
+                  }
                   className="group inline-flex h-13 items-center justify-center gap-2 rounded-pill border border-line bg-surface px-7 text-[0.9375rem] font-medium transition-[border-color,background-color] duration-300 hover:border-line-strong hover:bg-white"
                 >
                   {brochure.secondaryCta}

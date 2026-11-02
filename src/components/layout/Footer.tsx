@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Globe, Mail, MapPin } from "lucide-react";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { Container } from "@/components/layout/Container";
 import { Logo } from "@/components/ui/Logo";
 import { demoCta, footerNavigation, primaryCta } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
+import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
 
 /**
  * The site footer.
@@ -67,10 +69,11 @@ export function Footer() {
             {/* The two actions, kept together so the end of the page has
                 one obvious next step and one quieter alternative. */}
             <div className="flex shrink-0 flex-wrap items-center gap-3">
-              <Link
+              <TrackedLink
                 href={primaryCta.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                event={ANALYTICS_EVENTS.signupClick}
+                location="footer"
+                external
                 className="bg-brand shadow-brand group inline-flex h-12 items-center gap-2 rounded-pill pl-6 pr-5 text-[0.9375rem] font-medium text-white transition-[box-shadow,transform,filter] duration-200 ease-[var(--ease-out-soft)] hover:-translate-y-px hover:brightness-[1.07] hover:shadow-brand-hover"
               >
                 {primaryCta.label}
@@ -78,16 +81,17 @@ export function Footer() {
                   aria-hidden="true"
                   className="size-4 transition-transform duration-300 group-hover:translate-x-0.5"
                 />
-              </Link>
+              </TrackedLink>
 
-              <Link
+              <TrackedLink
                 href={demoCta.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                event={ANALYTICS_EVENTS.demoBooking}
+                location="footer"
+                external
                 className="inline-flex h-12 items-center rounded-pill border border-line-strong bg-surface px-6 text-[0.9375rem] font-medium transition-colors duration-200 hover:bg-surface-soft"
               >
                 {demoCta.label}
-              </Link>
+              </TrackedLink>
             </div>
           </div>
 

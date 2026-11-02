@@ -1,5 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { display, highlight, sans } from "./fonts";
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoScript,
+} from "@/components/analytics/GoogleTagManager";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
@@ -92,6 +96,8 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <GoogleTagManagerNoScript />
+
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-pill focus:bg-brand focus:px-5 focus:py-3 focus:text-sm focus:text-white"
@@ -99,6 +105,8 @@ export default function RootLayout({
           Skip to content
         </a>
         <SmoothScroll>{children}</SmoothScroll>
+
+        <GoogleTagManager />
       </body>
     </html>
   );

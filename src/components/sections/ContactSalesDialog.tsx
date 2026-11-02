@@ -16,6 +16,8 @@ import {
   submitContactSales,
   type ContactSalesPayload,
 } from "@/lib/inquiry";
+import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
+import { track } from "@/lib/analytics/track";
 import { cn } from "@/lib/utils";
 
 const INDUSTRIES = [
@@ -263,6 +265,13 @@ export function ContactSalesDialog({ open, onClose }: Props) {
     try {
       await submitContactSales(payload, controller.signal);
       setSuccess(true);
+      /* Only after the API has accepted it. Tracking the click instead would
+         count abandoned and rejected submissions as leads. The industry is
+         the one field safe to send: everything else the form collects
+         identifies a person. */
+      track(ANALYTICS_EVENTS.contactSalesSubmit, {
+        location: "contact_sales_dialog",
+      });
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") return;
       setError(
@@ -270,6 +279,13 @@ export function ContactSalesDialog({ open, onClose }: Props) {
           ? err.message
           : "Something went wrong. Please try again.",
       );
+      /* A spike here means the form is broken, which no pageview report
+         would reveal. `reason` distinguishes a rejected submission from an
+         unreachable API without carrying any of the visitor's input. */
+      track(ANALYTICS_EVENTS.contactSalesError, {
+        location: "contact_sales_dialog",
+        reason: err instanceof InquiryError ? "rejected" : "unexpected",
+      });
     } finally {
       abortRef.current = null;
       setLoading(false);

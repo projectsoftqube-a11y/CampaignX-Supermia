@@ -1,10 +1,11 @@
-import Link from "next/link";
 import { Check, X } from "lucide-react";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { Container } from "@/components/layout/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { withHighlight } from "@/components/ui/Highlight";
 import { SectionGlow } from "@/components/ui/SectionGlow";
 import { ContactSalesButton } from "@/components/sections/ContactSalesButton";
+import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
 import type { LivePlan } from "@/lib/billing";
 import { cn } from "@/lib/utils";
 
@@ -192,14 +193,16 @@ export function PricingCards({
                     className={cn(ctaClass, ctaVariant(plan.featured))}
                   />
                 ) : (
-                  <Link
+                  <TrackedLink
                     href={planHref(signupUrl, plan.id)}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    event={ANALYTICS_EVENTS.signupClick}
+                    plan={plan.id}
+                    location="pricing_card"
+                    external
                     className={cn(ctaClass, ctaVariant(plan.featured))}
                   >
                     {plan.cta}
-                  </Link>
+                  </TrackedLink>
                 )}
 
                 <ul className="mt-7 flex flex-col gap-3 border-t border-line pt-7">
