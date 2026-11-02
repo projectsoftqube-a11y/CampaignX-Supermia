@@ -1,25 +1,42 @@
 /**
- * Analytics configuration, read once from the environment.
+ * Analytics configuration.
  *
- * Both IDs are public by nature — they ship to the browser in the GTM
- * snippet — so `NEXT_PUBLIC_` is correct and neither is a secret.
+ * Neither ID is a secret: both ship to the browser inside the GTM snippet
+ * and are visible in page source on any site that uses them. They are
+ * written here rather than read from the environment so that deploying the
+ * site is all it takes for tracking to work — an environment variable that
+ * has to be set separately in the host is one more thing to forget, and
+ * when it is forgotten the failure is silent.
  *
- * Gating on the variable rather than on `NODE_ENV` is deliberate: it keeps
- * dev and preview traffic out of the production property, while still
- * allowing a staging container to be pointed at a test property by setting a
- * different ID. Checking `NODE_ENV === "production"` instead would make that
- * impossible to test before it is live.
+ * An environment variable still overrides them, which is what a staging
+ * container would use to point at a test property.
  */
 
-/** GTM container ID, e.g. GTM-XXXXXXX. Empty string when unset. */
-export const gtmId = process.env.NEXT_PUBLIC_GTM_ID?.trim() ?? "";
+/** GTM container for campaignx.supermia.ai. */
+const DEFAULT_GTM_ID = "GTM-NWJXBZ93";
+
+/** GA4 property for campaignx.supermia.ai. */
+const DEFAULT_GA4_ID = "G-7TDMWHHW6E";
+
+/** GTM container ID. */
+export const gtmId = process.env.NEXT_PUBLIC_GTM_ID?.trim() || DEFAULT_GTM_ID;
 
 /**
- * GA4 measurement ID, e.g. G-XXXXXXXXXX.
+ * Whether to load GTM at all.
  *
- * Not used to load gtag.js — GA4 is a tag inside the GTM container. It is
- * exposed here so the GA4 property can be named in one place and referenced
- * if a tag ever needs it, and so the value is documented in the codebase
- * rather than living only in the GTM UI.
+ * Off during `next dev`, so that working on the site does not register as
+ * visits, clicks and sign-up intent in the live GA4 property. A developer
+ * who needs to test the tags can run a production build locally, which is
+ * also the only way to see them behave as a visitor would.
  */
-export const ga4Id = process.env.NEXT_PUBLIC_GA4_ID?.trim() ?? "";
+export const analyticsEnabled =
+  process.env.NODE_ENV === "production" && gtmId !== "";
+
+/**
+ * GA4 measurement ID.
+ *
+ * Not used to load gtag.js — GA4 is a tag inside the GTM container, and
+ * loading both would send two page_views per visit. It is recorded here so
+ * the property is named in the codebase rather than only in the GTM UI.
+ */
+export const ga4Id = process.env.NEXT_PUBLIC_GA4_ID?.trim() || DEFAULT_GA4_ID;

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import Script from "next/script";
 import { RouteChangeTracker } from "@/components/analytics/RouteChangeTracker";
-import { gtmId } from "@/lib/analytics/config";
+import { analyticsEnabled, gtmId } from "@/lib/analytics/config";
 
 /**
  * Google Tag Manager.
@@ -15,11 +15,13 @@ import { gtmId } from "@/lib/analytics/config";
  * renders from GTM, so it has no business competing with the hero for the
  * main thread.
  *
- * Renders nothing when `NEXT_PUBLIC_GTM_ID` is unset, so a developer machine
- * and any preview deployment stay out of the production property.
+ * Renders nothing during `next dev`, so working on the site does not show
+ * up in the live property as visits and sign-up intent. The container ID is
+ * in lib/analytics/config.ts and needs no environment variable: deploying
+ * the site is all it takes for tracking to work.
  */
 export function GoogleTagManager() {
-  if (!gtmId) return null;
+  if (!analyticsEnabled) return null;
 
   return (
     <>
@@ -49,7 +51,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
  * of one integration are read together.
  */
 export function GoogleTagManagerNoScript() {
-  if (!gtmId) return null;
+  if (!analyticsEnabled) return null;
 
   return (
     <noscript>
